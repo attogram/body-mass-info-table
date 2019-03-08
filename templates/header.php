@@ -1,4 +1,4 @@
-<html><head><title>BMI Tool</title><style type="text/css">
+<html><head><title>BMI Chart</title><style type="text/css">
 body { 
     background-color: lightgrey;
     color:black; 
