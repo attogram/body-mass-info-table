@@ -123,7 +123,9 @@ class Web
                 $this->human->age,
                 $this->human->sex
             );
-            $infoArray["$mass"]['leanMass'] = 100 - $infoArray["$mass"]['bodyFat'];
+            $infoArray["$mass"]['leanMass'] = BodyCalculations::getLeanMass(
+                $infoArray["$mass"]['bodyFat']
+            );
             $infoArray["$mass"]['bmr'] = BodyCalculations::getBmr(
                 $mass,
                 $infoArray["$mass"]['bodyFat']

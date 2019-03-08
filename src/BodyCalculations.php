@@ -55,7 +55,25 @@ class BodyCalculations
         if ($sex == 'f') {
             $bodyFatSexFactor = 9; // female factor
         }
-        return (float) (1.39 * $bmi) + (0.16 * $age) - $bodyFatSexFactor;
+        $bodyFat = (float) (1.39 * $bmi) + (0.16 * $age) - $bodyFatSexFactor;
+        if ($bodyFat > 100 || $bodyFat < 0) {
+            return 0.0;
+        }
+
+        return $bodyFat;
+    }
+
+    /**
+     * @param float $bodyFat
+     * @return float
+     */
+    public static function getLeanMass(float $bodyFat)
+    {
+        if ($bodyFat <= 0) {
+            return 0.0;
+        }
+
+        return (float) 100 - $bodyFat;
     }
 
     /**
@@ -67,6 +85,10 @@ class BodyCalculations
      * @return float
      */
     public static function getBmr(float $mass, float $bodyFat) {
+        if ($bodyFat <= 0.0) {
+            return 0.0;
+        }
+
         return (float) 370 + (21.6 * ($mass * (1 - ($bodyFat / 100))));
     }
     // Katch-McArdle Hybrid BMR
