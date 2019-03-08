@@ -1,0 +1,15 @@
+{
+    "name": "attogram/bmi-chart",
+    "description": "Multi-weight Body Mass Index (BMI) chart based on your height, age and sex, with calculated Body Fat/Lean Percentage, Base Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE) for various activity levels.",
+    "type": "project",
+    "license": "MIT",
+    "homepage": "https://github.com/attogram/bmi-chart",
+    "autoload": {
+        "psr-4": {
+            "Attogram\\Body\\": "src/"
+        }
+    },
+    "require": {
+        "attogram/router": "^1.0"
+    }
+}
