@@ -173,7 +173,7 @@ class Web
                 . '<td align="right">' . number_format($info['bmiPrime'], 2) . '</td>'
                 . '<td align="right">' . number_format($info['bodyFat'], 2) . '%</td>'
                 . '<td align="right">' . number_format($info['leanMass'], 2) . '%</td>'
-                . '<td align="right">' . number_format($info['bmr'], 0) . '</td>'
+                . '<td align="right">' . number_format($info['bmr'], 0, '', '') . '</td>'
                 . '<td align="right">' . number_format($info['tdeeSedentary'], 0, '', '') . '</td>'
                 . '<td align="right">' . number_format($info['tdeeLight'], 0, '', '') . '</td>'
                 . '<td align="right">' . number_format($info['tdeeModerate'], 0, '', '') . '</td>'
