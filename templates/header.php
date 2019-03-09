@@ -4,7 +4,14 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 ?>
-<html><head><title>Body Mass Info Chart</title><style type="text/css">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Body Mass Info Chart</title>
+<style type="text/css">
 body { 
     background-color:white;
     color:black; 
@@ -44,6 +51,5 @@ table, tr, td {
 </style></head><body>
 <div class="hdr bw">
     <a href="<?= $this->router->getUriBase(); ?>/">Body Mass Info Chart</a>
-    &nbsp;
-    <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
+    &nbsp; <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
 </div>
