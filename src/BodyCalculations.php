@@ -148,33 +148,33 @@ class BodyCalculations
     public static function getBmiClassText(float $bmi) {
         switch($bmi) {
             case ($bmi >= 60.0):
-                return 'Obese - Class V - Super-Super Obesity';
+                return 'Obese - Class V <small>- Super-Super Obesity</small>';
             case ($bmi >= 50.0):
-                return 'Obese - Class IV - Super Obesity';
+                return 'Obese - Class IV <small>- Super Obesity</small>';
             case ($bmi >= 40.0):
-                return 'Obese - Class III - Morbid Obesity';
+                return 'Obese - Class III <small>- Morbid Obesity</small>';
             case ($bmi >= 37.5):
-                return 'Obese - Class II - Very Severe Obesity';
+                return 'Obese - Class II <small>- Very Severe Obesity</small>';
             case ($bmi >= 35.0):
-                return 'Obese - Class II - Severe Obesity';
+                return 'Obese - Class II <small>- Severe Obesity</small>';
             case ($bmi >= 32.5):
-                return 'Obese - Class I - Very Obese';
+                return 'Obese - Class I <small>- Very Obese</small>';
             case ($bmi >= 30.0):
-                return 'Obese - Class I - Obese';
+                return 'Obese - Class I <small>- Obese</small>';
             case ($bmi >= 27.5):
-                return 'Overweight - Pre-obese';
+                return 'Overweight <small>- Pre-obese</small>';
             case ($bmi >= 25.0):
                 return 'Overweight';
             case ($bmi >= 23.0):
-                return 'Normal weight +';
+                return 'Normal weight <small>+</small>';
             case ($bmi >= 18.5):
                 return 'Normal weight';
             case ($bmi >= 17.0):
-                return 'Underweight - Mild thinness';
+                return 'Underweight <small>- Mild thinness</small>';
             case ($bmi >= 16.0):
-                return 'Underweight - Moderate thinness';
+                return 'Underweight <small>- Moderate thinness</small>';
             case ($bmi < 16.0):
-                return 'Underweight - Severe thinness';
+                return 'Underweight <small>- Severe thinness</small>';
             default:
                 return '?';
         }
