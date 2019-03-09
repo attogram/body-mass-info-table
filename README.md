@@ -5,4 +5,4 @@ Multi-weight Body Mass Index (BMI) chart based on your height, age and sex, with
 # Open Source
 
 The Body Mass Info Chart is an Open Source project.
-Learn more at: https://github.com/attogram/bmi-chart
+Learn more at: https://github.com/attogram/body-mass-info-chart

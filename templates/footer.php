@@ -6,7 +6,7 @@
     &nbsp;
     <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
     &nbsp;
-    <a href="https://github.com/attogram/bmi-chart" target="github">Github</a>
+    <a href="https://github.com/attogram/body-mass-info-chart" target="github">Github</a>
 </div>
 </body>
 </html>

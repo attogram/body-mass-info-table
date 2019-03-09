@@ -20,7 +20,7 @@
     </p>
     <p>
         The Body Mass Info Chart is an Open Source project.  Learn more at:
-        <a href="https://github.com/attogram/bmi-chart" target="github">https://github.com/attogram/bmi-chart</a>
+        <a href="https://github.com/attogram/body-mass-info-chart" target="github">https://github.com/attogram/body-mass-info-chart</a>
     </p>
 
     <a name="howto"></a>
