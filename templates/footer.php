@@ -2,7 +2,7 @@
 <br />
 <br />
 <div class="hdr bw">
-    <a href="<?= $this->router->getUriBase(); ?>/">BMI Chart</a>
+    <a href="<?= $this->router->getUriBase(); ?>/">Body Mass Info Chart</a>
     &nbsp;
     <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
     &nbsp;

@@ -1,5 +1,5 @@
 <div style="margin:20px;">
-    <h1>Welcome to the BMI Chart</h1>
+    <h1>Welcome to the Body Mass Info Chart</h1>
     <p>
         This chart shows your
         <a href="#bmi">BMI (Body Mass Index)</a> and
@@ -19,7 +19,7 @@
         <a href="#tdee">TDEE (Total Daily Energy Expenditure)</a> for various activity levels.
     </p>
     <p>
-        The BMI Chart is an Open Source project.  Learn more at:
+        The Body Mass Info Chart is an Open Source project.  Learn more at:
         <a href="https://github.com/attogram/bmi-chart" target="github">https://github.com/attogram/bmi-chart</a>
     </p>
 

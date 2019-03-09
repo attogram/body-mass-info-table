@@ -1,4 +1,4 @@
-<html><head><title>BMI Chart</title><style type="text/css">
+<html><head><title>Body Mass Info Chart</title><style type="text/css">
 body { 
     background-color:white;
     color:black; 
@@ -25,11 +25,6 @@ a:hover {
     background-color:lightseagreen;
     color:black;
 }
-.widediv {
-    margin:0;
-    padding:0;
-    width:100%;
-}
 form {
     padding:14px;
     margin:0;
@@ -42,7 +37,7 @@ table, tr, td {
 }
 </style></head><body>
 <div class="hdr bw">
-    <a href="<?= $this->router->getUriBase(); ?>/">BMI Chart</a>
+    <a href="<?= $this->router->getUriBase(); ?>/">Body Mass Info Chart</a>
     &nbsp;
     <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
 </div>

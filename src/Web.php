@@ -142,7 +142,7 @@ class Web
         }
 
         print '<table><tr><td colspan="13">'
-            . 'Body Mass Information Chart'
+            . 'Body Mass Info Chart'
             . '<br /><br />Height: ' . $this->human->height . ' meters'
             . ' (' . number_format(Utils::metersToFeet($this->human->height), 2) . ' feet)'
             . ' (' . number_format(Utils::metersToInches($this->human->height), 2) . ' inches)'
