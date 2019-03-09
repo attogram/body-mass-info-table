@@ -26,7 +26,8 @@ namespace Attogram\Body;
     </p>
     <p>
         The Body Mass Info Chart is an Open Source project.  Learn more at:
-        <a href="https://github.com/attogram/body-mass-info-chart" target="github">https://github.com/attogram/body-mass-info-chart</a>
+        <a href="https://github.com/attogram/body-mass-info-chart" target="github">
+            https://github.com/attogram/body-mass-info-chart</a>
     </p>
 
     <a name="howto"></a>
@@ -43,15 +44,17 @@ namespace Attogram\Body;
     <a name="bmi"></a>
     <h2>What is BMI (Body Mass Index)?</h2>
     <p>
-        The body mass index (BMI) or Quetelet index is a value derived from the mass (weight) and height of an individual.
-        The BMI is defined as the body mass divided by the square of the body height, and is universally expressed
-        in units of kg/m2, resulting from mass in kilograms and height in metres.
-        <br /><br />
+        The body mass index (BMI) or Quetelet index is a value derived from the mass (weight) and height
+        of an individual. The BMI is defined as the body mass divided by the square of the body height,
+        and is universally expressed in units of kg/m2, resulting from mass in kilograms and height in metres.
+    </p>
+    <p>
         The BMI is an attempt to quantify the amount of tissue mass (muscle, fat, and bone) in an individual,
         and then categorize that person as underweight, normal weight, overweight, or obese based on that value.
         That categorization is the subject of some debate about where on the BMI scale the dividing
         lines between categories should be placed.
-        <br /><br />
+    </p>
+    <p>
         Commonly accepted BMI ranges are:
         <ul>
             <li>underweight: under 18.5 kg/m2</li>
@@ -78,7 +81,8 @@ namespace Attogram\Body;
         than 0.74 are underweight; those with between 0.74 and 1.00 have optimal weight; and those at 1.00
         or greater are overweight. BMI Prime is useful clinically because it shows by what ratio (e.g. 1.36)
         or percentage (e.g. 136%, or 36% above) a person deviates from the maximum optimal BMI.
-        <br /><br />
+    </p>
+    <p>
         For instance, a person with BMI 34 kg/m2 has a BMI Prime of 34/25 = 1.36, and is 36% over their
         upper mass limit. In South East Asian and South Chinese populations (see § international variations),
         BMI Prime should be calculated using an upper limit BMI of 23 in the denominator instead of 25.
@@ -99,7 +103,8 @@ namespace Attogram\Body;
         The minimum recommended total body fat percentage exceeds the essential fat percentage value
         reported above. A number of methods are available for determining body fat percentage,
         such as measurement with calipers or through the use of bioelectrical impedance analysis.
-        <br /><br />
+    </p>
+    <p>
         The body fat percentage is a measure of fitness level, since it is the only body measurement
         which directly calculates a person's relative body composition without regard to height or weight.
         The widely used body mass index (BMI) provides a measure that allows the comparison of the
@@ -117,7 +122,8 @@ namespace Attogram\Body;
     <p>
         Lean body mass (LBM) is a component of body composition, calculated by subtracting body fat
         weight from total body weight: total body weight is lean plus fat.
-        <br /><br />
+    </p>
+    <p>
         The percentage of total body mass that is lean is usually not quoted – it would typically be 60–90%.
         Instead, the body fat percentage, which is the complement, is computed, and is typically 10–40%.
         The lean body mass (LBM) has been described as an index superior to total body weight for
@@ -140,7 +146,8 @@ namespace Attogram\Body;
         which the metabolic rate was measured. This makes BMR a variant of standard metabolic rate
         measurement that excludes the temperature data, a practice that has led to problems in defining
         "standard" rates of metabolism for many mammals.
-        <br /><br />
+    </p>
+    <p>
         Metabolism comprises the processes that the body needs to function.
         Basal metabolic rate is the amount of energy per unit time that a person needs to keep the
         body functioning at rest. Some of those processes are breathing, blood circulation,
@@ -158,7 +165,7 @@ namespace Attogram\Body;
     <a name="tdee"></a>
     <h2>What is TDEE (Total Daily Energy Expenditure)?</h2>
     <p>
-
+        ...
     </p>
     <a href=""><small>^top</small></a>
 
