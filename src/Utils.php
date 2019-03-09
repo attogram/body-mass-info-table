@@ -55,4 +55,13 @@ class Utils
 
         return static::getEnumVar($_GET[$name],$enumArray, $default);
     }
+
+    /**
+     * @param float $mass
+     * @return float
+     */
+    public static function kilogramsToPounds(float $mass)
+    {
+        return (float) $mass * 2.2046226218;
+    }
 }

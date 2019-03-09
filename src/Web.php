@@ -137,41 +137,28 @@ class Web
             $infoArray["$mass"]['tdeeExtreme'] = $infoArray["$mass"]['bmr'] * 1.9;
         }
 
-        print '
-<div class="bw"> &nbsp; Height: ' . $this->human->height . ' meters</div>
-<div class="bw"> &nbsp; Age&nbsp;&nbsp;&nbsp;: ' . $this->human->age . ' years</div>
-<div class="bw"> &nbsp; Sex&nbsp;&nbsp;&nbsp;: ' . $this->human->sex . '</div>
-<table>
-<tr>
-<td>Description</td>
-<td>Weight</td>
-<td>BMI</td>
-<td>BMI<br />Prime</td>
-<td>Body<br />Fat %</td>
-<td>Lean<br />Mass %</td>
-<td>BMR</td>
-<td>TDEE<br />low</td>
-<td>TDEE<br />lite</td>
-<td>TDEE<br />modr</td>
-<td>TDEE<br />hevy</td>
-<td>TDEE<br />extr</td>
-</tr>';
+        print '<div class="bw"> &nbsp; Height: ' . $this->human->height . ' meters</div>'
+            . '<div class="bw"> &nbsp; Age&nbsp;&nbsp;&nbsp;: ' . $this->human->age . ' years</div>'
+            . '<div class="bw"> &nbsp; Sex&nbsp;&nbsp;&nbsp;: ' . $this->human->sex . '</div>'
+            . '<table>'
+            . $this->getChartHeader();
 
+        $count = 0;
         foreach ($infoArray as $mass => $info) {
-            $massDisplay = str_replace(
-                'X',
-                '&nbsp;',
-                str_pad(
-                    number_format((float) $mass, 2),
-                    6,
-                    'X',
-                    STR_PAD_LEFT
-                )
-            );
+
+            $mass = (float) $mass;
+
+            $count++;
+            if ($count > 30) {
+                $count = 0;
+                print $this->getChartHeader();
+            }
+
             print '<tr style="background-color:' . BodyCalculations::getBmiClassColor($info['bmi']) . '">'
                 . '<td>' . BodyCalculations::getBmiClassText($info['bmi']) . '</td>'
-                . '<td>' . $massDisplay . ' kg</td>'
-                . '<td>' . number_format($info['bmi'], 2) . '</td>'
+                . '<td align="right">' . number_format($mass, 2) . ' kg</td>'
+                . '<td align="right">' . number_format(Utils::kilogramsToPounds($mass), 2) . ' lb</td>'
+                . '<td align="right">' . number_format($info['bmi'], 2) . '</td>'
                 . '<td align="right">' . number_format($info['bmiPrime'], 2) . '</td>'
                 . '<td align="right">' . number_format($info['bodyFat'], 2) . '%</td>'
                 . '<td align="right">' . number_format($info['leanMass'], 2) . '%</td>'
@@ -183,7 +170,26 @@ class Web
                 . '<td align="right">' . number_format($info['tdeeExtreme'], 0, '', '') . '</td>'
                 . '</tr>';
         }
-        print '</table>';
+        print $this->getChartHeader() . '</table>';
+    }
+
+    private function getChartHeader()
+    {
+        return '<tr>'
+            . '<td>Description</td>'
+            . '<td>Weight<br />kilograms</td>'
+            . '<td>Weight<br />pounds</td>'
+            . '<td>BMI</td>'
+            . '<td>BMI<br />Prime</td>'
+            . '<td>Body<br />Fat %</td>'
+            . '<td>Lean<br />Mass %</td>'
+            . '<td>BMR</td>'
+            . '<td>TDEE<br />low</td>'
+            . '<td>TDEE<br />lite</td>'
+            . '<td>TDEE<br />modr</td>'
+            . '<td>TDEE<br />hevy</td>'
+            . '<td>TDEE<br />extr</td>'
+            . '</tr>';
     }
 
     /**
