@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 /**
- * The Average Human Body
+ * The Average Human
  */
 class AverageHuman
 {

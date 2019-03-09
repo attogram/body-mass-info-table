@@ -47,6 +47,12 @@ class Utils
             : $default;
     }
 
+    /**
+     * @param string $name
+     * @param array $enumArray
+     * @param string $default
+     * @return string
+     */
     public static function getEnumVarFromGet(string $name, array $enumArray, string $default = '')
     {
         if (!isset($_GET[$name])) {

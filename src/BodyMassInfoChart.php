@@ -6,12 +6,12 @@ namespace Attogram\Body;
 use Attogram\Router\Router;
 
 /**
- * Web Control
+ * Body Mass Info Chart
  */
 class BodyMassInfoChart
 {
     /** @var string Version*/
-    const VERSION = '1.3.0';
+    const VERSION = '1.3.1';
 
     /** @var Router */
     private $router;
@@ -106,7 +106,7 @@ class BodyMassInfoChart
     }
 
     /**
-     * @return void
+     * @uses $this->massArray
      */
     private function setMassArray()
     {
@@ -123,7 +123,7 @@ class BodyMassInfoChart
     }
 
     /**
-     * @return void
+     * @uses $this->infoArray
      */
     private function setInfoArray()
     {
@@ -149,7 +149,7 @@ class BodyMassInfoChart
     }
 
     /**
-     * Print Chart
+     * @uses $this->infoArray
      */
     private function chart()
     {
