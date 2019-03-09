@@ -2,9 +2,9 @@
     <h1>Welcome to the Body Mass Info Chart</h1>
     <p>
         This chart shows your
-        <a href="#bmi">BMI (Body Mass Index)</a> and
-        <a href="#bmi-prime">BMI' (BMI Prime)</a> for a range of weights
+        <a href="#bmi">BMI (Body Mass Index)</a>  for a range of weights
         based on your height, age, and sex.
+        Your <a href="#bmi-prime">BMI' (BMI Prime)</a> is also shown.
     </p>
     <p>
         Your BMI is used to estimate the average human body composition of
