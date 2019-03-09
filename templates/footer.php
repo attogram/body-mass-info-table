@@ -3,7 +3,7 @@
 <br />
 <div class="hdr bw">
     <a href="<?= $this->router->getUriBase(); ?>/">Body Mass Info Chart</a>
-    v<?= Attogram\Body\Web::VERSION; ?>
+    v<?= Attogram\Body\BodyMassInfoChart::VERSION; ?>
     &nbsp;
     <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
     &nbsp;

@@ -8,7 +8,7 @@ use Attogram\Router\Router;
 /**
  * Web Control
  */
-class Web
+class BodyMassInfoChart
 {
     /** @var string */
     const VERSION = '1.2.0';
@@ -39,6 +39,12 @@ class Web
 
     /** @var float */
     private $increment = 1.0;
+
+    /** @var array */
+    private $massArray = [];
+
+    /** @var array */
+    private $infoArray = [];
 
     /**
      * Route Request
@@ -94,23 +100,29 @@ class Web
     }
 
     /**
-     * Display Chart
+     * @return void
      */
-    private function chart()
+    private function setMassArray()
     {
-        $massArray = [];
+        $this->massArray = [];
         if ($this->startMass < $this->endMass) {
             for ($mass = $this->startMass; $mass <= $this->endMass; $mass = $mass + $this->increment) {
-                $massArray[] = $mass;
+                $this->massArray[] = $mass;
             }
         } else {
             for ($mass = $this->startMass; $this->endMass <= $mass; $mass = $mass - $this->increment) {
-                $massArray[] = $mass;
+                $this->massArray[] = $mass;
             }
         }
+    }
 
+    /**
+     * @return void
+     */
+    private function setInfoArray()
+    {
         $infoArray = [];
-        foreach ($massArray as $mass) {
+        foreach ($this->massArray as $mass) {
             $infoArray["$mass"]['mass'] = $mass;
             $infoArray["$mass"]['bmi'] = BodyCalculations::getBodyMassIndex(
                 $mass,
@@ -143,6 +155,16 @@ class Web
             $infoArray["$mass"]['tdeeHeavy'] = $infoArray["$mass"]['bmr'] * 1.725;
             $infoArray["$mass"]['tdeeExtreme'] = $infoArray["$mass"]['bmr'] * 1.9;
         }
+        $this->infoArray = $infoArray;
+    }
+
+    /**
+     * Print Chart
+     */
+    private function chart()
+    {
+        $this->setMassArray();
+        $this->setInfoArray();
 
         print '<table><tr><td colspan="13">'
             . 'Body Mass Info Chart'
@@ -155,16 +177,13 @@ class Web
             . $this->getChartHeader();
 
         $count = 0;
-        foreach ($infoArray as $mass => $info) {
-
+        foreach ($this->infoArray as $mass => $info) {
             $mass = (float) $mass;
-
             $count++;
             if ($count > 30) {
                 $count = 0;
                 print $this->getChartHeader();
             }
-
             print '<tr style="background-color:' . BodyCalculations::getBmiClassColor($info['bmi']) . '">'
                 . '<td>' . BodyCalculations::getBmiClassText($info['bmi']) . '</td>'
                 . '<td align="right">' . number_format($mass, 2) . '<small> kg</small></td>'
@@ -184,6 +203,9 @@ class Web
         print $this->getChartHeader() . '</table>';
     }
 
+    /**
+     * @return string
+     */
     private function getChartHeader()
     {
         return '<tr>'
@@ -208,6 +230,7 @@ class Web
      */
     private function includeTemplate(string $templateName)
     {
+        /** @noinspection PhpIncludeInspection */
         include($this->templatesDirectory . $templateName . '.php');
     }
 }

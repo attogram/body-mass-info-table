@@ -7,8 +7,7 @@ $autoload = '../vendor/autoload.php';
 if (!is_readable($autoload)) {
     die('Vendor autoload file not found.  Please run composer install.');
 }
+/** @noinspection PhpIncludeInspection */
 require_once($autoload);
 
-$web = new Web();
-
-$web->route();
+(new BodyMassInfoChart())->route();
