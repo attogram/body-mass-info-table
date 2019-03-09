@@ -141,13 +141,14 @@ class Web
             $infoArray["$mass"]['tdeeExtreme'] = $infoArray["$mass"]['bmr'] * 1.9;
         }
 
-        print '<div class="bw"> &nbsp; Height: ' . $this->human->height . ' meters'
+        print '<table><tr><td colspan="13">'
+            . 'Body Mass Information Chart'
+            . '<br /><br />Height: ' . $this->human->height . ' meters'
             . ' (' . number_format(Utils::metersToFeet($this->human->height), 2) . ' feet)'
             . ' (' . number_format(Utils::metersToInches($this->human->height), 2) . ' inches)'
-            . '</div>'
-            . '<div class="bw"> &nbsp; Age&nbsp;&nbsp;&nbsp;: ' . $this->human->age . ' years</div>'
-            . '<div class="bw"> &nbsp; Sex&nbsp;&nbsp;&nbsp;: ' . strtoupper($this->human->sex) . '</div>'
-            . '<table>'
+            . '<br />Age: ' . $this->human->age . ' years'
+            . '<br />Sex: ' . strtoupper($this->human->sex)
+            . '<br /></td></tr>'
             . $this->getChartHeader();
 
         $count = 0;

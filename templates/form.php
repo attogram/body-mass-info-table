@@ -22,8 +22,9 @@
 ?>
     <input type="radio" title="male" name="x" value="m" <?= $checkM; ?>>male
     <input type="radio" title="female" name="x" value="f"  <?= $checkF; ?>>female
-    <hr />
-    <em>Chart Options:</em>
+    <br />
+    <br />
+    <em>Options:</em>
     &nbsp;
     <label>Range:</label>
     <input id="s" name="s" title="Chart start" size="2" maxlength="3" value="<?= $this->startMass; ?>" />-<input

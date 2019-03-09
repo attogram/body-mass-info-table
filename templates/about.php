@@ -8,7 +8,8 @@
     </p>
     <p>
         Your BMI is used to estimate the average human body composition of
-        <a href="#body-composition">BFM (Body Fat Percentage) and LBM (Lean Body Mass)</a>.
+        <a href="#bfp">BFP (Body Fat Percentage)</a> versus
+        <a href="#lbm">LBM (Lean Body Mass)</a>.
     </p>
     <p>
         The body composition is used to estimate caloric maintenance requirements.
@@ -80,8 +81,8 @@
     </p>
     <a href=""><small>^top</small></a>
 
-    <a name="body-composition"></a>
-    <h2>What is BFP (Body Fat Percentage) and LBM (Lean Body Mass)?</h2>
+    <a name="bfp"></a>
+    <h2>What is BFP (Body Fat Percentage)?</h2>
     <p>
         The body fat percentage (BFP) of a human or other living being is
         the total mass of fat divided by total body mass, multiplied by 100; body fat includes essential
@@ -103,6 +104,10 @@
         large group of people, but a poor tool for determining the health of an individual.
         <br /><small>source: https://en.wikipedia.org/wiki/Body_fat_percentage</small>
     </p>
+    <a href=""><small>^top</small></a>
+
+    <a name="lbm"></a>
+    <h2>What is LBM (Lean Body Mass)?</h2>
     <p>
         Lean body mass (LBM) is a component of body composition, calculated by subtracting body fat
         weight from total body weight: total body weight is lean plus fat.
