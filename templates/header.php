@@ -1,3 +1,9 @@
+<?php
+declare(strict_types = 1);
+
+namespace Attogram\Body;
+
+?>
 <html><head><title>Body Mass Info Chart</title><style type="text/css">
 body { 
     background-color:white;

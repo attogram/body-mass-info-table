@@ -1,3 +1,9 @@
+<?php
+declare(strict_types = 1);
+
+namespace Attogram\Body;
+
+?>
 <div style="margin:20px;">
     <h1>Welcome to the Body Mass Info Chart</h1>
     <p>

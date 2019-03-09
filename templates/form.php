@@ -1,3 +1,9 @@
+<?php
+declare(strict_types = 1);
+
+namespace Attogram\Body;
+
+?>
 <form action="">
     <input type="submit" value="          Update Chart          " />
     &nbsp;
