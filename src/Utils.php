@@ -57,11 +57,29 @@ class Utils
     }
 
     /**
-     * @param float $mass
+     * @param float $kilograms
      * @return float
      */
-    public static function kilogramsToPounds(float $mass)
+    public static function kilogramsToPounds(float $kilograms)
     {
-        return (float) $mass * 2.2046226218;
+        return (float) $kilograms * 2.2046226218;
+    }
+
+    /**
+     * @param float $meters
+     * @return float
+     */
+    public static function metersToInches(float $meters)
+    {
+        return (float) $meters * 39.370;
+    }
+
+    /**
+     * @param float $meters
+     * @return float
+     */
+    public static function metersToFeet(float $meters)
+    {
+        return (float) $meters * 3.2808;
     }
 }

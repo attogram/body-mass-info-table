@@ -44,10 +44,14 @@ class Web
     {
         $this->router = new Router();
         $this->router->allow('/', 'home');
+        $this->router->allow('/about', 'about');
         $this->includeTemplate('header');
         switch ($this->router->match()) {
             case 'home':
                 $this->pageHome();
+                break;
+            case 'about':
+                $this->includeTemplate('about');
                 break;
             default: 
                 $this->pageNotFound();
@@ -137,9 +141,12 @@ class Web
             $infoArray["$mass"]['tdeeExtreme'] = $infoArray["$mass"]['bmr'] * 1.9;
         }
 
-        print '<div class="bw"> &nbsp; Height: ' . $this->human->height . ' meters</div>'
+        print '<div class="bw"> &nbsp; Height: ' . $this->human->height . ' meters'
+            . ' (' . number_format(Utils::metersToFeet($this->human->height), 2) . ' feet)'
+            . ' (' . number_format(Utils::metersToInches($this->human->height), 2) . ' inches)'
+            . '</div>'
             . '<div class="bw"> &nbsp; Age&nbsp;&nbsp;&nbsp;: ' . $this->human->age . ' years</div>'
-            . '<div class="bw"> &nbsp; Sex&nbsp;&nbsp;&nbsp;: ' . $this->human->sex . '</div>'
+            . '<div class="bw"> &nbsp; Sex&nbsp;&nbsp;&nbsp;: ' . strtoupper($this->human->sex) . '</div>'
             . '<table>'
             . $this->getChartHeader();
 
@@ -180,7 +187,7 @@ class Web
             . '<td>Weight<br /><small>kilograms</small></td>'
             . '<td>Weight<br /><small>pounds</small></td>'
             . '<td>BMI</td>'
-            . '<td>BMI<br />Prime</td>'
+            . '<td><small>BMI<br />Prime</small></td>'
             . '<td>Body<br />Fat %</td>'
             . '<td>Lean<br />Mass %</td>'
             . '<td>BMR</td>'

@@ -7,8 +7,9 @@ body {
     margin:0;
 }
 a {
-    background-color:black;
-    color:yellow;
+    background-color:lightyellow;
+    color:black;
+    text-decoration:none;
 }
 .hdr {
     font-weight:bold; 
@@ -38,4 +39,6 @@ table, tr, td {
 <div class="hdr bw">
     <a href="<?= $this->router->getUriBase(); ?>/">BMI Chart</a>
     <small>- Body Mass Index for your height, age and sex</small>
+    &nbsp;
+    <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
 </div>

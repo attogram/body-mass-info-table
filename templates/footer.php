@@ -1,5 +1,8 @@
 <br />
-<div class="hdr" style="text-align:right;">
-    <a href="<?= $this->router->getUriBase(); ?>/">BMI Chart</a>
-</div>
-</body></html>
+<br />
+ &nbsp;
+<a href="<?= $this->router->getUriBase(); ?>/">BMI Chart</a>
+ &nbsp;
+<a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
+</body>
+</html>
