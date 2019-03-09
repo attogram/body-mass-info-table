@@ -8,6 +8,8 @@ https://getitdaily.com/body-mass-info-chart/
 
 # Open Source
 
-The 'Body Mass Info Chart is an Open Source project.
+The Body Mass Info Chart is an Open Source project, 
+brought to you by the Attogram Project.
+
 * Github: https://github.com/attogram/body-mass-info-chart
 * Packagist: https://packagist.org/packages/attogram/body-mass-info-chart
