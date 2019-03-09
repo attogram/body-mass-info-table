@@ -10,6 +10,9 @@ use Attogram\Router\Router;
  */
 class Web
 {
+    /** @var string */
+    const VERSION = '1.1.0';
+
     /** @var Router Object*/
     private $router;
 
