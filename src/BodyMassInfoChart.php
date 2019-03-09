@@ -171,7 +171,7 @@ class BodyMassInfoChart
             }
             print '<tr style="background-color:' . Utils::getBmiClassColor($info['bmi']) . '">'
                 . '<td>' . Utils::getBmiClassText($info['bmi']) . '</td>'
-                . '<td align="right">' . number_format($this->human->mass, 2) . '<small> kg</small></td>'
+                . '<td align="right">' . number_format($info['mass'], 2) . '<small> kg</small></td>'
                 . '<td align="right">' . number_format(Utils::kilogramsToPounds($mass), 2) . '<small> lb</small></td>'
                 . '<td align="right">' . number_format($info['bmi'], 2) . '</td>'
                 . '<td align="right">' . number_format($info['bmiPrime'], 2) . '</td>'
