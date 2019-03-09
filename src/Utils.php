@@ -16,7 +16,7 @@ class Utils
     public static function getFloatVar($var, float $default = 0.0)
     {
         return ($var && is_numeric($var) && $var > 0)
-            ? (float)$var
+            ? (float) $var
             : $default;
     }
 

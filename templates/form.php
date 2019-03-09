@@ -3,18 +3,19 @@ declare(strict_types = 1);
 
 namespace Attogram\Body;
 
+/** @var BodyMassInfoChart $this */
 ?>
 <form>
     <input type="submit" value="          Update Chart          " />
     &nbsp;
     <label for="h">Height:</label>
     <input id="h" name="h" title="Height" type="text" size="4" maxlength="5" value="<?=
-        ($this->human->height > 0) ? $this->human->height : '';
+        ($this->human->getHeight() > 0) ? $this->human->getHeight() : '';
     ?>" />meters
     &nbsp;
     <label for="a">Age:</label>
     <input id="a" name="a" title="Age" type="text" size="4" maxlength="5" value="<?=
-        ($this->human->age > 0) ? $this->human->age : '';
+        ($this->human->getAge() > 0) ? $this->human->getAge() : '';
     ?>" />years
     &nbsp;
     <label>Sex:</label>

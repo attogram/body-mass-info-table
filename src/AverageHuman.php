@@ -4,30 +4,15 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 /**
- * The Average Human
+ * Average Human
  */
-class AverageHuman
+class AverageHuman extends BasicHuman
 {
-    /** @var float $height - length, in meters */
-    public $height = 0.0;
-
-    /** @var float $age - age, in years */
-    public $age = 0.0;
-
-    /** @var string $age - sex, m=male f=female, u=unknown*/
-    public $sex = 'u';
-
-    /** @var float $mass - weight, in kilograms */
-    public $mass = 0.0;
-
     /** @var float $bmi - Body Mass Index */
     private $bmi = 0.0;
 
     /** @var float $bfp - Body Fat Percentage */
     private $bfp = 0.0;
-
-    /** @var float $lbm - Lean Body Mass */
-    private $lbm = 0.0;
 
     /**
      * Standard Body Mass Index (BMI)
@@ -38,11 +23,11 @@ class AverageHuman
      */
     public function getBodyMassIndex()
     {
-        if (!$this->isValidFloat($this->height) || !$this->isValidFloat($this->mass)) {
+        if (!$this->isValidFloat($this->getHeight()) || !$this->isValidFloat($this->mass)) {
             return 0.0;
         }
 
-        return $this->bmi = (float) $this->mass / ($this->height ** 2);
+        return $this->bmi = (float) $this->mass / ($this->getHeight() ** 2);
     }
 
     /**
@@ -89,10 +74,10 @@ class AverageHuman
     public function getLeanBodyMass()
     {
         if (!$this->isValidFloat($this->bfp)) {
-            return $this->lbm = 0.0;
+            return 0.0;
         }
 
-        return $this->lbm = (float) 100 - $this->bfp;
+        return (float) 100 - $this->bfp;
     }
 
     /**
@@ -107,18 +92,5 @@ class AverageHuman
         }
 
         return (float) 370 + (21.6 * ($this->mass * (1 - ($this->bfp / 100))));
-    }
-
-    /**
-     * @param mixed $var
-     * @return bool
-     */
-    private function isValidFloat($var = null)
-    {
-        if ($var && $var > 0.0 && is_float($var)) {
-            return true;
-        }
-
-        return false;
     }
 }

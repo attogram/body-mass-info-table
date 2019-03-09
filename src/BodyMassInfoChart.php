@@ -90,9 +90,9 @@ class BodyMassInfoChart
     private function home()
     {
         $this->human = new AverageHuman();
-        $this->human->height = (float) Utils::getFloatVarFromGet('h', $this->defaultHeight);
-        $this->human->age = (float) Utils::getFloatVarFromGet('a', $this->defaultAge);
-        $this->human->sex = (string) Utils::getEnumVarFromGet('x', ['m','f','u'], $this->defaultSex);
+        $this->human->setAge(Utils::getFloatVarFromGet('a', $this->defaultAge));
+        $this->human->setHeight(Utils::getFloatVarFromGet('h', $this->defaultHeight));
+        $this->human->setSex(Utils::getEnumVarFromGet('x', ['m','f','u'], $this->defaultSex));
 
         $this->startMass = Utils::getFloatVarFromGet('s', $this->startMass);
         $this->endMass = Utils::getFloatVarFromGet('e', $this->endMass);
@@ -100,7 +100,7 @@ class BodyMassInfoChart
 
         $this->includeTemplate('form');
 
-        if ($this->human->height) {
+        if ($this->human->getHeight()) {
             $this->chart();
         }
     }
@@ -130,7 +130,7 @@ class BodyMassInfoChart
         $infoArray = [];
         foreach ($this->massArray as $mass) {
             $mass = (float) $mass;
-            $this->human->mass = $mass;
+            $this->human->setMass($mass);
             $infoArray["$mass"]['mass'] = $mass;
             $infoArray["$mass"]['bmi'] = $this->human->getBodyMassIndex();
             $infoArray["$mass"]['bmiPrime'] = $this->human->getBodyMassIndexPrime();
@@ -171,12 +171,12 @@ class BodyMassInfoChart
             }
             print '<tr style="background-color:' . Utils::getBmiClassColor($info['bmi']) . '">'
                 . '<td>' . Utils::getBmiClassText($info['bmi']) . '</td>'
-                . '<td align="right">' . number_format($info['mass'], 2) . '<small> kg</small></td>'
-                . '<td align="right">' . number_format(Utils::kilogramsToPounds($mass), 2) . '<small> lb</small></td>'
+                . '<td align="right">' . number_format($info['mass'], 2) . '</td>'
+                . '<td align="right">' . number_format(Utils::kilogramsToPounds($mass), 2) . '</td>'
                 . '<td align="right">' . number_format($info['bmi'], 2) . '</td>'
                 . '<td align="right">' . number_format($info['bmiPrime'], 2) . '</td>'
-                . '<td align="right">' . number_format($info['bodyFat'], 2) . '<small>%</small></td>'
-                . '<td align="right">' . number_format($info['leanMass'], 2) . '<small>%</small></td>'
+                . '<td align="right">' . number_format($info['bodyFat'], 2) . '</td>'
+                . '<td align="right">' . number_format($info['leanMass'], 2) . '</td>'
                 . '<td align="right">' . number_format($info['bmr'], 0, '', '') . '</td>'
                 . '<td align="right">' . number_format($info['tdeeSedentary'], 0, '', '') . '</td>'
                 . '<td align="right">' . number_format($info['tdeeLight'], 0, '', '') . '</td>'
@@ -194,11 +194,11 @@ class BodyMassInfoChart
     private function getChartTopic()
     {
         return 'Body Mass Info Chart'
-            . '<br /><br />Height: ' . $this->human->height . ' meters'
-            . ' (' . number_format(Utils::metersToFeet($this->human->height), 2) . ' feet)'
-            . ' (' . number_format(Utils::metersToInches($this->human->height), 2) . ' inches)'
-            . '<br />Age: ' . $this->human->age . ' years'
-            . '<br />Sex: ' . strtoupper($this->human->sex);
+            . '<br /><br />Height: ' . $this->human->getHeight() . ' meters'
+            . ' (' . number_format(Utils::metersToFeet($this->human->getHeight()), 2) . ' feet)'
+            . ' (' . number_format(Utils::metersToInches($this->human->getHeight()), 2) . ' inches)'
+            . '<br />Age: ' . $this->human->getAge() . ' years'
+            . '<br />Sex: ' . strtoupper($this->human->getSex());
     }
 
     /**
@@ -213,7 +213,7 @@ class BodyMassInfoChart
             . '<td>BMI</td>'
             . '<td><small>BMI<br />Prime</small></td>'
             . '<td>Body<br />Fat %</td>'
-            . '<td>Lean<br />Mass %</td>'
+            . '<td>Lean<br />Mass</td>'
             . '<td>BMR</td>'
             . '<td>TDEE<br /><small>low</small></td>'
             . '<td>TDEE<br /><small>light</small></td>'
