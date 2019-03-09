@@ -10,16 +10,16 @@ use Attogram\Router\Router;
  */
 class BodyMassInfoChart
 {
-    /** @var string */
+    /** @var string Version*/
     const VERSION = '1.2.0';
 
-    /** @var Router Object*/
+    /** @var Router */
     private $router;
 
     /** @var string */
     private $templatesDirectory = '../templates/';
 
-    /** @var AverageHuman Object */
+    /** @var AverageHuman */
     private $human;
 
     /** @var float */
@@ -54,41 +54,23 @@ class BodyMassInfoChart
         $this->router = new Router();
         $this->router->allow('/', 'home');
         $this->router->allow('/about', 'about');
+        $match = $this->router->match();
+
+        if (!$match) {
+            $this->pageNotFound();
+            return;
+        }
+
         $this->includeTemplate('header');
-        switch ($this->router->match()) {
+        switch ($match) {
             case 'home':
-                $this->pageHome();
+                $this->home();
                 break;
             case 'about':
                 $this->includeTemplate('about');
                 break;
-            default: 
-                $this->pageNotFound();
-                break;
         }
         $this->includeTemplate('footer');
-    }
-
-    /**
-     * Home Page
-     */
-    private function pageHome()
-    {
-        $height = Utils::getFloatVarFromGet('h', $this->defaultHeight);
-        $age = Utils::getFloatVarFromGet('a', $this->defaultAge);
-        $sex = Utils::getEnumVarFromGet('x', ['m','f','u'], $this->defaultSex);
-
-        $this->startMass = Utils::getFloatVarFromGet('s', $this->startMass);
-        $this->endMass = Utils::getFloatVarFromGet('e', $this->endMass);
-        $this->increment = Utils::getFloatVarFromGet('i', $this->increment);
-
-        $this->human = new AverageHuman($height, $age, $sex);
-
-        $this->includeTemplate('form');
-
-        if ($this->human->height) {
-            $this->chart();
-        }
     }
 
     /**
@@ -96,7 +78,31 @@ class BodyMassInfoChart
      */
     private function pageNotFound()
     {
-        print '<h1>404 Page Not Found</h1>';
+        header('HTTP/1.0 404 Not Found');
+        $this->includeTemplate('header');
+        print '<h1 style="padding:20px;">404 Page Not Found</h1>';
+        $this->includeTemplate('footer');
+    }
+
+    /**
+     * Home Page
+     */
+    private function home()
+    {
+        $this->human = new AverageHuman();
+        $this->human->height = (float) Utils::getFloatVarFromGet('h', $this->defaultHeight);
+        $this->human->age = (float) Utils::getFloatVarFromGet('a', $this->defaultAge);
+        $this->human->sex = (string) Utils::getEnumVarFromGet('x', ['m','f','u'], $this->defaultSex);
+
+        $this->startMass = Utils::getFloatVarFromGet('s', $this->startMass);
+        $this->endMass = Utils::getFloatVarFromGet('e', $this->endMass);
+        $this->increment = Utils::getFloatVarFromGet('i', $this->increment);
+
+        $this->includeTemplate('form');
+
+        if ($this->human->height) {
+            $this->chart();
+        }
     }
 
     /**
@@ -123,32 +129,16 @@ class BodyMassInfoChart
     {
         $infoArray = [];
         foreach ($this->massArray as $mass) {
+            $mass = (float) $mass;
+            $this->human->mass = $mass;
             $infoArray["$mass"]['mass'] = $mass;
-            $infoArray["$mass"]['bmi'] = BodyCalculations::getBodyMassIndex(
-                $mass,
-                $this->human->height
-            );
-            $infoArray["$mass"]['bmiPrime'] = BodyCalculations::getBodyMassIndexPrime(
-                $infoArray["$mass"]['bmi']
-            );
-            $infoArray["$mass"]['bmiText'] = BodyCalculations::getBmiClassText(
-                $infoArray["$mass"]['bmi']
-            );
-            $infoArray["$mass"]['bmiColor'] = BodyCalculations::getBmiClassColor(
-                $infoArray["$mass"]['bmi']
-            );
-            $infoArray["$mass"]['bodyFat'] = BodyCalculations::getEstimatedBodyFat(
-                $infoArray["$mass"]['bmi'],
-                $this->human->age,
-                $this->human->sex
-            );
-            $infoArray["$mass"]['leanMass'] = BodyCalculations::getLeanMass(
-                $infoArray["$mass"]['bodyFat']
-            );
-            $infoArray["$mass"]['bmr'] = BodyCalculations::getBmr(
-                $mass,
-                $infoArray["$mass"]['bodyFat']
-            );
+            $infoArray["$mass"]['bmi'] = $this->human->getBodyMassIndex();
+            $infoArray["$mass"]['bmiPrime'] = $this->human->getBodyMassIndexPrime();
+            $infoArray["$mass"]['bmiText'] = Utils::getBmiClassText($infoArray["$mass"]['bmi']);
+            $infoArray["$mass"]['bmiColor'] = Utils::getBmiClassColor($infoArray["$mass"]['bmi']);
+            $infoArray["$mass"]['bodyFat'] = $this->human->getBodyFatPercentage();
+            $infoArray["$mass"]['leanMass'] =  $this->human->getLeanBodyMass();
+            $infoArray["$mass"]['bmr'] = $this->human->getBasalMetablicRate();
             $infoArray["$mass"]['tdeeSedentary'] = $infoArray["$mass"]['bmr'] * 1.2;
             $infoArray["$mass"]['tdeeLight'] = $infoArray["$mass"]['bmr'] * 1.375;
             $infoArray["$mass"]['tdeeModerate'] = $infoArray["$mass"]['bmr'] * 1.55;
@@ -166,15 +156,10 @@ class BodyMassInfoChart
         $this->setMassArray();
         $this->setInfoArray();
 
-        print '<table><tr><td colspan="13">'
-            . 'Body Mass Info Chart'
-            . '<br /><br />Height: ' . $this->human->height . ' meters'
-            . ' (' . number_format(Utils::metersToFeet($this->human->height), 2) . ' feet)'
-            . ' (' . number_format(Utils::metersToInches($this->human->height), 2) . ' inches)'
-            . '<br />Age: ' . $this->human->age . ' years'
-            . '<br />Sex: ' . strtoupper($this->human->sex)
-            . '<br /></td></tr>'
-            . $this->getChartHeader();
+        print '<table>'
+            . '<tr>'
+            . '<td colspan="13">' . $this->getChartTopic() . '</td>'
+            . '</tr>' . $this->getChartHeader();
 
         $count = 0;
         foreach ($this->infoArray as $mass => $info) {
@@ -184,9 +169,9 @@ class BodyMassInfoChart
                 $count = 0;
                 print $this->getChartHeader();
             }
-            print '<tr style="background-color:' . BodyCalculations::getBmiClassColor($info['bmi']) . '">'
-                . '<td>' . BodyCalculations::getBmiClassText($info['bmi']) . '</td>'
-                . '<td align="right">' . number_format($mass, 2) . '<small> kg</small></td>'
+            print '<tr style="background-color:' . Utils::getBmiClassColor($info['bmi']) . '">'
+                . '<td>' . Utils::getBmiClassText($info['bmi']) . '</td>'
+                . '<td align="right">' . number_format($this->human->mass, 2) . '<small> kg</small></td>'
                 . '<td align="right">' . number_format(Utils::kilogramsToPounds($mass), 2) . '<small> lb</small></td>'
                 . '<td align="right">' . number_format($info['bmi'], 2) . '</td>'
                 . '<td align="right">' . number_format($info['bmiPrime'], 2) . '</td>'
@@ -201,6 +186,19 @@ class BodyMassInfoChart
                 . '</tr>';
         }
         print $this->getChartHeader() . '</table>';
+    }
+
+    /**
+     * @return string
+     */
+    private function getChartTopic()
+    {
+        return 'Body Mass Info Chart'
+            . '<br /><br />Height: ' . $this->human->height . ' meters'
+            . ' (' . number_format(Utils::metersToFeet($this->human->height), 2) . ' feet)'
+            . ' (' . number_format(Utils::metersToInches($this->human->height), 2) . ' inches)'
+            . '<br />Age: ' . $this->human->age . ' years'
+            . '<br />Sex: ' . strtoupper($this->human->sex);
     }
 
     /**
