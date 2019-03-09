@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 ?>
-<form action="">
+<form>
     <input type="submit" value="          Update Chart          " />
     &nbsp;
     <label for="h">Height:</label>

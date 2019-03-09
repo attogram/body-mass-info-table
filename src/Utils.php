@@ -135,19 +135,19 @@ class Utils
     public static function getBmiClassText(float $bmi) {
         switch($bmi) {
             case ($bmi >= 60.0):
-                return 'Obese - Class V <small>- Super-Super Obesity</small>';
+                return 'Obese <small>- Class V - Super-Super Obesity</small>';
             case ($bmi >= 50.0):
-                return 'Obese - Class IV <small>- Super Obesity</small>';
+                return 'Obese <small>- Class IV - Super Obesity</small>';
             case ($bmi >= 40.0):
-                return 'Obese - Class III <small>- Morbid Obesity</small>';
+                return 'Obese <small>- Class III - Morbid Obesity</small>';
             case ($bmi >= 37.5):
-                return 'Obese - Class II <small>- Very Severe Obesity</small>';
+                return 'Obese <small>- Class II - Very Severe Obesity</small>';
             case ($bmi >= 35.0):
-                return 'Obese - Class II <small>- Severe Obesity</small>';
+                return 'Obese <small>- Class II - Severe Obesity</small>';
             case ($bmi >= 32.5):
-                return 'Obese - Class I <small>- Very Obese</small>';
+                return 'Obese <small>- Class I - Very Obese</small>';
             case ($bmi >= 30.0):
-                return 'Obese - Class I <small>- Obese</small>';
+                return 'Obese <small>- Class I - Obese</small>';
             case ($bmi >= 27.5):
                 return 'Overweight <small>- Pre-obese</small>';
             case ($bmi >= 25.0):
