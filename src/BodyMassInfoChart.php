@@ -28,9 +28,6 @@ class BodyMassInfoChart
     /** @var float */
     private $defaultHeight = 0.0;
 
-    /** @var string */
-    private $defaultSex = 'm';
-
     /** @var float */
     private $startMass = 100.0;
 
@@ -92,17 +89,14 @@ class BodyMassInfoChart
         $this->human = new AverageHuman();
         $this->human->setAge(Utils::getFloatVarFromGet('a', $this->defaultAge));
         $this->human->setHeight(Utils::getFloatVarFromGet('h', $this->defaultHeight));
-        $this->human->setSex(Utils::getEnumVarFromGet('x', ['m','f','u'], $this->defaultSex));
+        $this->human->setSex(Utils::getEnumVarFromGet('x', ['m','f'], 'u'));
 
         $this->startMass = Utils::getFloatVarFromGet('s', $this->startMass);
         $this->endMass = Utils::getFloatVarFromGet('e', $this->endMass);
         $this->increment = Utils::getFloatVarFromGet('i', $this->increment);
 
         $this->includeTemplate('form');
-
-        if ($this->human->getHeight()) {
-            $this->chart();
-        }
+        $this->chart();
     }
 
     /**
@@ -132,18 +126,49 @@ class BodyMassInfoChart
             $mass = (float) $mass;
             $this->human->setMass($mass);
             $infoArray["$mass"]['mass'] = $mass;
-            $infoArray["$mass"]['bmi'] = $this->human->getBodyMassIndex();
-            $infoArray["$mass"]['bmiPrime'] = $this->human->getBodyMassIndexPrime();
-            $infoArray["$mass"]['bmiText'] = Utils::getBmiClassText($infoArray["$mass"]['bmi']);
-            $infoArray["$mass"]['bmiColor'] = Utils::getBmiClassColor($infoArray["$mass"]['bmi']);
-            $infoArray["$mass"]['bodyFat'] = $this->human->getBodyFatPercentage();
-            $infoArray["$mass"]['leanMass'] =  $this->human->getLeanBodyMass();
-            $infoArray["$mass"]['bmr'] = $this->human->getBasalMetablicRate();
-            $infoArray["$mass"]['tdeeSedentary'] = $infoArray["$mass"]['bmr'] * 1.2;
-            $infoArray["$mass"]['tdeeLight'] = $infoArray["$mass"]['bmr'] * 1.375;
-            $infoArray["$mass"]['tdeeModerate'] = $infoArray["$mass"]['bmr'] * 1.55;
-            $infoArray["$mass"]['tdeeHeavy'] = $infoArray["$mass"]['bmr'] * 1.725;
-            $infoArray["$mass"]['tdeeExtreme'] = $infoArray["$mass"]['bmr'] * 1.9;
+            $infoArray["$mass"]['bmi'] = number_format($this->human->getBodyMassIndex(), 2);
+            $infoArray["$mass"]['bmiPrime'] =  number_format($this->human->getBodyMassIndexPrime(), 2);
+            $infoArray["$mass"]['bmiText'] = Utils::getBmiClassText($this->human->getBodyMassIndex());
+            $infoArray["$mass"]['bmiColor'] = Utils::getBmiClassColor($this->human->getBodyMassIndex());
+            $infoArray["$mass"]['bodyFat'] = number_format($this->human->getBodyFatPercentage(), 2);
+            $infoArray["$mass"]['leanMass'] = number_format($this->human->getLeanBodyMass(), 2);
+            $infoArray["$mass"]['bmr'] = number_format($this->human->getBasalMetablicRate(), 0, '', '');
+            $infoArray["$mass"]['tdeeSedentary'] = number_format($this->human->getBasalMetablicRate() * 1.2, 0, '', '');
+            $infoArray["$mass"]['tdeeLight'] = number_format($this->human->getBasalMetablicRate() * 1.375, 0, '', '');
+            $infoArray["$mass"]['tdeeModerate'] = number_format($this->human->getBasalMetablicRate() * 1.55, 0, '', '');
+            $infoArray["$mass"]['tdeeHeavy'] = number_format($this->human->getBasalMetablicRate() * 1.725, 0, '', '');
+            $infoArray["$mass"]['tdeeExtreme'] = number_format($this->human->getBasalMetablicRate() * 1.9, 0, '', '');
+
+            if ($infoArray["$mass"]['bmi'] == 0.00) {
+                $infoArray["$mass"]['bmi'] = '-';
+            }
+            if ($infoArray["$mass"]['bmiPrime'] == 0.00) {
+                $infoArray["$mass"]['bmiPrime'] = '-';
+            }
+            if ($infoArray["$mass"]['bodyFat'] == 0.00) {
+                $infoArray["$mass"]['bodyFat'] = '-';
+            }
+            if ($infoArray["$mass"]['leanMass'] == 0.00) {
+                $infoArray["$mass"]['leanMass'] = '-';
+            }
+            if ($infoArray["$mass"]['bmr'] == 0) {
+                $infoArray["$mass"]['bmr'] = '-';
+            }
+            if ($infoArray["$mass"]['tdeeSedentary'] == 0) {
+                $infoArray["$mass"]['tdeeSedentary'] = '-';
+            }
+            if ($infoArray["$mass"]['tdeeLight'] == 0) {
+                $infoArray["$mass"]['tdeeLight'] = '-';
+            }
+            if ($infoArray["$mass"]['tdeeModerate'] == 0) {
+                $infoArray["$mass"]['tdeeModerate'] = '-';
+            }
+            if ($infoArray["$mass"]['tdeeHeavy'] == 0) {
+                $infoArray["$mass"]['tdeeHeavy'] = '-';
+            }
+            if ($infoArray["$mass"]['tdeeExtreme'] == 0) {
+                $infoArray["$mass"]['tdeeExtreme'] = '-';
+            }
         }
         $this->infoArray = $infoArray;
     }
@@ -158,7 +183,7 @@ class BodyMassInfoChart
 
         print '<table>'
             . '<tr>'
-            . '<td colspan="13">' . $this->getChartTopic() . '</td>'
+            . '<td colspan="14">' . $this->getChartTopic() . '</td>'
             . '</tr>' . $this->getChartHeader();
 
         $count = 0;
@@ -171,18 +196,19 @@ class BodyMassInfoChart
             }
             print '<tr style="background-color:' . Utils::getBmiClassColor($info['bmi']) . '">'
                 . '<td>' . Utils::getBmiClassText($info['bmi']) . '</td>'
-                . '<td align="right">' . number_format($info['mass'], 2) . '</td>'
-                . '<td align="right">' . number_format(Utils::kilogramsToPounds($mass), 2) . '</td>'
-                . '<td align="right">' . number_format($info['bmi'], 2) . '</td>'
-                . '<td align="right">' . number_format($info['bmiPrime'], 2) . '</td>'
-                . '<td align="right">' . number_format($info['bodyFat'], 2) . '</td>'
-                . '<td align="right">' . number_format($info['leanMass'], 2) . '</td>'
-                . '<td align="right">' . number_format($info['bmr'], 0, '', '') . '</td>'
-                . '<td align="right">' . number_format($info['tdeeSedentary'], 0, '', '') . '</td>'
-                . '<td align="right">' . number_format($info['tdeeLight'], 0, '', '') . '</td>'
-                . '<td align="right">' . number_format($info['tdeeModerate'], 0, '', '') . '</td>'
-                . '<td align="right">' . number_format($info['tdeeHeavy'], 0, '', '') . '</td>'
-                . '<td align="right">' . number_format($info['tdeeExtreme'], 0, '', '') . '</td>'
+                . '<td align="right">' . $info['mass'] . '</td>'
+                . '<td align="right">' . number_format(Conversions::kilogramsToPounds($mass), 2) . '</td>'
+                . '<td align="right">' . number_format(Conversions::kilogramsToStones($mass), 2) . '</td>'
+                . '<td align="right" class="bold">' . $info['bmi'] . '</td>'
+                . '<td align="right">' . $info['bmiPrime'] . '</td>'
+                . '<td align="right">' . $info['bodyFat'] . '</td>'
+                . '<td align="right">' . $info['leanMass'] . '</td>'
+                . '<td align="right">' . $info['bmr'] . '</td>'
+                . '<td align="right">' . $info['tdeeSedentary'] . '</td>'
+                . '<td align="right">' . $info['tdeeLight'] . '</td>'
+                . '<td align="right">' . $info['tdeeModerate'] . '</td>'
+                . '<td align="right">' . $info['tdeeHeavy'] . '</td>'
+                . '<td align="right">' . $info['tdeeExtreme'] . '</td>'
                 . '</tr>';
         }
         print $this->getChartHeader() . '</table>';
@@ -193,12 +219,23 @@ class BodyMassInfoChart
      */
     private function getChartTopic()
     {
+        $error = '<span class="error">Unknown</span>';
         return 'Body Mass Info Chart'
-            . '<br /><br />Height: ' . $this->human->getHeight() . ' meters'
-            . ' (' . number_format(Utils::metersToFeet($this->human->getHeight()), 2) . ' feet)'
-            . ' (' . number_format(Utils::metersToInches($this->human->getHeight()), 2) . ' inches)'
-            . '<br />Age: ' . $this->human->getAge() . ' years'
-            . '<br />Sex: ' . strtoupper($this->human->getSex());
+            . '<br /><br />Height: '
+            . ($this->human->getHeight()
+                ? $this->human->getHeight() . ' meters'
+                    . ' (' . number_format(Conversions::metersToFeet($this->human->getHeight()), 2)
+                    . ' feet)'
+                    . ' (' . number_format(Conversions::metersToInches($this->human->getHeight()), 2)
+                    . ' inches)'
+                : $error
+            )
+            . '<br />Age&nbsp;&nbsp;&nbsp;: '
+            . ($this->human->getAge() ? $this->human->getAge() . ' years' : $error)
+            . '<br />Sex&nbsp;&nbsp;&nbsp;: '
+            . ($this->human->getSex() == 'm' ? 'Male' : '')
+            . ($this->human->getSex() == 'f' ? 'Female' : '')
+            . (!in_array($this->human->getSex(), ['m', 'f']) ? '<span class="error">Unknown</span>' : '');
     }
 
     /**
@@ -208,11 +245,12 @@ class BodyMassInfoChart
     {
         return '<tr>'
             . '<td>Description</td>'
-            . '<td>Weight<br /><small>kilograms</small></td>'
-            . '<td>Weight<br /><small>pounds</small></td>'
-            . '<td>BMI</td>'
+            . '<td>Weight<br /><small>Kilograms</small></td>'
+            . '<td>Weight<br /><small>Pounds</small></td>'
+            . '<td>Weight<br /><small>Stones</small></td>'
+            . '<td class="bold">BMI</td>'
             . '<td><small>BMI<br />Prime</small></td>'
-            . '<td>Body<br />Fat %</td>'
+            . '<td>Body<br />Fat<small> %</small></td>'
             . '<td>Lean<br />Mass</td>'
             . '<td>BMR</td>'
             . '<td>TDEE<br /><small>low</small></td>'

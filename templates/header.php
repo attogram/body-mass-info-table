@@ -38,6 +38,15 @@ a:hover {
     background-color:lightseagreen;
     color:black;
 }
+.bold {
+    font-weight:bold;
+}
+.error {
+    background-color:black;
+    border:1px solid red;
+    color:yellow;
+    padding:0 4px 0 4px;
+}
 form {
     padding:14px;
     margin:0;

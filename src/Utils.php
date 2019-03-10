@@ -63,38 +63,14 @@ class Utils
     }
 
     /**
-     * @param float $kilograms
-     * @return float
-     */
-    public static function kilogramsToPounds(float $kilograms)
-    {
-        return (float) $kilograms * 2.2046226218;
-    }
-
-    /**
-     * @param float $meters
-     * @return float
-     */
-    public static function metersToInches(float $meters)
-    {
-        return (float) $meters * 39.370;
-    }
-
-    /**
-     * @param float $meters
-     * @return float
-     */
-    public static function metersToFeet(float $meters)
-    {
-        return (float) $meters * 3.2808;
-    }
-
-    /**
-     * @param float $bmi
+     * @param mixed $bmi
      * @return string
      */
-    public static function getBmiClassColor(float $bmi) {
+    public static function getBmiClassColor($bmi) {
         switch($bmi) {
+            case 0.0:
+            default:
+                return '#E8E8E8';
             case ($bmi >= 60.0): // Obese - Class V - Super-Super Obesity
                 return '#C71585';
             case ($bmi >= 50.0): // Obese - Class IV - Super Obesity
@@ -123,17 +99,18 @@ class Utils
                 return '#FFA500';
             case ($bmi < 16.0):  // Underweight - Severe thinness
                 return '#FF0000';
-            default:
-                return '#808080';
         }
     }
 
     /**
-     * @param float $bmi
+     * @param mixed $bmi
      * @return string
      */
-    public static function getBmiClassText(float $bmi) {
+    public static function getBmiClassText($bmi) {
         switch($bmi) {
+            case 0.0:
+            default:
+                return '-';
             case ($bmi >= 60.0):
                 return 'Obese <small>- Class V - Super-Super Obesity</small>';
             case ($bmi >= 50.0):
@@ -162,8 +139,6 @@ class Utils
                 return 'Underweight <small>- Moderate thinness</small>';
             case ($bmi < 16.0):
                 return 'Underweight <small>- Severe thinness</small>';
-            default:
-                return '?';
         }
     }
 }
