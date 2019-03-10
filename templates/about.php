@@ -30,8 +30,7 @@ namespace Attogram\Body;
             https://github.com/attogram/body-mass-info-chart</a>
     </p>
 
-    <a name="howto"></a>
-    <h2>How to use the chart</h2>
+    <h2 id="howto">How to use the chart</h2>
     <p>
         Enter your height (in meters), your age, and your sex.  Then click 'Update Chart'.
     </p>
@@ -41,8 +40,7 @@ namespace Attogram\Body;
     </p>
     <a href=""><small>^top</small></a>
 
-    <a name="bmi"></a>
-    <h2>What is BMI (Body Mass Index)?</h2>
+    <h2 id="bmi">What is BMI (Body Mass Index)?</h2>
     <p>
         The body mass index (BMI) or Quetelet index is a value derived from the mass (weight) and height
         of an individual. The BMI is defined as the body mass divided by the square of the body height,
@@ -56,12 +54,14 @@ namespace Attogram\Body;
     </p>
     <p>
         Commonly accepted BMI ranges are:
-        <ul>
-            <li>underweight: under 18.5 kg/m2</li>
-            <li>normal weight: 18.5 to 25</li>
-            <li>overweight: 25 to 30</li>
-            <li>obese: over 30</li>
-        </ul>
+    </p>
+    <ul>
+        <li>underweight: under 18.5 kg/m2</li>
+        <li>normal weight: 18.5 to 25</li>
+        <li>overweight: 25 to 30</li>
+        <li>obese: over 30</li>
+    </ul>
+    <p>
         BMIs under 20.0 and over 25.0 have been associated with higher all-cause mortality,
         increasing risk with distance from the 20.0-25.0 range.
         The prevalence of overweight and obesity is the highest in the Americas and lowest in South East Asia.
@@ -71,8 +71,7 @@ namespace Attogram\Body;
     </p>
     <a href=""><small>^top</small></a>
 
-    <a name="bmi-prime"></a>
-    <h2>What is BMI' (BMI Prime)?</h2>
+    <h2 id="bmi-prime">What is BMI' (BMI Prime)?</h2>
     <p>
         BMI Prime, a modification of the BMI system, is the ratio of actual BMI to upper limit optimal BMI
         (currently defined at 25 kg/m2), i.e., the actual BMI expressed as a proportion of upper limit optimal.
@@ -91,8 +90,7 @@ namespace Attogram\Body;
     </p>
     <a href=""><small>^top</small></a>
 
-    <a name="bfp"></a>
-    <h2>What is BFP (Body Fat Percentage)?</h2>
+    <h2 id="bfp">What is BFP (Body Fat Percentage)?</h2>
     <p>
         The body fat percentage (BFP) of a human or other living being is
         the total mass of fat divided by total body mass, multiplied by 100; body fat includes essential
@@ -117,8 +115,7 @@ namespace Attogram\Body;
     </p>
     <a href=""><small>^top</small></a>
 
-    <a name="lbm"></a>
-    <h2>What is LBM (Lean Body Mass)?</h2>
+    <h2 id="lbm">What is LBM (Lean Body Mass)?</h2>
     <p>
         Lean body mass (LBM) is a component of body composition, calculated by subtracting body fat
         weight from total body weight: total body weight is lean plus fat.
@@ -133,8 +130,7 @@ namespace Attogram\Body;
     </p>
     <a href=""><small>^top</small></a>
 
-    <a name="bmr"></a>
-    <h2>What is BMR (Basal Metabolic Rate)?</h2>
+    <h2 id="bmr">What is BMR (Basal Metabolic Rate)?</h2>
     <p>
         Basal metabolic rate (BMR) is the rate of energy expenditure per unit time by endothermic animals at rest.
         It is reported in energy units per unit time ranging from watt (joule/second) to ml O2/min or
@@ -162,8 +158,7 @@ namespace Attogram\Body;
     </p>
     <a href=""><small>^top</small></a>
 
-    <a name="tdee"></a>
-    <h2>What is TDEE (Total Daily Energy Expenditure)?</h2>
+    <h2 id="tdee">What is TDEE (Total Daily Energy Expenditure)?</h2>
     <p>
         ...
     </p>
