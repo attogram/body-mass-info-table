@@ -52,7 +52,10 @@ class AverageHuman extends BasicHuman
      */
     public function getBodyFatPercentage()
     {
-        if (!$this->isValidFloat($this->bmi) || !$this->isValidFloat($this->age)) {
+        if (!$this->isValidFloat($this->bmi)
+            || !$this->isValidFloat($this->age)
+            || !in_array($this->sex, ['m', 'f'])
+        ) {
             return $this->bfp = 0.0;
         }
 

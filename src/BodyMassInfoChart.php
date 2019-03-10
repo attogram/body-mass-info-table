@@ -125,7 +125,7 @@ class BodyMassInfoChart
         foreach ($this->massArray as $mass) {
             $mass = (float) $mass;
             $this->human->setMass($mass);
-            $infoArray["$mass"]['mass'] = $mass;
+            $infoArray["$mass"]['mass'] = number_format($mass, 2);
             $infoArray["$mass"]['bmi'] = number_format($this->human->getBodyMassIndex(), 2);
             $infoArray["$mass"]['bmiPrime'] =  number_format($this->human->getBodyMassIndexPrime(), 2);
             $infoArray["$mass"]['bmiText'] = Utils::getBmiClassText($this->human->getBodyMassIndex());
