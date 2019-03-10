@@ -47,6 +47,9 @@ a:hover {
     color:yellow;
     padding:0 4px 0 4px;
 }
+.nobr { white-space:nowrap; }
+.righty { text-align: right; }
+
 form {
     padding:14px;
     margin:0;

@@ -9,17 +9,17 @@ namespace Attogram\Body;
 <form>
     <input type="submit" value="          Update Chart          " />
     &nbsp;
-    <nobr><label for="h">Height:</label>
+    <span class="nobr"><label for="h">Height:</label>
     <input id="h" name="h" title="Height" type="text" size="4" maxlength="5" value="<?=
         ($this->human->getHeight() > 0) ? $this->human->getHeight() : '';
-    ?>" />meters</nobr>
+    ?>" />meters</span>
     &nbsp;
-    <nobr><label for="a">Age:</label>
+    <span class="nobr"><label for="a">Age:</label>
     <input id="a" name="a" title="Age" type="text" size="4" maxlength="5" value="<?=
         ($this->human->getAge() > 0) ? $this->human->getAge() : '';
-    ?>" />years</nobr>
+    ?>" />years</span>
     &nbsp;
-    <nobr><label>Sex:</label>
+    <span class="nobr"><label>Sex:</label>
 <?php
     $checked = ' checked="checked"';
     $checkM = (isset($_GET['x']) && $_GET['x'] == 'm') ? $checked : '';
@@ -27,18 +27,18 @@ namespace Attogram\Body;
 ?>
     <input type="radio" title="male" name="x" value="m" <?= $checkM; ?>>male
     <input type="radio" title="female" name="x" value="f"  <?= $checkF; ?>>female
-    </nobr>
+    </span>
     <br />
     <br />
     <div style="text-align:right;">
         <em>Options:</em>
         &nbsp;
-        <nobr><label>Range:</label>
+        <span class="nobr"><label>Range:</label>
         <input id="s" name="s" title="Chart start" size="2" maxlength="3" value="<?= $this->startMass; ?>" />-<input
-                id="e" name="e" title="Chart end" size="2" maxlength="3" value="<?= $this->endMass; ?>" />kg</nobr>
+                id="e" name="e" title="Chart end" size="2" maxlength="3" value="<?= $this->endMass; ?>" />kg</span>
         &nbsp;
-        <nobr><label for="i">Increment:</label>
-        <input id="i" name="i" title="Increment" size="2" maxlength="6" value="<?= $this->increment; ?>" />kg</nobr>
+        <span class="nobr"><label for="i">Increment:</label>
+        <input id="i" name="i" title="Increment" size="2" maxlength="6" value="<?= $this->increment; ?>" />kg</span>
     </div>
 </form>
 </div>
