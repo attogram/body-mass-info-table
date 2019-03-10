@@ -11,7 +11,7 @@ use Attogram\Router\Router;
 class BodyMassInfoChart
 {
     /** @var string Version*/
-    const VERSION = '1.5.2';
+    const VERSION = '1.5.3';
 
     /** @var Router */
     private $router;
