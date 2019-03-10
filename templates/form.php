@@ -5,6 +5,7 @@ namespace Attogram\Body;
 
 /** @var BodyMassInfoChart $this */
 ?>
+<div class="collapse show" id="options">
 <form>
     <input type="submit" value="          Update Chart          " />
     &nbsp;
@@ -40,3 +41,8 @@ namespace Attogram\Body;
         <input id="i" name="i" title="Increment" size="2" maxlength="6" value="<?= $this->increment; ?>" />kg</nobr>
     </div>
 </form>
+</div>
+<div style="text-align:right;">
+    <a data-toggle="collapse" href="#options" aria-expanded="false" aria-controls="options">Toggle options</a>
+</div>
+
