@@ -32,11 +32,11 @@ namespace Attogram\Body;
     <div style="text-align:right;">
         <em>Options:</em>
         &nbsp;
-        <label>Range:</label>
+        <nobr><label>Range:</label>
         <input id="s" name="s" title="Chart start" size="2" maxlength="3" value="<?= $this->startMass; ?>" />-<input
-                id="e" name="e" title="Chart end" size="2" maxlength="3" value="<?= $this->endMass; ?>" />kg
+                id="e" name="e" title="Chart end" size="2" maxlength="3" value="<?= $this->endMass; ?>" />kg</nobr>
         &nbsp;
-        <label for="i">Increment:</label>
-        <input id="i" name="i" title="Increment" size="2" maxlength="6" value="<?= $this->increment; ?>" />kg
+        <nobr><label for="i">Increment:</label>
+        <input id="i" name="i" title="Increment" size="2" maxlength="6" value="<?= $this->increment; ?>" />kg</nobr>
     </div>
 </form>
