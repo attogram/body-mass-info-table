@@ -6,12 +6,12 @@ namespace Attogram\Body;
 ?>
 <br /><br /><br />
 <div class="hdr bw">
-    <a href="<?= $this->router->getUriBase(); ?>/">Body Mass Info Chart
-        v<?= BodyMassInfoChart::VERSION; ?></a>
+    <a href="<?= $this->router->getUriBase(); ?>/">Body Mass Info Table
+        v<?= BodyMassInfoTable::VERSION; ?></a>
     &nbsp;
     <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
     &nbsp;
-    <a href="https://github.com/attogram/body-mass-info-chart" target="github">Github</a>
+    <a href="https://github.com/attogram/body-mass-info-table" target="github">Github</a>
 </div>
 
 </div><? /* end div container-fluid */ ?>

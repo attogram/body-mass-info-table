@@ -3,11 +3,11 @@ declare(strict_types = 1);
 
 namespace Attogram\Body;
 
-/** @var BodyMassInfoChart $this */
+/** @var BodyMassInfoTable $this */
 ?>
 <div class="collapse show" id="options">
 <form>
-    <input type="submit" value="          Update Chart          " />
+    <input type="submit" value="          Update Table          " />
     &nbsp;
     <span class="nobr"><label for="h">Height:</label>
     <input id="h" name="h" title="Height" type="text" size="4" maxlength="5" value="<?=
@@ -34,8 +34,8 @@ namespace Attogram\Body;
         <em>Options:</em>
         &nbsp;
         <span class="nobr"><label>Range:</label>
-        <input id="s" name="s" title="Chart start" size="2" maxlength="3" value="<?= $this->startMass; ?>" />-<input
-                id="e" name="e" title="Chart end" size="2" maxlength="3" value="<?= $this->endMass; ?>" />kg</span>
+        <input id="s" name="s" title="Table start" size="2" maxlength="3" value="<?= $this->startMass; ?>" />-<input
+                id="e" name="e" title="Table end" size="2" maxlength="3" value="<?= $this->endMass; ?>" />kg</span>
         &nbsp;
         <span class="nobr"><label for="i">Increment:</label>
         <input id="i" name="i" title="Increment" size="2" maxlength="6" value="<?= $this->increment; ?>" />kg</span>

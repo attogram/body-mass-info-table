@@ -5,9 +5,9 @@ namespace Attogram\Body;
 
 ?>
 <div style="margin:20px;">
-    <h1>Welcome to the Body Mass Info Chart</h1>
+    <h1>Welcome to the Body Mass Info Table</h1>
     <p>
-        This chart shows your
+        This table shows your
         <a href="#bmi">BMI (Body Mass Index)</a>  for a range of weights
         based on your height, age, and sex.
         Your <a href="#bmi-prime">BMI' (BMI Prime)</a> is also shown.
@@ -25,17 +25,17 @@ namespace Attogram\Body;
         <a href="#tdee">TDEE (Total Daily Energy Expenditure)</a> for various activity levels.
     </p>
     <p>
-        The Body Mass Info Chart is an Open Source project.  Learn more at:
-        <a href="https://github.com/attogram/body-mass-info-chart" target="github">
-            https://github.com/attogram/body-mass-info-chart</a>
+        The Body Mass Info Table is an Open Source project.  Learn more at:
+        <a href="https://github.com/attogram/body-mass-info-table" target="github">
+            https://github.com/attogram/body-mass-info-table</a>
     </p>
 
-    <h2 id="howto">How to use the chart</h2>
+    <h2 id="howto">How to use the table</h2>
     <p>
-        Enter your height (in meters), your age, and your sex.  Then click 'Update Chart'.
+        Enter your height (in meters), your age, and your sex.  Then click 'Update Table'.
     </p>
     <p>
-        In the Chart options section you can customize the weight ranges used in the chart,
+        In the Table options section you can customize the weight ranges used in the table,
         and the increment between weights.
     </p>
     <a href=""><small>^top</small></a>

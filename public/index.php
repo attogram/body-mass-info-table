@@ -10,4 +10,4 @@ if (!is_readable($autoload)) {
 /** @noinspection PhpIncludeInspection */
 require_once($autoload);
 
-(new BodyMassInfoChart())->route();
+(new BodyMassInfoTable())->route();

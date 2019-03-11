@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5ed85963521e98f5795342e6361c232",
+    "content-hash": "5fdf765ee1092b348332f2e107a663fb",
     "packages": [
         {
             "name": "attogram/router",

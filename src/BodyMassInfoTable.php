@@ -6,9 +6,9 @@ namespace Attogram\Body;
 use Attogram\Router\Router;
 
 /**
- * Body Mass Info Chart
+ * Body Mass Info Table
  */
-class BodyMassInfoChart
+class BodyMassInfoTable
 {
     /** @var string Version*/
     const VERSION = '1.5.3';
@@ -96,7 +96,7 @@ class BodyMassInfoChart
         $this->increment = Utils::getFloatVarFromGet('i', $this->increment);
 
         $this->includeTemplate('form');
-        $this->chart();
+        $this->showTable();
     }
 
     /**
@@ -176,15 +176,15 @@ class BodyMassInfoChart
     /**
      * @uses $this->infoArray
      */
-    private function chart()
+    private function showTable()
     {
         $this->setMassArray();
         $this->setInfoArray();
 
         print '<table>'
             . '<tr>'
-            . '<td colspan="14">' . $this->getChartTopic() . '</td>'
-            . '</tr>' . $this->getChartHeader();
+            . '<td colspan="14">' . $this->getTableTopic() . '</td>'
+            . '</tr>' . $this->getTableHeader();
 
         $count = 0;
         foreach ($this->infoArray as $mass => $info) {
@@ -192,7 +192,7 @@ class BodyMassInfoChart
             $count++;
             if ($count > 30) {
                 $count = 0;
-                print $this->getChartHeader();
+                print $this->getTableHeader();
             }
             print '<tr style="background-color:' . Utils::getBmiClassColor($info['bmi']) . '">'
                 . '<td>' . Utils::getBmiClassText($info['bmi']) . '</td>'
@@ -211,16 +211,16 @@ class BodyMassInfoChart
                 . '<td class="righty">' . $info['tdeeExtreme'] . '</td>'
                 . '</tr>';
         }
-        print $this->getChartHeader() . '</table>';
+        print $this->getTableHeader() . '</table>';
     }
 
     /**
      * @return string
      */
-    private function getChartTopic()
+    private function getTableTopic()
     {
         $error = '<span class="error">Unknown</span>';
-        return 'Body Mass Info Chart'
+        return 'Body Mass Info Table'
             . '<br /><br />Height: '
             . ($this->human->getHeight()
                 ? $this->human->getHeight() . ' meters'
@@ -241,7 +241,7 @@ class BodyMassInfoChart
     /**
      * @return string
      */
-    private function getChartHeader()
+    private function getTableHeader()
     {
         return '<tr>'
             . '<td>Description</td>'
