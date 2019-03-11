@@ -2,7 +2,7 @@
 
 Multi-weight Body Mass Index (BMI) table based on your height, age and sex, with calculated Body Fat/Lean Percentage, Base Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE) for various activity levels.
 
-[![screenshot](https://raw.githubusercontent.com/attogram/attogram-docs/master/body-mass-info-chart/body-mass-info-chart-v1-1.small.png)](https://raw.githubusercontent.com/attogram/attogram-docs/master/body-mass-info-chart/body-mass-info-chart-v1-1.png)
+[![screenshot](https://raw.githubusercontent.com/attogram/attogram-docs/master/body-mass-info-chart/body-mass-info-table.small.png)](https://raw.githubusercontent.com/attogram/attogram-docs/master/body-mass-info-table/body-mass-info-table.png)
 
 # Demo
 
