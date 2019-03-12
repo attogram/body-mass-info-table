@@ -10,9 +10,7 @@ https://getitdaily.com/body-mass-info-table/
 
 # Install
 
-* `composer create-project attogram/body-mass-info-table`
-* `cd body-mass-info-table`
-* `composer install`
+* `composer create-project attogram/body-mass-info-table directoryName`
 
 # Open Source
 
