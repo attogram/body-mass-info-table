@@ -83,7 +83,7 @@ namespace Attogram\Body;
     </p>
     <p>
         For instance, a person with BMI 34 kg/m2 has a BMI Prime of 34/25 = 1.36, and is 36% over their
-        upper mass limit. In South East Asian and South Chinese populations (see § international variations),
+        upper mass limit. In South East Asian and South Chinese populations,
         BMI Prime should be calculated using an upper limit BMI of 23 in the denominator instead of 25.
         BMI Prime allows easy comparison between populations whose upper-limit optimal BMI values differ.
         <br /><small>source: https://en.wikipedia.org/wiki/Body_mass_index#BMI_Prime</small>
@@ -137,11 +137,6 @@ namespace Attogram\Body;
         joule per hour per kg body mass J/(h·kg). Proper measurement requires a strict set of criteria be met.
         These criteria include being in a physically and psychologically undisturbed state, in a thermally
         neutral environment, while in the post-absorptive state (i.e., not actively digesting food).
-        In bradymetabolic animals, such as fish and reptiles, the equivalent term standard metabolic rate (SMR)
-        is used. It follows the same criteria as BMR, but requires the documentation of the temperature at
-        which the metabolic rate was measured. This makes BMR a variant of standard metabolic rate
-        measurement that excludes the temperature data, a practice that has led to problems in defining
-        "standard" rates of metabolism for many mammals.
     </p>
     <p>
         Metabolism comprises the processes that the body needs to function.
@@ -152,7 +147,7 @@ namespace Attogram\Body;
         ultimately whether that individual maintains, gains, or loses weight. The basal
         metabolic rate accounts for about 60 to 75% of the daily calorie expenditure by
         individuals. It is influenced by several factors. BMR typically declines by 1–2%
-        per decade after age 20, mostly due to loss of fat-free mass,[3] although the
+        per decade after age 20, mostly due to loss of fat-free mass, although the
         variability between individuals is high.
         <br /><small>source: https://en.wikipedia.org/wiki/Basal_metabolic_rate</small>
     </p>

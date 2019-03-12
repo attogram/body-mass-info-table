@@ -70,7 +70,7 @@ class Utils
         switch($bmi) {
             case 0.0:
             default:
-                return '#E8E8E8';
+                return '#FFFFFF';
             case ($bmi >= 60.0): // Obese - Class V - Super-Super Obesity
                 return '#C71585';
             case ($bmi >= 50.0): // Obese - Class IV - Super Obesity
@@ -88,11 +88,14 @@ class Utils
             case ($bmi >= 27.5): // Overweight - Pre-obese
                 return '#FFA800';
             case ($bmi >= 25.0): // Overweight
-                return '#FFD700';
+                //return '#FFD700';
+                return '#FFE730';
             case ($bmi >= 23.0): // Normal weight +
-                return '#BBFF33';
+                //return '#BBFF33';
+                return '#EEFF88';
             case ($bmi >= 18.5): // Normal weight
-                return '#AAFF33';
+                //return '#AAFF33';
+                return '#DDFF88';
             case ($bmi >= 17.0): // Underweight - Mild thinness
                 return '#FFD700';
             case ($bmi >= 16.0): // Underweight - Moderate thinness

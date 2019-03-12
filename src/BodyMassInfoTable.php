@@ -23,12 +23,6 @@ class BodyMassInfoTable
     private $human;
 
     /** @var float */
-    private $defaultAge = 0.0;
-
-    /** @var float */
-    private $defaultHeight = 0.0;
-
-    /** @var float */
     private $startMass = 100.0;
 
     /** @var float */
@@ -38,10 +32,10 @@ class BodyMassInfoTable
     private $increment = 1.0;
 
     /** @var array */
-    private $massArray = [];
+    private $mass = [];
 
     /** @var array */
-    private $infoArray = [];
+    private $info = [];
 
     /**
      * Route Request
@@ -52,22 +46,129 @@ class BodyMassInfoTable
         $this->router->allow('/', 'home');
         $this->router->allow('/about', 'about');
         $match = $this->router->match();
-
-        if (!$match) {
-            $this->pageNotFound();
+        if ($match) {
+            $this->routePage($match);
             return;
         }
+        $this->pageNotFound();
+    }
 
+    /**
+     * @param string $page
+     */
+    private function routePage(string $page)
+    {
         $this->includeTemplate('header');
-        switch ($match) {
+        switch ($page) {
             case 'home':
-                $this->home();
+                $this->table();
                 break;
             case 'about':
                 $this->includeTemplate('about');
                 break;
         }
         $this->includeTemplate('footer');
+    }
+
+    /**
+     * Show The Table
+     */
+    private function table()
+    {
+        $this->human = new AverageHuman();
+        $this->human->setAge(Utils::getFloatVarFromGet('a', 0.0));
+        $this->human->setHeight(Utils::getFloatVarFromGet('h', 0.0));
+        $this->human->setSex(Utils::getEnumVarFromGet('x', ['m','f'], 'u'));
+        $this->startMass = Utils::getFloatVarFromGet('s', $this->startMass);
+        $this->endMass = Utils::getFloatVarFromGet('e', $this->endMass);
+        $this->increment = Utils::getFloatVarFromGet('i', $this->increment);
+        $this->includeTemplate('form');
+        $this->setMass();
+        $this->setInfo();
+        $table = new Table($this->info, $this->human);
+        print $table->get();
+    }
+
+    /**
+     * @uses $this->mass
+     */
+    private function setMass()
+    {
+        $this->mass = [];
+        if ($this->startMass < $this->endMass) {
+            for ($mass = $this->startMass; $mass <= $this->endMass; $mass = $mass + $this->increment) {
+                $this->mass[] = $mass;
+            }
+        } else {
+            for ($mass = $this->startMass; $this->endMass <= $mass; $mass = $mass - $this->increment) {
+                $this->mass[] = $mass;
+            }
+        }
+    }
+
+    /**
+     * @uses $this->info
+     * @uses $this->mass
+     */
+    private function setInfo()
+    {
+        $this->info = [];
+        foreach ($this->mass as $mass) {
+            $mass = (float) $mass;
+            $this->human->setMass($mass);
+            $this->info["$mass"]['mass'] = number_format($mass, 2);
+            $this->info["$mass"]['bmi'] = number_format($this->human->getBodyMassIndex(), 2);
+            $this->info["$mass"]['bmiPrime'] =  number_format($this->human->getBodyMassIndexPrime(), 2);
+            $this->info["$mass"]['bmiText'] = Utils::getBmiClassText($this->human->getBodyMassIndex());
+            $this->info["$mass"]['bmiColor'] = Utils::getBmiClassColor($this->human->getBodyMassIndex());
+            $this->info["$mass"]['bodyFat'] = number_format($this->human->getBodyFatPercentage(), 2);
+            $this->info["$mass"]['leanMass'] = number_format($this->human->getLeanBodyMass(), 2);
+            $this->info["$mass"]['bmr'] = number_format($this->human->getBasalMetablicRate(), 0, '', '');
+            $this->info["$mass"]['tdeeSedentary'] = number_format($this->human->getBasalMetablicRate() *1.2, 0, '', '');
+            $this->info["$mass"]['tdeeLight'] = number_format($this->human->getBasalMetablicRate() *1.375, 0, '', '');
+            $this->info["$mass"]['tdeeModerate'] = number_format($this->human->getBasalMetablicRate() *1.55, 0, '', '');
+            $this->info["$mass"]['tdeeHeavy'] = number_format($this->human->getBasalMetablicRate() *1.725, 0, '', '');
+            $this->info["$mass"]['tdeeExtreme'] = number_format($this->human->getBasalMetablicRate() *1.9, 0, '', '');
+            if ($this->info["$mass"]['bmi'] == 0.00) {
+                $this->info["$mass"]['bmi'] = '-';
+            }
+            if ($this->info["$mass"]['bmiPrime'] == 0.00) {
+                $this->info["$mass"]['bmiPrime'] = '-';
+            }
+            if ($this->info["$mass"]['bodyFat'] == 0.00) {
+                $this->info["$mass"]['bodyFat'] = '-';
+            }
+            if ($this->info["$mass"]['leanMass'] == 0.00) {
+                $this->info["$mass"]['leanMass'] = '-';
+            }
+            if ($this->info["$mass"]['bmr'] == 0) {
+                $this->info["$mass"]['bmr'] = '-';
+            }
+            if ($this->info["$mass"]['tdeeSedentary'] == 0) {
+                $this->info["$mass"]['tdeeSedentary'] = '-';
+            }
+            if ($this->info["$mass"]['tdeeLight'] == 0) {
+                $this->info["$mass"]['tdeeLight'] = '-';
+            }
+            if ($this->info["$mass"]['tdeeModerate'] == 0) {
+                $this->info["$mass"]['tdeeModerate'] = '-';
+            }
+            if ($this->info["$mass"]['tdeeHeavy'] == 0) {
+                $this->info["$mass"]['tdeeHeavy'] = '-';
+            }
+            if ($this->info["$mass"]['tdeeExtreme'] == 0) {
+                $this->info["$mass"]['tdeeExtreme'] = '-';
+            }
+        }
+    }
+
+    /**
+     * @param string $templateName
+     */
+    private function includeTemplate(string $templateName)
+    {
+        /** @noinspection PhpIncludeInspection */
+        include($this->templatesDirectory . $templateName . '.php');
     }
 
     /**
@@ -79,194 +180,5 @@ class BodyMassInfoTable
         $this->includeTemplate('header');
         print '<h1 style="padding:20px;">404 Page Not Found</h1>';
         $this->includeTemplate('footer');
-    }
-
-    /**
-     * Home Page
-     */
-    private function home()
-    {
-        $this->human = new AverageHuman();
-        $this->human->setAge(Utils::getFloatVarFromGet('a', $this->defaultAge));
-        $this->human->setHeight(Utils::getFloatVarFromGet('h', $this->defaultHeight));
-        $this->human->setSex(Utils::getEnumVarFromGet('x', ['m','f'], 'u'));
-
-        $this->startMass = Utils::getFloatVarFromGet('s', $this->startMass);
-        $this->endMass = Utils::getFloatVarFromGet('e', $this->endMass);
-        $this->increment = Utils::getFloatVarFromGet('i', $this->increment);
-
-        $this->includeTemplate('form');
-        $this->showTable();
-    }
-
-    /**
-     * @uses $this->massArray
-     */
-    private function setMassArray()
-    {
-        $this->massArray = [];
-        if ($this->startMass < $this->endMass) {
-            for ($mass = $this->startMass; $mass <= $this->endMass; $mass = $mass + $this->increment) {
-                $this->massArray[] = $mass;
-            }
-        } else {
-            for ($mass = $this->startMass; $this->endMass <= $mass; $mass = $mass - $this->increment) {
-                $this->massArray[] = $mass;
-            }
-        }
-    }
-
-    /**
-     * @uses $this->infoArray
-     */
-    private function setInfoArray()
-    {
-        $infoArray = [];
-        foreach ($this->massArray as $mass) {
-            $mass = (float) $mass;
-            $this->human->setMass($mass);
-            $infoArray["$mass"]['mass'] = number_format($mass, 2);
-            $infoArray["$mass"]['bmi'] = number_format($this->human->getBodyMassIndex(), 2);
-            $infoArray["$mass"]['bmiPrime'] =  number_format($this->human->getBodyMassIndexPrime(), 2);
-            $infoArray["$mass"]['bmiText'] = Utils::getBmiClassText($this->human->getBodyMassIndex());
-            $infoArray["$mass"]['bmiColor'] = Utils::getBmiClassColor($this->human->getBodyMassIndex());
-            $infoArray["$mass"]['bodyFat'] = number_format($this->human->getBodyFatPercentage(), 2);
-            $infoArray["$mass"]['leanMass'] = number_format($this->human->getLeanBodyMass(), 2);
-            $infoArray["$mass"]['bmr'] = number_format($this->human->getBasalMetablicRate(), 0, '', '');
-            $infoArray["$mass"]['tdeeSedentary'] = number_format($this->human->getBasalMetablicRate() * 1.2, 0, '', '');
-            $infoArray["$mass"]['tdeeLight'] = number_format($this->human->getBasalMetablicRate() * 1.375, 0, '', '');
-            $infoArray["$mass"]['tdeeModerate'] = number_format($this->human->getBasalMetablicRate() * 1.55, 0, '', '');
-            $infoArray["$mass"]['tdeeHeavy'] = number_format($this->human->getBasalMetablicRate() * 1.725, 0, '', '');
-            $infoArray["$mass"]['tdeeExtreme'] = number_format($this->human->getBasalMetablicRate() * 1.9, 0, '', '');
-
-            if ($infoArray["$mass"]['bmi'] == 0.00) {
-                $infoArray["$mass"]['bmi'] = '-';
-            }
-            if ($infoArray["$mass"]['bmiPrime'] == 0.00) {
-                $infoArray["$mass"]['bmiPrime'] = '-';
-            }
-            if ($infoArray["$mass"]['bodyFat'] == 0.00) {
-                $infoArray["$mass"]['bodyFat'] = '-';
-            }
-            if ($infoArray["$mass"]['leanMass'] == 0.00) {
-                $infoArray["$mass"]['leanMass'] = '-';
-            }
-            if ($infoArray["$mass"]['bmr'] == 0) {
-                $infoArray["$mass"]['bmr'] = '-';
-            }
-            if ($infoArray["$mass"]['tdeeSedentary'] == 0) {
-                $infoArray["$mass"]['tdeeSedentary'] = '-';
-            }
-            if ($infoArray["$mass"]['tdeeLight'] == 0) {
-                $infoArray["$mass"]['tdeeLight'] = '-';
-            }
-            if ($infoArray["$mass"]['tdeeModerate'] == 0) {
-                $infoArray["$mass"]['tdeeModerate'] = '-';
-            }
-            if ($infoArray["$mass"]['tdeeHeavy'] == 0) {
-                $infoArray["$mass"]['tdeeHeavy'] = '-';
-            }
-            if ($infoArray["$mass"]['tdeeExtreme'] == 0) {
-                $infoArray["$mass"]['tdeeExtreme'] = '-';
-            }
-        }
-        $this->infoArray = $infoArray;
-    }
-
-    /**
-     * @uses $this->infoArray
-     */
-    private function showTable()
-    {
-        $this->setMassArray();
-        $this->setInfoArray();
-
-        print '<table>'
-            . '<tr>'
-            . '<td colspan="14">' . $this->getTableTopic() . '</td>'
-            . '</tr>' . $this->getTableHeader();
-
-        $count = 0;
-        foreach ($this->infoArray as $mass => $info) {
-            $mass = (float) $mass;
-            $count++;
-            if ($count > 30) {
-                $count = 0;
-                print $this->getTableHeader();
-            }
-            print '<tr style="background-color:' . Utils::getBmiClassColor($info['bmi']) . '">'
-                . '<td>' . Utils::getBmiClassText($info['bmi']) . '</td>'
-                . '<td class="righty">' . $info['mass'] . '</td>'
-                . '<td class="right">' . number_format(Conversions::kilogramsToPounds($mass), 2) . '</td>'
-                . '<td class="right">' . number_format(Conversions::kilogramsToStones($mass), 2) . '</td>'
-                . '<td class="righty bold">' . $info['bmi'] . '</td>'
-                . '<td class="righty">' . $info['bmiPrime'] . '</td>'
-                . '<td class="righty">' . $info['bodyFat'] . '</td>'
-                . '<td class="righty">' . $info['leanMass'] . '</td>'
-                . '<td class="righty">' . $info['bmr'] . '</td>'
-                . '<td class="righty">' . $info['tdeeSedentary'] . '</td>'
-                . '<td class="righty">' . $info['tdeeLight'] . '</td>'
-                . '<td class="righty">' . $info['tdeeModerate'] . '</td>'
-                . '<td class="righty">' . $info['tdeeHeavy'] . '</td>'
-                . '<td class="righty">' . $info['tdeeExtreme'] . '</td>'
-                . '</tr>';
-        }
-        print $this->getTableHeader() . '</table>';
-    }
-
-    /**
-     * @return string
-     */
-    private function getTableTopic()
-    {
-        $error = '<span class="error">Unknown</span>';
-        return 'Body Mass Info Table'
-            . '<br /><br />Height: '
-            . ($this->human->getHeight()
-                ? $this->human->getHeight() . ' meters'
-                    . ' (' . number_format(Conversions::metersToFeet($this->human->getHeight()), 2)
-                    . ' feet)'
-                    . ' (' . number_format(Conversions::metersToInches($this->human->getHeight()), 2)
-                    . ' inches)'
-                : $error
-            )
-            . '<br />Age&nbsp;&nbsp;&nbsp;: '
-            . ($this->human->getAge() ? $this->human->getAge() . ' years' : $error)
-            . '<br />Sex&nbsp;&nbsp;&nbsp;: '
-            . ($this->human->getSex() == 'm' ? 'Male' : '')
-            . ($this->human->getSex() == 'f' ? 'Female' : '')
-            . (!in_array($this->human->getSex(), ['m', 'f']) ? '<span class="error">Unknown</span>' : '');
-    }
-
-    /**
-     * @return string
-     */
-    private function getTableHeader()
-    {
-        return '<tr>'
-            . '<td>Description</td>'
-            . '<td>Weight<br /><small>Kilograms</small></td>'
-            . '<td>Weight<br /><small>Pounds</small></td>'
-            . '<td>Weight<br /><small>Stones</small></td>'
-            . '<td class="bold">BMI</td>'
-            . '<td><small>BMI<br />Prime</small></td>'
-            . '<td>Body<br />Fat<small> %</small></td>'
-            . '<td>Lean<br />Mass</td>'
-            . '<td>BMR</td>'
-            . '<td>TDEE<br /><small>low</small></td>'
-            . '<td>TDEE<br /><small>light</small></td>'
-            . '<td>TDEE<br /><small>modrt</small></td>'
-            . '<td>TDEE<br /><small>heavy</small></td>'
-            . '<td>TDEE<br /><small>extrm</small></td>'
-            . '</tr>';
-    }
-
-    /**
-     * @param string $templateName
-     */
-    private function includeTemplate(string $templateName)
-    {
-        /** @noinspection PhpIncludeInspection */
-        include($this->templatesDirectory . $templateName . '.php');
     }
 }
