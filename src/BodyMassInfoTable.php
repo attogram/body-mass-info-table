@@ -123,12 +123,19 @@ class BodyMassInfoTable
             $this->info["$mass"]['bmiColor'] = Utils::getBmiClassColor($this->human->getBodyMassIndex());
             $this->info["$mass"]['bodyFat'] = number_format($this->human->getBodyFatPercentage(), 2);
             $this->info["$mass"]['leanMass'] = number_format($this->human->getLeanBodyMass(), 2);
-            $this->info["$mass"]['bmr'] = number_format($this->human->getBasalMetablicRate(), 0, '', '');
-            $this->info["$mass"]['tdeeSedentary'] = number_format($this->human->getBasalMetablicRate() *1.2, 0, '', '');
-            $this->info["$mass"]['tdeeLight'] = number_format($this->human->getBasalMetablicRate() *1.375, 0, '', '');
-            $this->info["$mass"]['tdeeModerate'] = number_format($this->human->getBasalMetablicRate() *1.55, 0, '', '');
-            $this->info["$mass"]['tdeeHeavy'] = number_format($this->human->getBasalMetablicRate() *1.725, 0, '', '');
-            $this->info["$mass"]['tdeeExtreme'] = number_format($this->human->getBasalMetablicRate() *1.9, 0, '', '');
+            $this->info["$mass"]['bmr']
+                = number_format($this->human->getBasalMetablicRate(), 0, '', '');
+            $this->info["$mass"]['tdeeSedentary']
+                = number_format($this->human->getTDEE(PhysicalActivityLevel::SEDENTARY), 0, '', '');
+            $this->info["$mass"]['tdeeLight']
+                = number_format($this->human->getTDEE(PhysicalActivityLevel::LIGHT), 0, '', '');
+            $this->info["$mass"]['tdeeModerate']
+                = number_format($this->human->getTDEE(PhysicalActivityLevel::MODERATE), 0, '', '');
+            $this->info["$mass"]['tdeeHeavy']
+                = number_format($this->human->getTDEE(PhysicalActivityLevel::HEAVY), 0, '', '');
+            $this->info["$mass"]['tdeeExtreme']
+                = number_format($this->human->getTDEE(PhysicalActivityLevel::EXTREME), 0, '', '');
+
             if ($this->info["$mass"]['bmi'] == 0.00) {
                 $this->info["$mass"]['bmi'] = '-';
             }

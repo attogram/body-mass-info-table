@@ -14,6 +14,9 @@ class AverageHuman extends BasicHuman
     /** @var float $bfp - Body Fat Percentage */
     private $bfp = 0.0;
 
+    /** @var float $bmr - Basal Metabolic Rate */
+    private $bmr = 0.0;
+
     /**
      * Standard Body Mass Index (BMI)
      *      BMI = weight(kg) / height(m)^2
@@ -91,9 +94,22 @@ class AverageHuman extends BasicHuman
      */
     public function getBasalMetablicRate() {
         if (!$this->isValidFloat($this->bfp) || !$this->isValidFloat($this->mass)) {
+            return $this->bmr = 0.0;
+        }
+
+        return $this->bmr = (float) 370 + (21.6 * ($this->mass * (1 - ($this->bfp / 100))));
+    }
+
+    /**
+     * @param float $physicalActivityLevel
+     * @return float
+     */
+    public function getTDEE(float $physicalActivityLevel)
+    {
+        if (!$this->isValidFloat($this->bmr) || !$this->isValidFloat($physicalActivityLevel)) {
             return 0.0;
         }
 
-        return (float) 370 + (21.6 * ($this->mass * (1 - ($this->bfp / 100))));
+        return (float) $this->bmr * $physicalActivityLevel;
     }
 }

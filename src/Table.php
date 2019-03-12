@@ -30,10 +30,7 @@ class Table
      */
     public function get()
     {
-        $table = '<table>'
-            . '<tr>'
-            . '<td colspan="14">' . $this->getTableTopic() . '</td>'
-            . '</tr>' . $this->getTableHeader();
+        $table = '<table><tr><td colspan="14">' . $this->getTableTopic() . '</td></tr>' . $this->getTableHeader();
 
         $count = 0;
         foreach ($this->info as $mass => $info) {
@@ -46,8 +43,8 @@ class Table
             $table .= '<tr style="background-color:' . Utils::getBmiClassColor($info['bmi']) . '">'
                 . '<td>' . Utils::getBmiClassText($info['bmi']) . '</td>'
                 . '<td class="righty">' . $info['mass'] . '</td>'
-                . '<td class="right">' . number_format(Conversions::kilogramsToPounds($mass), 2) . '</td>'
-                . '<td class="right">' . number_format(Conversions::kilogramsToStones($mass), 2) . '</td>'
+                . '<td class="righty">' . number_format(Conversions::kilogramsToPounds($mass), 2) . '</td>'
+                . '<td class="righty">' . number_format(Conversions::kilogramsToStones($mass), 2) . '</td>'
                 . '<td class="righty bold">' . $info['bmi'] . '</td>'
                 . '<td class="righty">' . $info['bmiPrime'] . '</td>'
                 . '<td class="righty">' . $info['bodyFat'] . '</td>'
@@ -75,10 +72,8 @@ class Table
             . '<br /><br />Height: '
             . ($this->human->getHeight()
                 ? $this->human->getHeight() . ' meters'
-                . ' (' . number_format(Conversions::metersToFeet($this->human->getHeight()), 2)
-                . ' feet)'
-                . ' (' . number_format(Conversions::metersToInches($this->human->getHeight()), 2)
-                . ' inches)'
+                    . ' (' . number_format(Conversions::metersToFeet($this->human->getHeight()), 2) . ' feet)'
+                    . ' (' . number_format(Conversions::metersToInches($this->human->getHeight()), 2) . ' inches)'
                 : $error
             )
             . '<br />Age&nbsp;&nbsp;&nbsp;: '
@@ -86,7 +81,7 @@ class Table
             . '<br />Sex&nbsp;&nbsp;&nbsp;: '
             . ($this->human->getSex() == 'm' ? 'Male' : '')
             . ($this->human->getSex() == 'f' ? 'Female' : '')
-            . (!in_array($this->human->getSex(), ['m', 'f']) ? '<span class="error">Unknown</span>' : '');
+            . (!in_array($this->human->getSex(), ['m', 'f']) ? $error : '');
     }
 
     /**
