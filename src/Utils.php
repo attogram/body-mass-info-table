@@ -125,9 +125,9 @@ class Utils
             case ($bmi >= 35.0):
                 return 'Obese <small>- Class II - Severe Obesity</small>';
             case ($bmi >= 32.5):
-                return 'Obese <small>- Class I - Very Obese</small>';
+                return 'Obese <small>- Class I +</small>';
             case ($bmi >= 30.0):
-                return 'Obese <small>- Class I - Obese</small>';
+                return 'Obese <small>- Class I</small>';
             case ($bmi >= 27.5):
                 return 'Overweight <small>- Pre-obese</small>';
             case ($bmi >= 25.0):

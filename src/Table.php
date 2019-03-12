@@ -68,19 +68,19 @@ class Table
     private function getTableTopic()
     {
         $error = '<span class="error">Unknown</span>';
-        return 'Body Mass Info Table'
-            . '<br /><br />Height: '
+        return '<b>Body Mass Info Table</b>'
+            . '<br />Height: '
             . ($this->human->getHeight()
-                ? $this->human->getHeight() . ' meters'
+                ? '<b>' . $this->human->getHeight() . ' meters</b>'
                     . ' (' . number_format(Conversions::metersToFeet($this->human->getHeight()), 2) . ' feet)'
                     . ' (' . number_format(Conversions::metersToInches($this->human->getHeight()), 2) . ' inches)'
                 : $error
             )
             . '<br />Age&nbsp;&nbsp;&nbsp;: '
-            . ($this->human->getAge() ? $this->human->getAge() . ' years' : $error)
+            . ($this->human->getAge() ? '<b>' . $this->human->getAge() . ' years</b>' : $error)
             . '<br />Sex&nbsp;&nbsp;&nbsp;: '
-            . ($this->human->getSex() == 'm' ? 'Male' : '')
-            . ($this->human->getSex() == 'f' ? 'Female' : '')
+            . ($this->human->getSex() == 'm' ? '<b>Male</b>' : '')
+            . ($this->human->getSex() == 'f' ? '<b>Female</b>' : '')
             . (!in_array($this->human->getSex(), ['m', 'f']) ? $error : '');
     }
 

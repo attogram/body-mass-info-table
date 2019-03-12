@@ -124,7 +124,7 @@ class BodyMassInfoTable
             $this->info["$mass"]['bodyFat'] = number_format($this->human->getBodyFatPercentage(), 2);
             $this->info["$mass"]['leanMass'] = number_format($this->human->getLeanBodyMass(), 2);
             $this->info["$mass"]['bmr']
-                = number_format($this->human->getBasalMetablicRate(), 0, '', '');
+                = number_format($this->human->getBMR(), 0, '', '');
             $this->info["$mass"]['tdeeSedentary']
                 = number_format($this->human->getTDEE(PhysicalActivityLevel::SEDENTARY), 0, '', '');
             $this->info["$mass"]['tdeeLight']

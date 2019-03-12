@@ -18,7 +18,7 @@ class AverageHuman extends BasicHuman
     private $bmr = 0.0;
 
     /**
-     * Standard Body Mass Index (BMI)
+     * Get Body Mass Index (BMI)
      *      BMI = weight(kg) / height(m)^2
      *      BMI = 703 * weight(lb) / height(in)^2
      *
@@ -46,7 +46,7 @@ class AverageHuman extends BasicHuman
     }
 
     /**
-     * Get Estimated Body Fat, based on BMI
+     * Get Body Fat Percentage, predicted based on BMI
      *      formula: (1.39 x BMI) + (0.16 x age) - (10.34 x [m=1,f=0]) - 9
      *          men: (1.39 x BMI) + (0.16 x age) - 19.34
      *        women: (1.39 x BMI) + (0.16 x age) - 9
@@ -75,6 +75,8 @@ class AverageHuman extends BasicHuman
     }
 
     /**
+     * Get Lean Body Mass
+     *
      * @return float
      */
     public function getLeanBodyMass()
@@ -87,12 +89,12 @@ class AverageHuman extends BasicHuman
     }
 
     /**
-     * Get Estimated Basal Metabolic Rate, based on mass and body fat percentage
+     * Get Basal Metabolic Rate, based on mass and body fat percentage
      *      Katch-McArdle BMR = 370 + ( 21.6 * ( WeightInKilograms * ( 1 - BodyFatPercentage ) ) )
      *
      * @return float
      */
-    public function getBasalMetablicRate() {
+    public function getBMR() {
         if (!$this->isValidFloat($this->bfp) || !$this->isValidFloat($this->mass)) {
             return $this->bmr = 0.0;
         }
@@ -101,6 +103,8 @@ class AverageHuman extends BasicHuman
     }
 
     /**
+     * Get Total Daily Energy Expenditure
+     *
      * @param float $physicalActivityLevel
      * @return float
      */
