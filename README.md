@@ -8,6 +8,12 @@ Multi-weight Body Mass Index (BMI) table based on your height, age and sex, with
 
 https://getitdaily.com/body-mass-info-table/
 
+# Install
+
+* `composer create-project attogram/body-mass-info-table`
+* `cd body-mass-info-table`
+* `composer install`
+
 # Open Source
 
 The Body Mass Info Table is an Open Source project, 
