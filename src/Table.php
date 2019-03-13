@@ -40,8 +40,8 @@ class Table
                 $count = 0;
                 $table .= $this->getTableHeader();
             }
-            $table .= '<tr style="background-color:' . Utils::getBmiClassColor($info['bmi']) . '">'
-                . '<td>' . Utils::getBmiClassText($info['bmi']) . '</td>'
+            $table .= '<tr style="background-color:' . Classification::getBmiClassColor($info['bmi']) . '">'
+                . '<td>' . Classification::getBmiClassText($info['bmi']) . '</td>'
                 . '<td class="righty">' . $info['mass'] . '</td>'
                 . '<td class="righty">' . number_format(Conversions::kilogramsToPounds($mass), 2) . '</td>'
                 . '<td class="righty">' . number_format(Conversions::kilogramsToStones($mass), 2) . '</td>'
@@ -68,20 +68,22 @@ class Table
     private function getTableTopic()
     {
         $error = '<span class="error">Unknown</span>';
-        return '<b>Body Mass Info Table</b>'
-            . '<br />Height: '
-            . ($this->human->getHeight()
-                ? '<b>' . $this->human->getHeight() . ' meters</b>'
-                    . ' (' . number_format(Conversions::metersToFeet($this->human->getHeight()), 2) . ' feet)'
-                    . ' (' . number_format(Conversions::metersToInches($this->human->getHeight()), 2) . ' inches)'
-                : $error
-            )
-            . '<br />Age&nbsp;&nbsp;&nbsp;: '
-            . ($this->human->getAge() ? '<b>' . $this->human->getAge() . ' years</b>' : $error)
-            . '<br />Sex&nbsp;&nbsp;&nbsp;: '
-            . ($this->human->getSex() == 'm' ? '<b>Male</b>' : '')
+        $height = $this->human->getHeight()
+            ? '<b>' . $this->human->getHeight() . ' meters</b>'
+                . ' (' . number_format(Conversions::metersToInches($this->human->getHeight()), 2) . ' inches)'
+                . ' (' . number_format(Conversions::metersToFeet($this->human->getHeight()), 2) . ' feet)'
+            : $error;
+        $age = $this->human->getAge()
+            ? '<b>' . $this->human->getAge() . ' years</b>'
+            : $error;
+        $sex = ($this->human->getSex() == 'm' ? '<b>Male</b>' : '')
             . ($this->human->getSex() == 'f' ? '<b>Female</b>' : '')
             . (!in_array($this->human->getSex(), ['m', 'f']) ? $error : '');
+
+        return '<span class="bold">Body Mass Info Table</span>'
+            . '<br />Height: ' . $height
+            . '<br />Age&nbsp;&nbsp;&nbsp;: ' . $age
+            . '<br />Sex&nbsp;&nbsp;&nbsp;: ' . $sex;
     }
 
     /**

@@ -119,8 +119,8 @@ class BodyMassInfoTable
             $this->info["$mass"]['mass'] = number_format($mass, 2);
             $this->info["$mass"]['bmi'] = number_format($this->human->getBodyMassIndex(), 2);
             $this->info["$mass"]['bmiPrime'] =  number_format($this->human->getBodyMassIndexPrime(), 2);
-            $this->info["$mass"]['bmiText'] = Utils::getBmiClassText($this->human->getBodyMassIndex());
-            $this->info["$mass"]['bmiColor'] = Utils::getBmiClassColor($this->human->getBodyMassIndex());
+            $this->info["$mass"]['bmiText'] = Classification::getBmiClassText($this->human->getBodyMassIndex());
+            $this->info["$mass"]['bmiColor'] = Classification::getBmiClassColor($this->human->getBodyMassIndex());
             $this->info["$mass"]['bodyFat'] = number_format($this->human->getBodyFatPercentage(), 2);
             $this->info["$mass"]['leanMass'] = number_format($this->human->getLeanBodyMass(), 2);
             $this->info["$mass"]['bmr']

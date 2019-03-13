@@ -26,7 +26,7 @@ class AverageHuman extends BasicHuman
      */
     public function getBodyMassIndex()
     {
-        if (!$this->isValidFloat($this->getHeight()) || !$this->isValidFloat($this->mass)) {
+        if (!Utils::isValidFloat($this->getHeight()) || !Utils::isValidFloat($this->mass)) {
             return 0.0;
         }
 
@@ -38,7 +38,7 @@ class AverageHuman extends BasicHuman
      */
     public function getBodyMassIndexPrime()
     {
-        if (!$this->isValidFloat($this->bmi)) {
+        if (!Utils::isValidFloat($this->bmi)) {
             return 0.0;
         }
 
@@ -55,8 +55,8 @@ class AverageHuman extends BasicHuman
      */
     public function getBodyFatPercentage()
     {
-        if (!$this->isValidFloat($this->bmi)
-            || !$this->isValidFloat($this->age)
+        if (!Utils::isValidFloat($this->bmi)
+            || !Utils::isValidFloat($this->age)
             || !in_array($this->sex, ['m', 'f'])
         ) {
             return $this->bfp = 0.0;
@@ -81,7 +81,7 @@ class AverageHuman extends BasicHuman
      */
     public function getLeanBodyMass()
     {
-        if (!$this->isValidFloat($this->bfp)) {
+        if (!Utils::isValidFloat($this->bfp)) {
             return 0.0;
         }
 
@@ -95,7 +95,7 @@ class AverageHuman extends BasicHuman
      * @return float
      */
     public function getBMR() {
-        if (!$this->isValidFloat($this->bfp) || !$this->isValidFloat($this->mass)) {
+        if (!Utils::isValidFloat($this->bfp) || !Utils::isValidFloat($this->mass)) {
             return $this->bmr = 0.0;
         }
 
@@ -110,7 +110,7 @@ class AverageHuman extends BasicHuman
      */
     public function getTDEE(float $physicalActivityLevel)
     {
-        if (!$this->isValidFloat($this->bmr) || !$this->isValidFloat($physicalActivityLevel)) {
+        if (!Utils::isValidFloat($this->bmr) || !Utils::isValidFloat($physicalActivityLevel)) {
             return 0.0;
         }
 
