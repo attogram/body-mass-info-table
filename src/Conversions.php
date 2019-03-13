@@ -4,7 +4,8 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 /**
- * Conversion functions
+ * Class Conversions
+ * @package Attogram\Body
  */
 class Conversions
 {

@@ -4,7 +4,8 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 /**
- * Utility functions
+ * Class Utils
+ * @package Attogram\Body
  */
 class Utils
 {

@@ -59,7 +59,7 @@ class Classification
                 return '#FFD700';
             case ($bmi >= self::UNDERWEIGHT_MODERATE):
                 return '#FFA500';
-            case ($bmi < self::UNDERWEIGHT_MODERATE):  // Underweight - Severe thinness
+            case ($bmi < self::UNDERWEIGHT_MODERATE): // Underweight - Severe thinness
                 return '#FF0000';
         }
     }
@@ -99,7 +99,7 @@ class Classification
                 return 'Underweight <small>- Mild thinness</small>';
             case ($bmi >= self::UNDERWEIGHT_MODERATE):
                 return 'Underweight <small>- Moderate thinness</small>';
-            case ($bmi < self::UNDERWEIGHT_MODERATE):
+            case ($bmi < self::UNDERWEIGHT_MODERATE): // Underweight - Severe thinness
                 return 'Underweight <small>- Severe thinness</small>';
         }
     }

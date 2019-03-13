@@ -4,7 +4,8 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 /**
- * Table
+ * Class Table
+ * @package Attogram\Body
  */
 class Table
 {
