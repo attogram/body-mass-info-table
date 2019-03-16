@@ -29,7 +29,7 @@ class BodyMassInfoTable
     /** @var AverageHuman */
     private $human;
 
-    /** @var stdClass */
+    /** @var Config */
     private $config;
 
     /** @var array */
@@ -67,7 +67,6 @@ class BodyMassInfoTable
                 $form = new Form($this->human, $this->config);
                 $form->includeForm();
 
-                $this->setMass();
                 $this->setInfo();
                 $table = new Table($this->info, $this->human);
                 print $table->get();
@@ -84,7 +83,7 @@ class BodyMassInfoTable
      */
     private function setConfig()
     {
-        $this->config = new stdClass();
+        $this->config = new Config();
         $this->config->startMass = Util::getFloatVarFromGet('s', self::DEFAULT_START_MASS);
         $this->config->endMass = Util::getFloatVarFromGet('e', self::DEFAULT_END_MASS);
         $this->config->increment = Util::getFloatVarFromGet('i', self::DEFAULT_INCREMENT);
@@ -134,6 +133,7 @@ class BodyMassInfoTable
      */
     private function setInfo()
     {
+        $this->setMass();
         $this->info = [];
         foreach ($this->mass as $mass) {
             $mass = (float) $mass;

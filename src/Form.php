@@ -15,15 +15,15 @@ class Form
     /** @var AverageHuman */
     private $human;
 
-    /** @var stdClass */
+    /** @var Config */
     private $config;
 
     /**
      * Form constructor.
      * @param AverageHuman $human
-     * @param stdClass $config
+     * @param Config $config
      */
-    public function __construct(AverageHuman $human, stdClass $config)
+    public function __construct(AverageHuman $human, Config $config)
     {
         $this->human = $human;
         $this->config = $config;
