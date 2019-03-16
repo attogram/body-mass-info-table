@@ -44,8 +44,8 @@ class Table
             $table .= '<tr style="background-color:' . Classification::getBmiClassColor($info['bmi']) . '">'
                 . '<td>' . Classification::getBmiClassText($info['bmi']) . '</td>'
                 . '<td class="righty">' . $info['mass'] . '</td>'
-                . '<td class="righty">' . number_format(Conversions::kilogramsToPounds($mass), 2) . '</td>'
-                . '<td class="righty">' . number_format(Conversions::kilogramsToStones($mass), 2) . '</td>'
+                . '<td class="righty">' . number_format(Conversion::kilogramsToPounds($mass), 2) . '</td>'
+                . '<td class="righty">' . number_format(Conversion::kilogramsToStones($mass), 2) . '</td>'
                 . '<td class="righty bold">' . $info['bmi'] . '</td>'
                 . '<td class="righty">' . $info['bmiPrime'] . '</td>'
                 . '<td class="righty">' . $info['bodyFat'] . '</td>'
@@ -71,8 +71,8 @@ class Table
         $error = '<span class="error">Unknown</span>';
         $height = $this->human->getHeight()
             ? '<b>' . $this->human->getHeight() . ' meters</b>'
-                . ' (' . number_format(Conversions::metersToInches($this->human->getHeight()), 2) . ' inches)'
-                . ' (' . number_format(Conversions::metersToFeet($this->human->getHeight()), 2) . ' feet)'
+                . ' (' . number_format(Conversion::metersToInches($this->human->getHeight()), 2) . ' inches)'
+                . ' (' . number_format(Conversion::metersToFeet($this->human->getHeight()), 2) . ' feet)'
             : $error;
         $age = $this->human->getAge()
             ? '<b>' . $this->human->getAge() . ' years</b>'

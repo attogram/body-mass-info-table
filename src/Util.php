@@ -4,10 +4,10 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 /**
- * Class Utils
+ * Class Util
  * @package Attogram\Body
  */
-class Utils
+class Util
 {
     /**
      * @param mixed $var

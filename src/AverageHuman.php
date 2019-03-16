@@ -26,7 +26,7 @@ class AverageHuman extends BasicHuman
      */
     public function getBodyMassIndex()
     {
-        if (!Utils::isValidFloat($this->getHeight()) || !Utils::isValidFloat($this->mass)) {
+        if (!Util::isValidFloat($this->getHeight()) || !Util::isValidFloat($this->mass)) {
             return 0.0;
         }
 
@@ -38,7 +38,7 @@ class AverageHuman extends BasicHuman
      */
     public function getBodyMassIndexPrime()
     {
-        if (!Utils::isValidFloat($this->bmi)) {
+        if (!Util::isValidFloat($this->bmi)) {
             return 0.0;
         }
 
@@ -46,26 +46,31 @@ class AverageHuman extends BasicHuman
     }
 
     /**
-     * Get Body Fat Percentage, predicted based on BMI
-     *      formula: (1.39 x BMI) + (0.16 x age) - (10.34 x [m=1,f=0]) - 9
-     *          men: (1.39 x BMI) + (0.16 x age) - 19.34
-     *        women: (1.39 x BMI) + (0.16 x age) - 9
+     * Get Body Fat Percentage
+     *
+     *  Jackson AS formula: (1.39 x BMI) + (0.16 x age) - (10.34 x [m=1,f=0]) - 9
+     *                 men: (1.39 x BMI) + (0.16 x age) - 19.34
+     *               women: (1.39 x BMI) + (0.16 x age) - 9
+     *
+     * @see https://www.academia.edu
+     *      /2711997/Measuring_obesity_results_are_poles_apart_obtained_by_BMI_and_bio-electrical_impedance_analysis
      *
      * @return float
      */
     public function getBodyFatPercentage()
     {
-        if (!Utils::isValidFloat($this->bmi)
-            || !Utils::isValidFloat($this->age)
+        if (!Util::isValidFloat($this->bmi)
+            || !Util::isValidFloat($this->age)
             || !in_array($this->sex, ['m', 'f'])
         ) {
             return $this->bfp = 0.0;
         }
 
         $bodyFatSexFactor = 19.34; // male factor
-        if ($this->sex == 'f') {
+        if ($this->isFemale()) {
             $bodyFatSexFactor = 9; // female factor
         }
+
         $bodyFat = (float) (1.39 * $this->bmi) + (0.16 * $this->age) - $bodyFatSexFactor;
         if ($bodyFat > 100 || $bodyFat < 0) {
             return $this->bfp = 0.0;
@@ -81,7 +86,7 @@ class AverageHuman extends BasicHuman
      */
     public function getLeanBodyMass()
     {
-        if (!Utils::isValidFloat($this->bfp)) {
+        if (!Util::isValidFloat($this->bfp)) {
             return 0.0;
         }
 
@@ -90,12 +95,13 @@ class AverageHuman extends BasicHuman
 
     /**
      * Get Basal Metabolic Rate, based on mass and body fat percentage
-     *      Katch-McArdle BMR = 370 + ( 21.6 * ( WeightInKilograms * ( 1 - BodyFatPercentage ) ) )
+     *
+     *      Katch-McArdle Formula: BMR = 370 + (21.6 * (WeightInKilograms * (1 - BodyFatPercentage)))
      *
      * @return float
      */
     public function getBMR() {
-        if (!Utils::isValidFloat($this->bfp) || !Utils::isValidFloat($this->mass)) {
+        if (!Util::isValidFloat($this->bfp) || !Util::isValidFloat($this->mass)) {
             return $this->bmr = 0.0;
         }
 
@@ -110,7 +116,7 @@ class AverageHuman extends BasicHuman
      */
     public function getTDEE(float $physicalActivityLevel)
     {
-        if (!Utils::isValidFloat($this->bmr) || !Utils::isValidFloat($physicalActivityLevel)) {
+        if (!Util::isValidFloat($this->bmr) || !Util::isValidFloat($physicalActivityLevel)) {
             return 0.0;
         }
 

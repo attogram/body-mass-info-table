@@ -4,32 +4,33 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 use Attogram\Router\Router;
+use stdClass;
 
 /**
  * Body Mass Info Table
  */
 class BodyMassInfoTable
 {
+    use TemplateTrait;
+
     /** @var string Version*/
-    const VERSION = '1.8.0';
+    const VERSION = '1.9.0.pre';
+
+    const DEFAULT_AGE        = 0.0;
+    const DEFAULT_HEIGHT     = 0.0;
+    const DEFAULT_SEX        = '';
+    const DEFAULT_START_MASS = 100.0;
+    const DEFAULT_END_MASS   = 50.0;
+    const DEFAULT_INCREMENT  = 1.0;
 
     /** @var Router */
     private $router;
 
-    /** @var string */
-    private $templatesDirectory = '../templates/';
-
     /** @var AverageHuman */
     private $human;
 
-    /** @var float */
-    private $startMass = 100.0;
-
-    /** @var float */
-    private $endMass = 50.0;
-
-    /** @var float */
-    private $increment = 1.0;
+    /** @var stdClass */
+    private $config;
 
     /** @var array */
     private $mass = [];
@@ -61,7 +62,15 @@ class BodyMassInfoTable
         $this->includeTemplate('header');
         switch ($page) {
             case 'home':
-                $this->table();
+                $this->setConfig();
+                $this->setHuman();
+                $form = new Form($this->human, $this->config);
+                $form->includeForm();
+
+                $this->setMass();
+                $this->setInfo();
+                $table = new Table($this->info, $this->human);
+                print $table->get();
                 break;
             case 'about':
                 $this->includeTemplate('about');
@@ -71,36 +80,48 @@ class BodyMassInfoTable
     }
 
     /**
-     * Show The Table
+     * @uses $this->config
      */
-    private function table()
+    private function setConfig()
+    {
+        $this->config = new stdClass();
+        $this->config->startMass = Util::getFloatVarFromGet('s', self::DEFAULT_START_MASS);
+        $this->config->endMass = Util::getFloatVarFromGet('e', self::DEFAULT_END_MASS);
+        $this->config->increment = Util::getFloatVarFromGet('i', self::DEFAULT_INCREMENT);
+    }
+
+    /**
+     * @uses $this->human
+     */
+    private function setHuman()
     {
         $this->human = new AverageHuman();
-        $this->human->setAge(Utils::getFloatVarFromGet('a', 0.0));
-        $this->human->setHeight(Utils::getFloatVarFromGet('h', 0.0));
-        $this->human->setSex(Utils::getEnumVarFromGet('x', ['m','f'], 'u'));
-        $this->startMass = Utils::getFloatVarFromGet('s', $this->startMass);
-        $this->endMass = Utils::getFloatVarFromGet('e', $this->endMass);
-        $this->increment = Utils::getFloatVarFromGet('i', $this->increment);
-        $this->includeTemplate('form');
-        $this->setMass();
-        $this->setInfo();
-        $table = new Table($this->info, $this->human);
-        print $table->get();
+        $this->human->setAge(Util::getFloatVarFromGet('a', self::DEFAULT_AGE));
+        $this->human->setHeight(Util::getFloatVarFromGet('h', self::DEFAULT_HEIGHT));
+        $this->human->setSex(Util::getEnumVarFromGet('x', ['m','f'], self::DEFAULT_SEX));
     }
 
     /**
      * @uses $this->mass
+     * @uses $this->config
      */
     private function setMass()
     {
         $this->mass = [];
-        if ($this->startMass < $this->endMass) {
-            for ($mass = $this->startMass; $mass <= $this->endMass; $mass = $mass + $this->increment) {
+        if ($this->config->startMass < $this->config->endMass) {
+            for (
+                $mass = $this->config->startMass;
+                $mass <= $this->config->endMass;
+                $mass = $mass + $this->config->increment
+            ) {
                 $this->mass[] = $mass;
             }
         } else {
-            for ($mass = $this->startMass; $this->endMass <= $mass; $mass = $mass - $this->increment) {
+            for (
+                $mass = $this->config->startMass;
+                $this->config->endMass <= $mass;
+                $mass = $mass - $this->config->increment
+            ) {
                 $this->mass[] = $mass;
             }
         }
@@ -109,6 +130,7 @@ class BodyMassInfoTable
     /**
      * @uses $this->info
      * @uses $this->mass
+     * @uses $this->human
      */
     private function setInfo()
     {
@@ -167,15 +189,6 @@ class BodyMassInfoTable
                 $this->info["$mass"]['tdeeExtreme'] = '-';
             }
         }
-    }
-
-    /**
-     * @param string $templateName
-     */
-    private function includeTemplate(string $templateName)
-    {
-        /** @noinspection PhpIncludeInspection */
-        include($this->templatesDirectory . $templateName . '.php');
     }
 
     /**

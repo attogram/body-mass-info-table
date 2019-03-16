@@ -4,10 +4,10 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 /**
- * Class Conversions
+ * Class Conversion
  * @package Attogram\Body
  */
-class Conversions
+class Conversion
 {
     /**
      * @param float $kilograms

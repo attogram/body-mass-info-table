@@ -58,7 +58,7 @@ class BasicHuman
     public function setAge($age)
     {
         $age = (float) $age;
-        if (Utils::isValidFloat($age)) {
+        if (Util::isValidFloat($age)) {
             $this->age = $age;
 
             return;
@@ -67,12 +67,23 @@ class BasicHuman
     }
 
     /**
+     * @return bool
+     */
+    public function isAdult()
+    {
+        if ($this->age > 20.99) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @param mixed $height
      */
     public function setHeight($height)
     {
         $height = (float) $height;
-        if (Utils::isValidFloat($height)) {
+        if (Util::isValidFloat($height)) {
             $this->height = $height;
 
             return;
@@ -86,7 +97,7 @@ class BasicHuman
     public function setMass($mass)
     {
         $mass = (float) $mass;
-        if (Utils::isValidFloat($mass)) {
+        if (Util::isValidFloat($mass)) {
             $this->mass = $mass;
 
             return;
@@ -105,5 +116,27 @@ class BasicHuman
             return;
         }
         $this->sex = 'u';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFemale()
+    {
+        if ($this->sex == 'f') {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMale()
+    {
+        if ($this->sex == 'm') {
+            return true;
+        }
+        return false;
     }
 }
