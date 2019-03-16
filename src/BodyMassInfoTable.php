@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace Attogram\Body;
 
 use Attogram\Router\Router;
-use stdClass;
 
 /**
  * Body Mass Info Table
@@ -32,12 +31,6 @@ class BodyMassInfoTable
     /** @var Config */
     private $config;
 
-    /** @var array */
-    private $mass = [];
-
-    /** @var array */
-    private $info = [];
-
     /**
      * Route Request
      */
@@ -51,7 +44,10 @@ class BodyMassInfoTable
             $this->routePage($match);
             return;
         }
-        $this->pageNotFound();
+        header('HTTP/1.0 404 Not Found');
+        $this->includeTemplate('header');
+        print '<h1 style="padding:20px;">404 Page Not Found</h1>';
+        $this->includeTemplate('footer');
     }
 
     /**
@@ -67,8 +63,7 @@ class BodyMassInfoTable
                 $form = new Form($this->human, $this->config);
                 $form->includeForm();
 
-                $this->setInfo();
-                $table = new Table($this->info, $this->human);
+                $table = new Table($this->human, $this->config);
                 print $table->get();
                 break;
             case 'about':
@@ -98,107 +93,5 @@ class BodyMassInfoTable
         $this->human->setAge(Util::getFloatVarFromGet('a', self::DEFAULT_AGE));
         $this->human->setHeight(Util::getFloatVarFromGet('h', self::DEFAULT_HEIGHT));
         $this->human->setSex(Util::getEnumVarFromGet('x', ['m','f'], self::DEFAULT_SEX));
-    }
-
-    /**
-     * @uses $this->mass
-     * @uses $this->config
-     */
-    private function setMass()
-    {
-        $this->mass = [];
-        if ($this->config->startMass < $this->config->endMass) {
-            for (
-                $mass = $this->config->startMass;
-                $mass <= $this->config->endMass;
-                $mass = $mass + $this->config->increment
-            ) {
-                $this->mass[] = $mass;
-            }
-        } else {
-            for (
-                $mass = $this->config->startMass;
-                $this->config->endMass <= $mass;
-                $mass = $mass - $this->config->increment
-            ) {
-                $this->mass[] = $mass;
-            }
-        }
-    }
-
-    /**
-     * @uses $this->info
-     * @uses $this->mass
-     * @uses $this->human
-     */
-    private function setInfo()
-    {
-        $this->setMass();
-        $this->info = [];
-        foreach ($this->mass as $mass) {
-            $mass = (float) $mass;
-            $this->human->setMass($mass);
-            $this->info["$mass"]['mass'] = number_format($mass, 2);
-            $this->info["$mass"]['bmi'] = number_format($this->human->getBodyMassIndex(), 2);
-            $this->info["$mass"]['bmiPrime'] =  number_format($this->human->getBodyMassIndexPrime(), 2);
-            $this->info["$mass"]['bmiText'] = Classification::getBmiClassText($this->human->getBodyMassIndex());
-            $this->info["$mass"]['bmiColor'] = Classification::getBmiClassColor($this->human->getBodyMassIndex());
-            $this->info["$mass"]['bodyFat'] = number_format($this->human->getBodyFatPercentage(), 2);
-            $this->info["$mass"]['leanMass'] = number_format($this->human->getLeanBodyMass(), 2);
-            $this->info["$mass"]['bmr']
-                = number_format($this->human->getBMR(), 0, '', '');
-            $this->info["$mass"]['tdeeSedentary']
-                = number_format($this->human->getTDEE(PhysicalActivityLevel::SEDENTARY), 0, '', '');
-            $this->info["$mass"]['tdeeLight']
-                = number_format($this->human->getTDEE(PhysicalActivityLevel::LIGHT), 0, '', '');
-            $this->info["$mass"]['tdeeModerate']
-                = number_format($this->human->getTDEE(PhysicalActivityLevel::MODERATE), 0, '', '');
-            $this->info["$mass"]['tdeeHeavy']
-                = number_format($this->human->getTDEE(PhysicalActivityLevel::HEAVY), 0, '', '');
-            $this->info["$mass"]['tdeeExtreme']
-                = number_format($this->human->getTDEE(PhysicalActivityLevel::EXTREME), 0, '', '');
-
-            if ($this->info["$mass"]['bmi'] == 0.00) {
-                $this->info["$mass"]['bmi'] = '-';
-            }
-            if ($this->info["$mass"]['bmiPrime'] == 0.00) {
-                $this->info["$mass"]['bmiPrime'] = '-';
-            }
-            if ($this->info["$mass"]['bodyFat'] == 0.00) {
-                $this->info["$mass"]['bodyFat'] = '-';
-            }
-            if ($this->info["$mass"]['leanMass'] == 0.00) {
-                $this->info["$mass"]['leanMass'] = '-';
-            }
-            if ($this->info["$mass"]['bmr'] == 0) {
-                $this->info["$mass"]['bmr'] = '-';
-            }
-            if ($this->info["$mass"]['tdeeSedentary'] == 0) {
-                $this->info["$mass"]['tdeeSedentary'] = '-';
-            }
-            if ($this->info["$mass"]['tdeeLight'] == 0) {
-                $this->info["$mass"]['tdeeLight'] = '-';
-            }
-            if ($this->info["$mass"]['tdeeModerate'] == 0) {
-                $this->info["$mass"]['tdeeModerate'] = '-';
-            }
-            if ($this->info["$mass"]['tdeeHeavy'] == 0) {
-                $this->info["$mass"]['tdeeHeavy'] = '-';
-            }
-            if ($this->info["$mass"]['tdeeExtreme'] == 0) {
-                $this->info["$mass"]['tdeeExtreme'] = '-';
-            }
-        }
-    }
-
-    /**
-     * 404 Page Not Found
-     */
-    private function pageNotFound()
-    {
-        header('HTTP/1.0 404 Not Found');
-        $this->includeTemplate('header');
-        print '<h1 style="padding:20px;">404 Page Not Found</h1>';
-        $this->includeTemplate('footer');
     }
 }

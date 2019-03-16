@@ -2,7 +2,6 @@
 declare(strict_types = 1);
 
 namespace Attogram\Body;
-use stdClass;
 
 /**
  * Class Form
