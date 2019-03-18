@@ -13,7 +13,7 @@ class BodyMassInfoTable
     use TemplateTrait;
 
     /** @var string Version*/
-    const VERSION = '1.9.0';
+    const VERSION = '1.9.1';
 
     const DEFAULT_AGE        = 0.0;
     const DEFAULT_HEIGHT     = 0.0;
