@@ -44,4 +44,17 @@ class Conversion
     {
         return (float) $meters * 3.2808;
     }
+
+    /**
+     * @param float $meters
+     * @return string
+     */
+    public static function metersToFeetAndInches(float $meters)
+    {
+        $inches = static::metersToInches($meters);
+        $feet = floor($inches / 12);
+        $remainingInches = number_format($inches - ($feet * 12), 1);
+
+        return $feet . "' " . $remainingInches . '"';
+    }
 }

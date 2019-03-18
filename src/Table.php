@@ -140,7 +140,7 @@ class Table
                 $count = 0;
                 $table .= $this->getTableHeader();
             }
-            $table .= '<tr style="background-color:' . Classification::getBmiClassColor($info['bmi']) . '">'
+            $table .= '<tr style="background-color:' . Classification::getBmiClassColor($info['bmi']) . ';">'
                 . '<td>' . Classification::getBmiClassText($info['bmi']) . '</td>'
                 . '<td class="righty">' . $info['mass'] . '</td>'
                 . '<td class="righty">' . number_format(Conversion::kilogramsToPounds($mass), 2) . '</td>'
@@ -171,7 +171,7 @@ class Table
         $height = $this->human->getHeight()
             ? '<b>' . $this->human->getHeight() . ' meters</b>'
                 . ' (' . number_format(Conversion::metersToInches($this->human->getHeight()), 2) . ' inches)'
-                . ' (' . number_format(Conversion::metersToFeet($this->human->getHeight()), 2) . ' feet)'
+                . ' (' . Conversion::metersToFeetAndInches($this->human->getHeight()) . ')'
             : $error;
         $age = $this->human->getAge()
             ? '<b>' . $this->human->getAge() . ' years</b>'

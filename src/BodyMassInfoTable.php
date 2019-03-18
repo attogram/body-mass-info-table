@@ -6,7 +6,8 @@ namespace Attogram\Body;
 use Attogram\Router\Router;
 
 /**
- * Body Mass Info Table
+ * Class BodyMassInfoTable
+ * @package Attogram\Body
  */
 class BodyMassInfoTable
 {
@@ -37,7 +38,7 @@ class BodyMassInfoTable
             $this->routePage($match);
             return;
         }
-        header('HTTP/1.0 404 Not Found');
+        header('HTTP/1.0 404 Page Not Found');
         $this->includeTemplate('header');
         print '<h1 class="alert alert-danger">404 Page Not Found</h1>';
         $this->includeTemplate('footer');
