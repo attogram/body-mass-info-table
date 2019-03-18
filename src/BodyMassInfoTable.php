@@ -46,7 +46,7 @@ class BodyMassInfoTable
         }
         header('HTTP/1.0 404 Not Found');
         $this->includeTemplate('header');
-        print '<h1 style="padding:20px;">404 Page Not Found</h1>';
+        print '<h1 class="alert alert-danger">404 Page Not Found</h1>';
         $this->includeTemplate('footer');
     }
 
