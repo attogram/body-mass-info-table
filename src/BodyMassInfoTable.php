@@ -15,13 +15,6 @@ class BodyMassInfoTable
     /** @var string Version*/
     const VERSION = '1.9.1';
 
-    const DEFAULT_AGE        = 0.0;
-    const DEFAULT_HEIGHT     = 0.0;
-    const DEFAULT_SEX        = '';
-    const DEFAULT_START_MASS = 100.0;
-    const DEFAULT_END_MASS   = 50.0;
-    const DEFAULT_INCREMENT  = 1.0;
-
     /** @var Router */
     private $router;
 
@@ -79,9 +72,10 @@ class BodyMassInfoTable
     private function setConfig()
     {
         $this->config = new Config();
-        $this->config->startMass = Util::getFloatVarFromGet('s', self::DEFAULT_START_MASS);
-        $this->config->endMass = Util::getFloatVarFromGet('e', self::DEFAULT_END_MASS);
-        $this->config->increment = Util::getFloatVarFromGet('i', self::DEFAULT_INCREMENT);
+        $this->config->startMass = Util::getFloatVarFromGet('s', Config::DEFAULT_START_MASS);
+        $this->config->endMass = Util::getFloatVarFromGet('e', Config::DEFAULT_END_MASS);
+        $this->config->increment = Util::getFloatVarFromGet('i', Config::DEFAULT_INCREMENT);
+        $this->config->repeatHeader = Util::getFloatVarFromGet('r', Config::DEFAULT_REPEAT_HEADER);
     }
 
     /**
@@ -90,8 +84,8 @@ class BodyMassInfoTable
     private function setHuman()
     {
         $this->human = new AverageHuman();
-        $this->human->setAge(Util::getFloatVarFromGet('a', self::DEFAULT_AGE));
-        $this->human->setHeight(Util::getFloatVarFromGet('h', self::DEFAULT_HEIGHT));
-        $this->human->setSex(Util::getEnumVarFromGet('x', ['m','f'], self::DEFAULT_SEX));
+        $this->human->setAge(Util::getFloatVarFromGet('a', Config::DEFAULT_AGE));
+        $this->human->setHeight(Util::getFloatVarFromGet('h', Config::DEFAULT_HEIGHT));
+        $this->human->setSex(Util::getEnumVarFromGet('x', ['m','f'], Config::DEFAULT_SEX));
     }
 }

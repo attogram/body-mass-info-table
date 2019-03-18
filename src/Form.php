@@ -40,6 +40,7 @@ class Form
         $this->data['startMass'] = $this->config->startMass;
         $this->data['endMass'] = $this->config->endMass;
         $this->data['increment'] = $this->config->increment;
+        $this->data['repeatHeader'] = $this->config->repeatHeader;
 
         $this->includeTemplate('form');
     }

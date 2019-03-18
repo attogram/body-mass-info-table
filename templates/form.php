@@ -42,20 +42,27 @@ namespace Attogram\Body;
     <div class="collapse show" id="options">
         <div class="row mx-5 mt-3 px-2 bg-light border">
             <div class="col nobr">
-                <label for="s">Range:</label><label for="e"></label>
+                <label for="s">Weight Range:</label><label for="e"></label>
                 <br />
                 <input id="s" name="s" title="Table start" size="4" maxlength="5" value="<?=
                     $this->data['startMass']
                 ?>" />-<input id="e" name="e" title="Table end" size="4" maxlength="5" value="<?=
                     $this->data['endMass']
-                ?>" />kg
+                ?>" /> kg
             </div>
             <div class="col nobr">
                 <label for="i">Increment:</label>
                 <br />
                 <input id="i" name="i" title="Increment" size="3" maxlength="6" value="<?=
                     $this->data['increment']
-                ?>" />kg
+                ?>" /> kg
+            </div>
+            <div class="col nobr">
+                <label for="r">Repeat Header:</label>
+                <br />
+                every <input id="r" name="r" title="Repeat Header" size="2" maxlength="5" value="<?=
+                    $this->data['repeatHeader']
+                ?>" /> rows
             </div>
         </div>
     </div>

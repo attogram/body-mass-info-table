@@ -136,7 +136,7 @@ class Table
         foreach ($this->info as $mass => $info) {
             $mass = (float) $mass;
             $count++;
-            if ($count > 30) {
+            if ($count > $this->config->repeatHeader) {
                 $count = 0;
                 $table .= $this->getTableHeader();
             }
