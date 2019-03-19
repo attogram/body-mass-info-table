@@ -25,6 +25,6 @@ trait TemplateTrait
             return;
         }
         /** @noinspection PhpIncludeInspection */
-        include($template);
+        include $template;
     }
 }

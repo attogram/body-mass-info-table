@@ -28,8 +28,9 @@ class Classification
      * @param mixed $bmi
      * @return string
      */
-    public static function getBmiClassColor($bmi) {
-        switch($bmi) {
+    public static function getBmiClassColor($bmi)
+    {
+        switch ($bmi) {
             case 0.0:
             default:
                 return '#FFFFFF';
@@ -68,8 +69,9 @@ class Classification
      * @param mixed $bmi
      * @return string
      */
-    public static function getBmiClassText($bmi) {
-        switch($bmi) {
+    public static function getBmiClassText($bmi)
+    {
+        switch ($bmi) {
             case 0.0:
             default:
                 return '-';

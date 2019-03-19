@@ -9,6 +9,6 @@ if (!is_readable($autoload)) {
 }
 
 /** @noinspection PhpIncludeInspection */
-require_once($autoload);
+require_once $autoload;
 
 (new BodyMassInfoTable())->route();

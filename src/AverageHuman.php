@@ -100,7 +100,8 @@ class AverageHuman extends BasicHuman
      *
      * @return float
      */
-    public function getBMR() {
+    public function getBMR()
+    {
         if (!Util::isValidFloat($this->bfp) || !Util::isValidFloat($this->mass)) {
             return $this->bmr = 0.0;
         }
