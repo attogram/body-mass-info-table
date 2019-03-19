@@ -21,7 +21,6 @@ trait TemplateTrait
     public function includeTemplate(string $name)
     {
         $template = $this->templatesDirectory . $name . '.php';
-
         if (!is_readable($template)) {
             return;
         }

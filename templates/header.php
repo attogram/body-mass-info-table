@@ -3,6 +3,9 @@ declare(strict_types = 1);
 
 namespace Attogram\Body;
 
+/**
+ * @var BodyMassInfoTable $this
+ */
 ?>
 <!doctype html>
 <html lang="en">

@@ -6,7 +6,6 @@ namespace Attogram\Body;
 /**
  * @var Form $this
  */
-
 ?>
 <form>
     <div class="row mx-5 px-2 border">
