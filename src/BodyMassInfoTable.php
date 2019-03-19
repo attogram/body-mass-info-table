@@ -14,7 +14,7 @@ class BodyMassInfoTable
     use TemplateTrait;
 
     /** @var string Version*/
-    const VERSION = '1.9.3';
+    const VERSION = '1.9.4';
 
     /** @var Router */
     private $router;
@@ -36,6 +36,7 @@ class BodyMassInfoTable
         $match = $this->router->match();
         if ($match) {
             $this->routePage($match);
+
             return;
         }
         $this->includeTemplate('404');
