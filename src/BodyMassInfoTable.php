@@ -38,10 +38,7 @@ class BodyMassInfoTable
             $this->routePage($match);
             return;
         }
-        header('HTTP/1.0 404 Page Not Found');
-        $this->includeTemplate('header');
-        print '<h1 class="alert alert-danger">404 Page Not Found</h1>';
-        $this->includeTemplate('footer');
+        $this->includeTemplate('404');
     }
 
     /**
@@ -54,11 +51,8 @@ class BodyMassInfoTable
             case 'home':
                 $this->setConfig();
                 $this->setHuman();
-                $form = new Form($this->human, $this->config);
-                $form->includeForm();
-
-                $table = new Table($this->human, $this->config);
-                print $table->get();
+                (new Form($this->human, $this->config))->include();
+                (new Table($this->human, $this->config))->include();
                 break;
             case 'about':
                 $this->includeTemplate('about');

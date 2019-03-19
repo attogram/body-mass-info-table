@@ -126,9 +126,9 @@ class Table
 
     /**
      * @uses $this->info
-     * @return string
+     * @uses $this->config
      */
-    public function get()
+    public function include()
     {
         $table = '<table><tr><td colspan="14">' . $this->getTableTopic() . '</td></tr>' . $this->getTableHeader();
 
@@ -159,7 +159,7 @@ class Table
         }
         $table .= $this->getTableHeader() . '</table>';
 
-        return $table;
+        print $table;
     }
 
     /**

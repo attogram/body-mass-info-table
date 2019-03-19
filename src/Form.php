@@ -28,7 +28,7 @@ class Form
         $this->config = $config;
     }
 
-    public function includeForm()
+    public function include()
     {
         $this->data['height'] = ($this->human->getHeight() > 0) ? $this->human->getHeight() : '';
         $this->data['age'] = ($this->human->getAge() > 0) ? $this->human->getAge() : '';
