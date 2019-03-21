@@ -27,4 +27,16 @@ trait TemplateTrait
         /** @noinspection PhpIncludeInspection */
         include $template;
     }
+
+    /**
+     * @param mixed $value
+     * @return mixed
+     */
+    public function getData($value)
+    {
+        if (isset($this->data[$value])) {
+            return $this->data[$value];
+        }
+        return '?';
+    }
 }
