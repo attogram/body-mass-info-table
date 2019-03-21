@@ -39,4 +39,11 @@
 [6] Jackson, A.S. (1984)
     Research design and analysis of data procedures for predicting body density.
     Medicine & Science in Sports & Exercise, 16, 616-620.doi:10.1249/00005768-198412000-00018
+
+[7] Cunningham JJ. 
+    A reanalysis of the factors influencing basal metabolic rate in normal adults. 
+    Am J Clin Nutr 1980; 33: 2372-4. 
+
+http://www.lifescienceglobal.com/pms/index.php/jnt/article/download/3187/1854
+
 ```
