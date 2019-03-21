@@ -45,15 +45,17 @@ class AverageHuman extends BasicHuman
         return (float) ($this->bmi / 24.99) * 1;
     }
 
+    /*
+
+     */
     /**
      * Get Body Fat Percentage
      *
-     *  Jackson AS formula: (1.39 x BMI) + (0.16 x age) - (10.34 x [m=1,f=0]) - 9
+     *  Jackson formula: (1.39 x BMI) + (0.16 x age) - (10.34 x [m=1,f=0]) - 9
      *                 men: (1.39 x BMI) + (0.16 x age) - 19.34
      *               women: (1.39 x BMI) + (0.16 x age) - 9
      *
-     * @see https://www.academia.edu
-     *      /2711997/Measuring_obesity_results_are_poles_apart_obtained_by_BMI_and_bio-electrical_impedance_analysis
+     * @see https://www.academia.edu/2711997/Measuring_obesity_results_are_poles_apart_obtained_by_BMI_and_bio-electrical_impedance_analysis
      *
      * @return float
      */
