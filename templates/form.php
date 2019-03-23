@@ -42,10 +42,15 @@ use Attogram\Body\Equation\BodyMassIndex;
     </div>
     <div class="row mx-4 px-4">
         <a data-toggle="collapse" href="#options" aria-expanded="false" aria-controls="options">
-            <small>+ Table Options: Weight Range, Increment, Header repeat, Equation choice for BMI, BFP, BMR</small>
+            <small>
+                &nbsp; + Setup Table:
+                Weight Range,
+                Increment,
+                Header repeat
+            </small>
         </a>
     </div>
-    <div class="collapse hide" id="options">
+    <div class="collapse hide mb-3" id="options">
         <div class="row mx-5 px-2 bg-light">
             <div class="col nobr pt-3">
                 <label for="s">Weight Range:</label><label for="e"></label>
@@ -68,6 +73,18 @@ use Attogram\Body\Equation\BodyMassIndex;
                     $this->getData('repeatHeader') ?>" /> rows
             </div>
         </div>
+    </div>
+    <div class="row mx-4 px-4">
+        <a data-toggle="collapse" href="#equations" aria-expanded="false" aria-controls="equations">
+            <small>
+                &nbsp; + Setup Equations:
+                Body Mass Index (BMI),
+                Body Fat Percentage (BFP),
+                Basal Metabolic Rate (BMR)
+            </small>
+        </a>
+    </div>
+    <div class="collapse hide" id="equations">
         <div class="row mx-5 px-2 bg-light">
             <div class="col nobr pt-3">
                 <label>BMI - Body Mass Index Equation:</label>
