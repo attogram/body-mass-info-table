@@ -17,31 +17,38 @@ class BasicHuman
     /** @var float $mass - weight, in kilograms */
     protected $mass = 0.0;
 
-    /** @var string $sex - sex, m=male f=female, u=unknown*/
-    protected $sex = 'u';
+    /** @var string $sex - sex, m=male f=female */
+    protected $sex = '';
 
     /**
      * @return float
      */
     public function getAge()
     {
-        return $this->age;
+        return (float) $this->age;
     }
 
     /**
      * @return float
      */
-    public function getHeight()
+    public function getHeightMeters()
     {
-        return $this->height;
+        return (float) $this->height;
     }
 
     /**
      * @return float
      */
-    public function getMass()
+    public function getHeightCentimeters()
     {
-        return $this->mass;
+        return (float) $this->height * 100;
+    }
+    /**
+     * @return float
+     */
+    public function getMassKilograms()
+    {
+        return (float) $this->mass;
     }
 
     /**

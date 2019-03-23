@@ -90,7 +90,7 @@ class Equation
      */
     protected function isValidHumanHeight()
     {
-        if ($this->isValidHuman() && Util::isValidFloat($this->human->getHeight())) {
+        if ($this->isValidHuman() && Util::isValidFloat($this->human->getHeightMeters())) {
             return true;
         }
         return false;
@@ -101,7 +101,7 @@ class Equation
      */
     protected function isValidHumanMass()
     {
-        if ($this->isValidHuman() && Util::isValidFloat($this->human->getMass())) {
+        if ($this->isValidHuman() && Util::isValidFloat($this->human->getMassKilograms())) {
             return true;
         }
         return false;

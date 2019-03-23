@@ -190,10 +190,10 @@ class Table
     private function getTableTopic()
     {
         $error = '<span class="error">Unknown</span>';
-        $height = $this->human->getHeight()
-            ? '<b>' . $this->human->getHeight() . ' meters</b>'
-                . ' (' . number_format(Conversion::metersToInches($this->human->getHeight()), 2) . ' inches)'
-                . ' (' . Conversion::metersToFeetAndInches($this->human->getHeight()) . ')'
+        $height = $this->human->getHeightMeters()
+            ? '<b>' . $this->human->getHeightMeters() . ' meters</b>'
+                . ' (' . number_format(Conversion::metersToInches($this->human->getHeightMeters()), 2) . ' inches)'
+                . ' (' . Conversion::metersToFeetAndInches($this->human->getHeightMeters()) . ')'
             : $error;
         $age = $this->human->getAge()
             ? '<b>' . $this->human->getAge() . ' years</b>'

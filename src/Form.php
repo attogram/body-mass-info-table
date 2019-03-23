@@ -30,7 +30,7 @@ class Form
 
     public function include()
     {
-        $this->data['height'] = ($this->human->getHeight() > 0) ? $this->human->getHeight() : '';
+        $this->data['height'] = ($this->human->getHeightMeters() > 0) ? $this->human->getHeightMeters() : '';
         $this->data['age'] = ($this->human->getAge() > 0) ? $this->human->getAge() : '';
 
         $checked = ' checked="checked"';

@@ -98,18 +98,13 @@ class BasalMetabolicRate extends Equation
             $bodyFatPercentage = (float) $bodyFatPercentage / 100;
         }
 
-        $heightCentimeters = 0.0;
-        if ($this->isValidHumanHeight()) {
-            $heightCentimeters = ($this->human->getHeight() * 100);
-        }
-
         switch ($equationId) {
             case self::KATCH_MCARDLE_2006:
                 if (!Util::isValidFloat($bodyFatPercentage)) {
                     return  0.0;
                 }
                 // 370 + (21.6 * (Weight_kilograms * (1 - BFP)))
-                $bmr = 370 + (21.6 * ($this->human->getMass() * (1 - $bodyFatPercentage)));
+                $bmr = 370 + (21.6 * ($this->human->getMassKilograms() * (1 - $bodyFatPercentage)));
                 break;
 
             case self::KATCH_MCARDLE_HYBRID_20XX:
@@ -119,8 +114,8 @@ class BasalMetabolicRate extends Equation
                 // (370 * (1 - BFP)) + (21.6 * (Weight_kilograms * (1 - BFP))) + (6.17 * (Weight_kilograms * BFP))
                 $bmr = (float) (
                           (370 * (1 - $bodyFatPercentage))
-                        + (21.6 * ($this->human->getMass() * (1 - $bodyFatPercentage)))
-                        + (6.17 * ($this->human->getMass() * $bodyFatPercentage))
+                        + (21.6 * ($this->human->getMassKilograms() * (1 - $bodyFatPercentage)))
+                        + (6.17 * ($this->human->getMassKilograms() * $bodyFatPercentage))
                 );
                 break;
 
@@ -130,14 +125,14 @@ class BasalMetabolicRate extends Equation
                 }
                 switch ($this->human->getSex()) {
                     case 'm': // Male: (13.397 * Weight_kilograms) + (4.799 * Height_cm) - (5.677 * Age) + 88.362
-                        $bmr = (float) (13.397 * $this->human->getMass())
-                            + (4.799 * $heightCentimeters)
+                        $bmr = (float) (13.397 * $this->human->getMassKilograms())
+                            + (4.799 * $this->human->getHeightCentimeters())
                             + (5.677 * $this->human->getAge())
                             + 88.362;
                         break;
                     case 'f': // Female: ( 9.247 * Weight_kilograms) + (3.098 * Height_cm) - (4.330 * Age) + 447.593
-                        $bmr = (float) (9.247 * $this->human->getMass())
-                            + (3.098 * $heightCentimeters)
+                        $bmr = (float) (9.247 * $this->human->getMassKilograms())
+                            + (3.098 * $this->human->getHeightCentimeters())
                             + (4.330 * $this->human->getAge())
                             + 447.593;
                         break;
@@ -152,8 +147,8 @@ class BasalMetabolicRate extends Equation
                 }
                 // Male: (10 * Weight_kilograms) + (6.25 * Height_cm) - (5 * Age) + 5
                 // Female: (10 * Weight_kilograms) + (6.25 * Height_cm) - (5 * Age) - 161
-                $bmr = (10 * $this->human->getMass())
-                    + (6.25 * $heightCentimeters)
+                $bmr = (10 * $this->human->getMassKilograms())
+                    + (6.25 * $this->human->getHeightCentimeters())
                     - (5 * $this->human->getAge());
                 switch ($this->human->getSex()) {
                     case 'm':
@@ -172,7 +167,7 @@ class BasalMetabolicRate extends Equation
                     return  0.0;
                 }
                 // 500 + (22 * (Weight_kilograms * (1 - BFP)))
-                $bmr = (float) 500 + (22 * ($this->human->getMass() * (1 - $bodyFatPercentage)));
+                $bmr = (float) 500 + (22 * ($this->human->getMassKilograms() * (1 - $bodyFatPercentage)));
                 break;
 
             case self::HARRIS_BENEDICT_1919:
@@ -181,15 +176,15 @@ class BasalMetabolicRate extends Equation
                 }
                 switch ($this->human->getSex()) {
                     case 'm': // Male: (13.7516 * Weight_kilograms) + (5.0033 * Height_cm) - (6.755  * Age) + 66.473
-                        $bmr = (13.7516 * $this->human->getMass())
-                            + (5.0033 * $heightCentimeters)
+                        $bmr = (13.7516 * $this->human->getMassKilograms())
+                            + (5.0033 * $this->human->getHeightCentimeters())
                             - (6.755 * $this->human->getAge())
                             + 66.473;
                         break;
                     case 'f': // Female: (9.5634 * Weight_kilograms) + (1.8496 * Height_cm) - (4.6756 * Age) + 655.0955
                         // BMR = 655.1 + ( 9.563 × weight in kg ) + ( 1.850 × height in cm ) – ( 4.676 × age in years )
-                        $bmr = (9.5634 * $this->human->getMass())
-                            + (1.8496 * $heightCentimeters)
+                        $bmr = (9.5634 * $this->human->getMassKilograms())
+                            + (1.8496 * $this->human->getHeightCentimeters())
                             - (4.6756 * $this->human->getAge())
                             + 655.0955;
                         break;

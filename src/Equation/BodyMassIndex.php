@@ -41,9 +41,9 @@ class BodyMassIndex extends Equation
 
         switch ($equationId) {
             case self::QUETELET_1832:
-                return (float) $this->human->getMass() / ($this->human->getHeight() ** 2);
+                return (float) $this->human->getMassKilograms() / ($this->human->getHeightMeters() ** 2);
             case self::TREFETHEN_2013:
-                return (float) (1.3 * $this->human->getMass()) / ($this->human->getHeight() ** 2.5);
+                return (float) (1.3 * $this->human->getMassKilograms()) / ($this->human->getHeightMeters() ** 2.5);
             default:
                 return 0.0;
         }
