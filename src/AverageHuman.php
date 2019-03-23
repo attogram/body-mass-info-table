@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Attogram\Body;
 
+use Attogram\Body\Equation\BasalMetabolicRate;
 use Attogram\Body\Equation\BodyFatPercentage;
 use Attogram\Body\Equation\BodyMassIndex;
 
@@ -51,8 +52,6 @@ class AverageHuman extends BasicHuman
     }
 
     /**
-     * Get Lean Body Mass
-     *
      * @return float
      */
     public function getLeanBodyMass()
@@ -69,15 +68,12 @@ class AverageHuman extends BasicHuman
      *
      *      Katch-McArdle Formula: BMR = 370 + (21.6 * (WeightInKilograms * (1 - BodyFatPercentage)))
      *
+     * @param int $equation
      * @return float
      */
-    public function getBMR()
+    public function getBasalMetabolicRate(int $equation)
     {
-        if (!Util::isValidFloat($this->bfp) || !Util::isValidFloat($this->mass)) {
-            return $this->bmr = 0.0;
-        }
-
-        return $this->bmr = (float) 370 + (21.6 * ($this->mass * (1 - ($this->bfp / 100))));
+        return $this->bmr = (new BasalMetabolicRate($this))->get($equation, $this->bfp);
     }
 
     /**

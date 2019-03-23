@@ -96,7 +96,12 @@ class Table
             $this->info["$mass"]['leanMass']
                 = number_format($this->human->getLeanBodyMass(), 2);
             $this->info["$mass"]['bmr']
-                = number_format($this->human->getBMR(), 0, '', '');
+                = number_format(
+                    $this->human->getBasalMetabolicRate($this->config->equationBasalMetabolicRate),
+                    0,
+                    '',
+                    ''
+                );
             $this->info["$mass"]['tdeeSedentary']
                 = number_format($this->human->getTDEE(PhysicalActivityLevel::SEDENTARY), 0, '', '');
             $this->info["$mass"]['tdeeLight']
