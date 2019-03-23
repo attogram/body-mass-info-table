@@ -72,6 +72,9 @@ class BodyMassInfoTable
         $this->config->endMass = Util::getFloatVarFromGet('e', Config::DEFAULT_END_MASS);
         $this->config->increment = Util::getFloatVarFromGet('i', Config::DEFAULT_INCREMENT);
         $this->config->repeatHeader = Util::getFloatVarFromGet('r', Config::DEFAULT_REPEAT_HEADER);
+        $this->config->equationBodyMassIndex = Util::getIntVarFromGet('bmi', Config::DEFAULT_EQUATION_BMI);
+        $this->config->equationBodyFatPercentage = Util::getIntVarFromGet('bfp', Config::DEFAULT_EQUATION_BFP);
+        $this->config->equationBasalMetabolicRate = Util::getIntVarFromGet('bmr', Config::DEFAULT_EQUATION_BMR);
     }
 
     /**

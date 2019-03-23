@@ -23,16 +23,25 @@ class Config
     const DEFAULT_INCREMENT = 1.0;
     /** @var int */
     const DEFAULT_REPEAT_HEADER = 25;
+    /** @var int */
+    const DEFAULT_EQUATION_BMI = 1;
+    /** @var int */
+    const DEFAULT_EQUATION_BFP = 1;
+    /** @var int */
+    const DEFAULT_EQUATION_BMR = 1;
 
     /** @var float */
     public $startMass;
-
     /** @var float */
     public $endMass;
-
     /** @var float */
     public $increment;
-
     /** @var int */
     public $repeatHeader;
+    /** @var int*/
+    public $equationBodyMassIndex;
+    /** @var int*/
+    public $equationBodyFatPercentage;
+    /** @var int*/
+    public $equationBasalMetabolicRate;
 }

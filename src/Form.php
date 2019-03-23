@@ -44,4 +44,33 @@ class Form
 
         $this->includeTemplate('form');
     }
+
+    /**
+     * @param array $equations
+     * @param string $config
+     * @param string $name
+     * @return string
+     */
+    public function radioBunch(array $equations = [], string $config = '', string $bunchName = '')
+    {
+        $bunch = '';
+        foreach ($equations as $equationId => $equationInfo) {
+            $equationName = $equationInfo['name'];
+            $equationMetric = $equationInfo['metric'];
+            $equationCite = str_replace('"', "'", $equationInfo['cite']);
+            $checked = '';
+            if (property_exists($this->config, $config) && $equationId == $this->config->{$config}) {
+                $checked = 'checked="checked" ';
+            }
+            $bunch .= ' &nbsp; '
+                . '<span title="' . "$equationName\n\n$equationCite" . '">'
+                . '<input type="radio" id="' . $bunchName . '" name="' . $bunchName . '"'
+                . ' title="" value="' . $equationId . '" ' . $checked . '/>'
+                . " $equationName<br /> &nbsp;&nbsp;&nbsp;&nbsp; <small>$equationMetric</small>"
+                . '</span>'
+                . '<br />';
+        }
+
+        return $bunch;
+    }
 }

@@ -25,8 +25,9 @@ a:hover { background-color:yellow; color:black; }
 .nobr { white-space:nowrap; }
 .righty { text-align: right; }
 form { padding:14px; margin:0; }
-label { font-size:smaller; margin:0; padding:0; }
+label { font-size:smaller; font-weight:bold; margin:0; padding:0; }
 table, tr, td { border:1px solid black; border-collapse:collapse; margin:20px; padding:2px 8px 2px 8px; }
+small { color: #5c5c5c; }
 </style></head><body>
 <div class="container-fluid">
 <div class="hdr bw">

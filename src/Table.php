@@ -3,6 +3,10 @@ declare(strict_types = 1);
 
 namespace Attogram\Body;
 
+use Attogram\Body\Equation\BasalMetabolicRate;
+use Attogram\Body\Equation\BodyFatPercentage;
+use Attogram\Body\Equation\BodyMassIndex;
+
 /**
  * Class Table
  * @package Attogram\Body
@@ -72,12 +76,25 @@ class Table
             $mass = (float) $mass;
             $this->human->setMass($mass);
             $this->info["$mass"]['mass'] = number_format($mass, 2);
-            $this->info["$mass"]['bmi'] = number_format($this->human->getBodyMassIndex(), 2);
-            $this->info["$mass"]['bmiPrime'] =  number_format($this->human->getBodyMassIndexPrime(), 2);
-            $this->info["$mass"]['bmiText'] = Classification::getBmiClassText($this->human->getBodyMassIndex());
-            $this->info["$mass"]['bmiColor'] = Classification::getBmiClassColor($this->human->getBodyMassIndex());
-            $this->info["$mass"]['bodyFat'] = number_format($this->human->getBodyFatPercentage(), 2);
-            $this->info["$mass"]['leanMass'] = number_format($this->human->getLeanBodyMass(), 2);
+            $this->info["$mass"]['bmi']
+                = number_format(
+                    $this->human->getBodyMassIndex($this->config->equationBodyMassIndex),
+                    2
+                );
+            $this->info["$mass"]['bmiPrime']
+                = number_format($this->human->getBodyMassIndexPrime(), 2);
+            $this->info["$mass"]['bmiText']
+                = Classification::getBmiClassText(
+                    $this->human->getBodyMassIndex($this->config->equationBodyMassIndex)
+                );
+            $this->info["$mass"]['bmiColor']
+                = Classification::getBmiClassColor(
+                    $this->human->getBodyMassIndex($this->config->equationBodyMassIndex)
+                );
+            $this->info["$mass"]['bodyFat']
+                = number_format($this->human->getBodyFatPercentage(), 2);
+            $this->info["$mass"]['leanMass']
+                = number_format($this->human->getLeanBodyMass(), 2);
             $this->info["$mass"]['bmr']
                 = number_format($this->human->getBMR(), 0, '', '');
             $this->info["$mass"]['tdeeSedentary']
@@ -180,10 +197,29 @@ class Table
             . ($this->human->getSex() == 'f' ? '<b>Female</b>' : '')
             . (!in_array($this->human->getSex(), ['m', 'f']) ? $error : '');
 
+        $bmiName = BodyMassIndex::getEquationName($this->config->equationBodyMassIndex);
+        $bmiEquation =  BodyMassIndex::getEquationMetric($this->config->equationBodyMassIndex);
+
+        $bfpName = BodyFatPercentage::getEquationName($this->config->equationBodyFatPercentage);
+        $bfpEquation = BodyFatPercentage::getEquationMetric($this->config->equationBodyFatPercentage);
+
+        $bmrName = BasalMetabolicRate::getEquationName($this->config->equationBasalMetabolicRate);
+        $bmrEquation = BasalMetabolicRate::getEquationMetric($this->config->equationBasalMetabolicRate);
+
         return '<span class="bold">Body Mass Info Table</span>'
+            . '<br />'
             . '<br />Height: ' . $height
-            . '<br />Age&nbsp;&nbsp;&nbsp;: ' . $age
-            . '<br />Sex&nbsp;&nbsp;&nbsp;: ' . $sex;
+            . '<br />Age:&nbsp;&nbsp;&nbsp; ' . $age
+            . '<br />Sex:&nbsp;&nbsp;&nbsp; ' . $sex
+            . '<br />'
+            . '<small>'
+            . '<br /><em>Equations used:</em>'
+            . "<br />BMI - Body Mass Index:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  $bmiName: <small>$bmiEquation</small>"
+            . "<br />BFP - Body Fat Percentage:&nbsp; $bfpName: <small>$bfpEquation</small>"
+            . "<br />BMR - Basal Metabolic Rate: $bmrName: <small>$bmrEquation</small>"
+            . '</small>'
+            . '<br />'
+            . '<br />';
     }
 
     /**

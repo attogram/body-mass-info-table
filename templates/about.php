@@ -121,8 +121,8 @@ namespace Attogram\Body;
         weight from total body weight: total body weight is lean plus fat.
     </p>
     <p>
-        The percentage of total body mass that is lean is usually not quoted – it would typically be 60–90%.
-        Instead, the body fat percentage, which is the complement, is computed, and is typically 10–40%.
+        The percentage of total body mass that is lean is usually not quoted - it would typically be 60-90%.
+        Instead, the body fat percentage, which is the complement, is computed, and is typically 10-40%.
         The lean body mass (LBM) has been described as an index superior to total body weight for
         prescribing proper levels of medications and for assessing metabolic disorders, as body fat
         is less relevant for metabolism. LBW is used by anesthesiologists to dose certain medications.
@@ -146,7 +146,7 @@ namespace Attogram\Body;
         muscles. Basal metabolic rate (BMR) affects the rate that a person burns calories and
         ultimately whether that individual maintains, gains, or loses weight. The basal
         metabolic rate accounts for about 60 to 75% of the daily calorie expenditure by
-        individuals. It is influenced by several factors. BMR typically declines by 1–2%
+        individuals. It is influenced by several factors. BMR typically declines by 1-2%
         per decade after age 20, mostly due to loss of fat-free mass, although the
         variability between individuals is high.
         <br /><small>source: https://en.wikipedia.org/wiki/Basal_metabolic_rate</small>

@@ -36,6 +36,32 @@ class Util
     }
 
     /**
+     * @param mixed $var
+     * @param int $default
+     * @return float
+     */
+    public static function getIntVar($var, int $default = 0)
+    {
+        return ($var && preg_match('/^[0-9]*$/', $var) && $var > 0)
+            ? (int) $var
+            : $default;
+    }
+
+    /**
+     * @param string $name
+     * @param int  $default
+     * @return float
+     */
+    public static function getIntVarFromGet(string $name, int $default = 0)
+    {
+        if (!isset($_GET[$name])) {
+            return $default;
+        }
+
+        return static::getIntVar($_GET[$name], $default);
+    }
+
+    /**
      * @param mixed  $var
      * @param array  $enumArray
      * @param string $default
@@ -60,7 +86,7 @@ class Util
             return $default;
         }
 
-        return static::getEnumVar($_GET[$name],$enumArray, $default);
+        return static::getEnumVar($_GET[$name], $enumArray, $default);
     }
 
     /**
