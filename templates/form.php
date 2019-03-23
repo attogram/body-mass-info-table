@@ -42,7 +42,7 @@ use Attogram\Body\Equation\BodyMassIndex;
     </div>
     <div class="row mx-4 px-4">
         <a data-toggle="collapse" href="#options" aria-expanded="false" aria-controls="options">
-            <small>+ Table Options: Weight Range, Increment, header, BMI, BFP, BMR Equations</small>
+            <small>+ Table Options: Weight Range, Increment, Header repeat, Equation choice for BMI, BFP, BMR</small>
         </a>
     </div>
     <div class="collapse hide" id="options">
@@ -62,7 +62,7 @@ use Attogram\Body\Equation\BodyMassIndex;
                     $this->getData('increment') ?>" /> kilograms
             </div>
             <div class="col nobr pt-3">
-                <label for="r">Repeat Header:</label>
+                <label for="r">Header repeat:</label>
                 <br />
                 every <input id="r" name="r" title="Repeat Header" size="2" maxlength="5" value="<?=
                     $this->getData('repeatHeader') ?>" /> rows

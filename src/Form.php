@@ -55,18 +55,22 @@ class Form
     {
         $bunch = '';
         foreach ($equations as $equationId => $equationInfo) {
-            $equationName = $equationInfo['name'];
-            $equationMetric = $equationInfo['metric'];
-            $equationCite = str_replace('"', "'", $equationInfo['cite']);
+            $equationName = htmlspecialchars($equationInfo['name']);
+            $equationMetric = htmlspecialchars($equationInfo['metric']);
+            $equationMetricHtml = str_replace("\n", '<br />', $equationMetric);
+            $equationMetricHtml = str_replace("\t", ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ', $equationMetricHtml);
+            $equationCite = htmlspecialchars($equationInfo['cite']);
             $checked = '';
             if (property_exists($this->config, $config) && $equationId == $this->config->{$config}) {
                 $checked = 'checked="checked" ';
             }
             $bunch .= ' &nbsp; '
-                . '<span title="' . "$equationName\n\n$equationCite" . '">'
+                . '<span title="'
+                . "$equationName\n--\n$bunchName = $equationMetric\n--\n$equationCite\n--"
+                . '">'
                 . '<input type="radio" id="' . $bunchName . '" name="' . $bunchName . '"'
                 . ' title="" value="' . $equationId . '" ' . $checked . '/>'
-                . " $equationName<br /> &nbsp;&nbsp;&nbsp;&nbsp; <small>$equationMetric</small>"
+                . " $equationName<br /> &nbsp;&nbsp;&nbsp;&nbsp; <small>$equationMetricHtml</small>"
                 . '</span>'
                 . '<br />';
         }

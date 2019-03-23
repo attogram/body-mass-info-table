@@ -198,13 +198,15 @@ class Table
             . (!in_array($this->human->getSex(), ['m', 'f']) ? $error : '');
 
         $bmiName = BodyMassIndex::getEquationName($this->config->equationBodyMassIndex);
-        $bmiEquation =  BodyMassIndex::getEquationMetric($this->config->equationBodyMassIndex);
+        $bmiEquation = BodyMassIndex::getEquationMetric($this->config->equationBodyMassIndex);
 
         $bfpName = BodyFatPercentage::getEquationName($this->config->equationBodyFatPercentage);
         $bfpEquation = BodyFatPercentage::getEquationMetric($this->config->equationBodyFatPercentage);
 
         $bmrName = BasalMetabolicRate::getEquationName($this->config->equationBasalMetabolicRate);
         $bmrEquation = BasalMetabolicRate::getEquationMetric($this->config->equationBasalMetabolicRate);
+        $bmrEquation =  str_replace("\n\t", '<br /> &nbsp;&nbsp;&nbsp; ', $bmrEquation);
+
 
         return '<span class="bold">Body Mass Info Table</span>'
             . '<br />'
@@ -214,9 +216,9 @@ class Table
             . '<br />'
             . '<small>'
             . '<br /><em>Equations used:</em>'
-            . "<br />BMI - Body Mass Index:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  $bmiName: <small>$bmiEquation</small>"
-            . "<br />BFP - Body Fat Percentage:&nbsp; $bfpName: <small>$bfpEquation</small>"
-            . "<br />BMR - Basal Metabolic Rate: $bmrName: <small>$bmrEquation</small>"
+            . "<br />BMI - Body Mass Index: <b>$bmiName</b><br /> &nbsp;&nbsp;&nbsp; <small>$bmiEquation</small>"
+            . "<br />BFP - Body Fat Percentage: <b>$bfpName</b><br /> &nbsp;&nbsp;&nbsp;<small>$bfpEquation</small>"
+            . "<br />BMR - Basal Metabolic Rate: <b>$bmrName</b><br /> &nbsp;&nbsp;&nbsp;<small>$bmrEquation</small>"
             . '</small>'
             . '<br />'
             . '<br />';

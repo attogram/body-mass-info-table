@@ -34,7 +34,7 @@ class BasalMetabolicRate extends Equation
         self::HARRIS_BENEDICT_REVISED_1984 => [
             'name'     => 'Harris-Benedict-Revised 1984',
             'metric'   => 'Male: (13.397 * Weight_kilograms) + (4.799 * Height_cm) - (5.677 * Age) + 88.362'
-                        . '<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '
+                         . "\n\t"
                         . 'Female: (9.247 * Weight_kilograms) + (3.098 * Height_cm) - (4.330 * Age) + 447.593',
             'imperial' => '',
             'cite'     => 'Roza AM, Shizgal HM (1984).'
@@ -45,7 +45,7 @@ class BasalMetabolicRate extends Equation
         self::MIFFLIN_ST_JEOR_1990 => [
             'name'     => 'Mifflin-St Jeor 1990',
             'metric'   => 'Male: (10 * Weight_kg) + (6.25 * Height_cm) - (5 * Age) + 5'
-                        . '<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '
+                        . "\n\t"
                         . 'Female: (10 * Weight_kg) + (6.25 * Height_cm) - (5 * Age) - 161',
             'imperial' => '',
             'cite'     => 'Mifflin MD, St Jeor ST, Hill LA, Scott BJ, Daugherty SA, Koh YO (1990).'
@@ -65,14 +65,14 @@ class BasalMetabolicRate extends Equation
         self::HARRIS_BENEDICT_1919 => [
             'name'     => 'Harris-Benedict 1919',
             'metric'   => 'Male: (13.7516 * Weight_kg) + (5.0033 * Height_cm) - (6.755 * Age) + 66.473'
-                        . '<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '
+                        . "\n\t"
                         . 'Female: (9.5634 * Weight_kg) + (1.8496 * Height_cm) - (4.6756 * Age) + 655.0955',
             'imperial' => '',
             'cite'     => 'Harris JA, Benedict FG (1918). "A Biometric Study of Human Basal Metabolism".'
                 . ' Proceedings of the National Academy of Sciences of the United States of America. 4 (12): 370–3.'
                 . ' doi:10.1073/pnas.4.12.370. PMC 1091498. PMID 16576330.'
                 . ' <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1091498/>'
-                . '; '
+                . "\n"
                 . 'A Biometric Study of Basal Metabolism in Man.'
                 . ' J. Arthur Harris and Francis G. Benedict. Washington, DC: Carnegie Institution, 1919.'
                 . ' <https://archive.org/details/biometricstudyof00harruoft/page/98>',
