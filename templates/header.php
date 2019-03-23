@@ -23,7 +23,8 @@ a:hover { background-color:yellow; color:black; }
 .bold { font-weight:bold; }
 .error { background-color:black; border:1px solid red; color:yellow; padding:0 4px 0 4px; }
 .nobr { white-space:nowrap; }
-.righty { text-align: right; }
+.righty { text-align:right; }
+.tight { line-height:0.75; }
 form { padding:14px; margin:0; }
 label { font-size:smaller; font-weight:bold; margin:0; padding:0; }
 table, tr, td { border:1px solid black; border-collapse:collapse; margin:auto; padding:2px 8px 2px 8px; }
