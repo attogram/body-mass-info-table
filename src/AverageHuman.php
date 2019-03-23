@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Attogram\Body;
 
+use Attogram\Body\Equation\BodyFatPercentage;
 use Attogram\Body\Equation\BodyMassIndex;
 
 /**
@@ -20,7 +21,6 @@ class AverageHuman extends BasicHuman
     private $bmr = 0.0;
 
     /**
-     * Get Body Mass Index (BMI)
      * @param int $equation
      * @return float
      */
@@ -42,33 +42,12 @@ class AverageHuman extends BasicHuman
     }
 
     /**
-     * Get Body Fat Percentage
-     *
-     *  Jackson formula: (1.39 x BMI) + (0.16 x age) - (10.34 x [m=1,f=0]) - 9
-     *                 men: (1.39 x BMI) + (0.16 x age) - 19.34
-     *               women: (1.39 x BMI) + (0.16 x age) - 9
+     * @param int $equation
      * @return float
      */
-    public function getBodyFatPercentage()
+    public function getBodyFatPercentage(int $equation)
     {
-        if (!Util::isValidFloat($this->bmi)
-            || !Util::isValidFloat($this->age)
-            || !in_array($this->sex, ['m', 'f'])
-        ) {
-            return $this->bfp = 0.0;
-        }
-
-        $bodyFatSexFactor = 19.34; // male factor
-        if ($this->isFemale()) {
-            $bodyFatSexFactor = 9; // female factor
-        }
-
-        $bodyFat = (float) (1.39 * $this->bmi) + (0.16 * $this->age) - $bodyFatSexFactor;
-        if ($bodyFat > 100 || $bodyFat < 0) {
-            return $this->bfp = 0.0;
-        }
-
-        return $this->bfp = $bodyFat;
+        return $this->bfp = (new BodyFatPercentage($this))->get($equation, $this->bmi);
     }
 
     /**

@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace Attogram\Body\Equation;
 
+use Attogram\Body\Util;
+
 /**
  * Class BodyFatPercentage
  * @package Attogram\Body\Equation
@@ -67,4 +69,69 @@ class BodyFatPercentage extends Equation
                 . ' <https://insights.ovid.com/crossref?an=00005768-198412000-00018>',
         ],
     ];
+
+    /**
+     * Get Body Fat Percentage
+     *
+     * @param int $equationId
+     * @param float $bmi
+     * @return float
+     */
+    public function get(int $equationId = 0, float $bmi = 0)
+    {
+        if (!Util::isValidFloat($bmi) || !$this->isValidHumanAge() || !$this->isValidHumanSex()) {
+            return 0.0;
+        }
+
+        switch ($equationId) {
+            case self::JACKSON_2002: // (1.39 x BMI) + (0.16 x age) - (10.34 x [m=1,f=0]) - 9
+                $bodyFatSexFactor = 10.34 + 9; // male factor
+                if ($this->human->isFemale()) {
+                    $bodyFatSexFactor = 9; // female factor
+                }
+                $bodyFat = (float) (1.39 * $bmi) + (0.16 * $this->human->getAge()) - $bodyFatSexFactor;
+                break;
+
+            case self::DEURENBERG_1998: // (1.29 * BMI) + (0.20 * Age) - (11.40 * [M=1,F=0]) - 8.03
+                $bodyFatSexFactor = 11.40 + 8.03; // male factor
+                if ($this->human->isFemale()) {
+                    $bodyFatSexFactor = 8.03; // female factor
+                }
+                $bodyFat = (float) (1.29 * $bmi) + (0.20 * $this->human->getAge()) - $bodyFatSexFactor;
+                break;
+
+            case self::GALLAGHER_1996: // (1.46 * BMI) + (0.14 * Age) - (11.60 * [M=1,F=0]) - 104
+                $bodyFatSexFactor = 11.60 + 104; // male factor
+                if ($this->human->isFemale()) {
+                    $bodyFatSexFactor = 104; // female factor
+                }
+                $bodyFat = (float) (1.46 * $bmi) + (0.14 * $this->human->getAge()) - $bodyFatSexFactor;
+                break;
+
+            case self::DEURENBERG_1991: // (1.20 * BMI) + (0.23 * Age) - (10.80 * [M=1,F=0]) - 5.42
+                $bodyFatSexFactor = 10.80 + 5.42; // male factor
+                if ($this->human->isFemale()) {
+                    $bodyFatSexFactor = 5.42; // female factor
+                }
+                $bodyFat = (float) (1.20 * $bmi) + (0.23 * $this->human->getAge()) - $bodyFatSexFactor;
+                break;
+
+            case self::JACKSON_POLLOCK_1984: // (1.61 * BMI) + (0.13 * Age) - (12.10 * [M=1,F=0]) - 13.95
+                $bodyFatSexFactor = 12.10 + 13.95; // male factor
+                if ($this->human->isFemale()) {
+                    $bodyFatSexFactor = 13.95; // female factor
+                }
+                $bodyFat = (float) (1.61 * $bmi) + (0.13 * $this->human->getAge()) - $bodyFatSexFactor;
+                break;
+
+            default:
+                return 0.0;
+        }
+
+        if ($bodyFat > 100 || $bodyFat < 0) {
+            return 0.0;
+        }
+
+        return $bodyFat;
+    }
 }

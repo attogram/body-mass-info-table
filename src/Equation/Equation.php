@@ -106,4 +106,26 @@ class Equation
         }
         return false;
     }
+
+    /**
+     * @return bool
+     */
+    protected function isValidHumanAge()
+    {
+        if ($this->isValidHuman() && Util::isValidFloat($this->human->getAge())) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isValidHumanSex()
+    {
+        if ($this->isValidHuman() && in_array($this->human->getSex(), ['m','f'])) {
+            return true;
+        }
+        return false;
+    }
 }
