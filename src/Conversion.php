@@ -28,6 +28,25 @@ class Conversion
     }
 
     /**
+     * @param float $kilograms
+     * @return string
+     */
+    public static function kilogramsToStonesAndPounds(float $kilograms)
+    {
+        $pounds = static::kilogramsToPounds($kilograms);
+        $stones = floor($pounds / 14);
+        $remainingPounds = number_format($pounds - ($stones * 14), 1);
+
+        return $stones
+            . '<span style="font-size:xx-small;">st </span>'
+            . '<span style="font-size:smaller;">'
+            . $remainingPounds
+            . '</span>'
+            . '<span style="font-size:xx-small;">lbs</span></span>';
+    }
+
+
+    /**
      * @param float $meters
      * @return float
      */

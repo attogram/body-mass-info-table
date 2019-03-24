@@ -29,6 +29,12 @@ class Config
     const DEFAULT_EQUATION_BFP = 1;
     /** @var int */
     const DEFAULT_EQUATION_BMR = 1;
+    /** @var bool */
+    const DEFAULT_SHOW_KILOGRAMS = true;
+    /** @var bool */
+    const DEFAULT_SHOW_POUNDS = true;
+    /** @var bool */
+    const DEFAULT_SHOW_STONES = false;
 
     /** @var float */
     public $startMass;
@@ -38,6 +44,14 @@ class Config
     public $increment;
     /** @var int */
     public $repeatHeader;
+
+    /** @var bool */
+    public $showKilograms;
+    /** @var bool */
+    public $showPounds;
+    /** @var bool */
+    public $showStones;
+
     /** @var int*/
     public $equationBodyMassIndex;
     /** @var int*/

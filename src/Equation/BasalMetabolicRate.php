@@ -94,7 +94,7 @@ class BasalMetabolicRate extends Equation
             return 0.0;
         }
 
-        if ($bodyFatPercentage) {
+        if ($bodyFatPercentage > 0) {
             $bodyFatPercentage = (float) $bodyFatPercentage / 100;
         }
 

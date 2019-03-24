@@ -62,6 +62,22 @@ class Util
     }
 
     /**
+     * @param string $name
+     * @param bool $default
+     * @return bool
+     */
+    public static function getBoolVarFromGetCheckbox(string $name, bool $default)
+    {
+        if (!isset($_GET['t']) || $_GET['t'] != 1) { // form not submitted
+            return $default;
+        }
+        if (isset($_GET[$name]) && $_GET[$name] == 'on') {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @param mixed  $var
      * @param array  $enumArray
      * @param string $default

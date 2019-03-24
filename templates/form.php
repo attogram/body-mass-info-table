@@ -14,6 +14,7 @@ use Attogram\Body\Equation\BodyMassIndex;
 
 ?>
 <form>
+    <input type="hidden" name="t" value="1" />
     <div class="row mx-5 px-2 border">
         <div class="col pb-2">
             <input type="submit" value="     Update Table     " />
@@ -43,10 +44,11 @@ use Attogram\Body\Equation\BodyMassIndex;
     <div class="row mx-4 px-4">
         <a data-toggle="collapse" href="#options" aria-expanded="false" aria-controls="options">
             <small>
-                &nbsp; + Setup Table:
+                &nbsp; <b>+ Setup:</b>
                 Weight Range,
                 Increment,
-                Header repeat
+                Header repeat,
+                Show Kilograms, Pounds, Stones
             </small>
         </a>
     </div>
@@ -72,12 +74,23 @@ use Attogram\Body\Equation\BodyMassIndex;
                 every <input id="r" name="r" title="Repeat Header" size="2" maxlength="5" value="<?=
                     $this->getData('repeatHeader') ?>" /> rows
             </div>
+            <div class="col nobr pt-3">
+                <input type="checkbox" id="sk" name="sk" title="Show Kilograms" <?= $this->getData('checkSK') ?>/>
+                    Show Kilograms
+                <br />
+                <input type="checkbox" id="sp" name="sp" title="Show Pounds" <?= $this->getData('checkSP') ?>/>
+                    Show Pounds
+                <br />
+                <input type="checkbox" id="ss" name="ss" title="Show Stones" <?= $this->getData('checkSS') ?>/>
+                    Show Stones
+
+            </div>
         </div>
     </div>
     <div class="row mx-4 px-4">
         <a data-toggle="collapse" href="#equations" aria-expanded="false" aria-controls="equations">
             <small>
-                &nbsp; + Setup Equations:
+                &nbsp; <b>+ Equations:</b>
                 Body Mass Index (BMI),
                 Body Fat Percentage (BFP),
                 Basal Metabolic Rate (BMR)

@@ -46,18 +46,16 @@ class Table
     {
         $this->mass = [];
         if ($this->config->startMass < $this->config->endMass) {
-            for (
-                $mass = $this->config->startMass;
-                $mass <= $this->config->endMass;
-                $mass = $mass + $this->config->increment
+            for ($mass = $this->config->startMass;
+                 $mass <= $this->config->endMass;
+                 $mass = $mass + $this->config->increment
             ) {
                 $this->mass[] = $mass;
             }
         } else {
-            for (
-                $mass = $this->config->startMass;
-                $this->config->endMass <= $mass;
-                $mass = $mass - $this->config->increment
+            for ($mass = $this->config->startMass;
+                 $this->config->endMass <= $mass;
+                 $mass = $mass - $this->config->increment
             ) {
                 $this->mass[] = $mass;
             }
@@ -147,12 +145,18 @@ class Table
     }
 
     /**
-     * @uses $this->info
      * @uses $this->config
+     * @uses $this->info
      */
     public function include()
     {
-        $table = '<table><tr><td colspan="14">' . $this->getTableTopic() . '</td></tr>' . $this->getTableHeader();
+        $colspan = 14
+            - ($this->config->showKilograms ? 0 : 1)
+            - ($this->config->showPounds ? 0 : 1)
+            - ($this->config->showStones ? 0 : 1);
+
+        $table = '<table><tr><td colspan="' . $colspan . '">' . $this->getTableTopic()
+            . '</td></tr>' . $this->getTableHeader();
 
         $count = 0;
         foreach ($this->info as $mass => $info) {
@@ -164,9 +168,22 @@ class Table
             }
             $table .= '<tr style="background-color:' . Classification::getBmiClassColor($info['bmi']) . ';">'
                 . '<td>' . Classification::getBmiClassText($info['bmi']) . '</td>'
-                . '<td class="righty bold">' . $info['mass'] . '</td>'
-                . '<td class="righty">' . number_format(Conversion::kilogramsToPounds($mass), 2) . '</td>'
-                . '<td class="righty">' . number_format(Conversion::kilogramsToStones($mass), 2) . '</td>'
+
+                . (
+                    $this->config->showKilograms
+                        ? '<td class="righty bold">' . $info['mass'] . '</td>'
+                        : ''
+                )
+                . (
+                $this->config->showPounds
+                    ? '<td class="righty">' . number_format(Conversion::kilogramsToPounds($mass), 2) . '</td>'
+                    : ''
+                )
+                . (
+                $this->config->showStones
+                    ? '<td class="righty">' . Conversion::kilogramsToStonesAndPounds($mass) . '</td>'
+                    : ''
+                )
                 . '<td class="righty bold">' . $info['bmi'] . '</td>'
                 . '<td class="righty">' . $info['bmiPrime'] . '</td>'
                 . '<td class="righty">' . $info['bodyFat'] . '</td>'
@@ -237,11 +254,23 @@ class Table
     {
         return '<tr class="tight">'
             . '<td>Classification</td>'
-            . '<td>Weight<br /><small><br />Kilograms<br /><br /></small></td>'
-            . '<td>Weight<br /><small><br />Pounds<br /><br /></small></td>'
-            . '<td>Weight<br /><small><br />Stones<br /><br /></small></td>'
+            . (
+                $this->config->showKilograms
+                    ? '<td>Weight<br /><small><br />Kilograms<br /><br /></small></td>'
+                    : ''
+            )
+            . (
+                $this->config->showPounds
+                    ? '<td>Weight<br /><small><br />Pounds<br /><br /></small></td>'
+                    : ''
+            )
+            . (
+                $this->config->showStones
+                    ? '<td>Weight<br /><small><br />Stones<br /><br /></small></td>'
+                    : ''
+            )
             . '<td >BMI<br /><small><br />Body Mass<br />Index</small></td>'
-            . '<td><em>BMI\'<br /></em><small><br />BMI<br />Prime</small></td>'
+            . "<td><em>BMI<b>'</b><br /></em><small><br />BMI<br />Prime</small></td>"
             . '<td>BFP<br /><small><br />Body<br />Fat %</small></td>'
             . '<td>LBM<br /><small>Lean<br />Body<br />Mass</small></td>'
             . '<td>BMR<br /><small>Basal<br />Metabolic<br />Rate</small></td>'

@@ -26,7 +26,7 @@ class BodyMassInfoTable
     private $config;
 
     /**
-     * Route Request
+     * @uses $this->router
      */
     public function route()
     {
@@ -71,7 +71,12 @@ class BodyMassInfoTable
         $this->config->startMass = Util::getFloatVarFromGet('s', Config::DEFAULT_START_MASS);
         $this->config->endMass = Util::getFloatVarFromGet('e', Config::DEFAULT_END_MASS);
         $this->config->increment = Util::getFloatVarFromGet('i', Config::DEFAULT_INCREMENT);
-        $this->config->repeatHeader = Util::getFloatVarFromGet('r', Config::DEFAULT_REPEAT_HEADER);
+        $this->config->repeatHeader = Util::getIntVarFromGet('r', Config::DEFAULT_REPEAT_HEADER);
+
+        $this->config->showKilograms = Util::getBoolVarFromGetCheckbox('sk', Config::DEFAULT_SHOW_KILOGRAMS);
+        $this->config->showPounds = Util::getBoolVarFromGetCheckbox('sp', Config::DEFAULT_SHOW_POUNDS);
+        $this->config->showStones = Util::getBoolVarFromGetCheckbox('ss', Config::DEFAULT_SHOW_STONES);
+
         $this->config->equationBodyMassIndex = Util::getIntVarFromGet('bmi', Config::DEFAULT_EQUATION_BMI);
         $this->config->equationBodyFatPercentage = Util::getIntVarFromGet('bfp', Config::DEFAULT_EQUATION_BFP);
         $this->config->equationBasalMetabolicRate = Util::getIntVarFromGet('bmr', Config::DEFAULT_EQUATION_BMR);

@@ -42,6 +42,10 @@ class Form
         $this->data['increment'] = $this->config->increment;
         $this->data['repeatHeader'] = $this->config->repeatHeader;
 
+        $this->data['checkSK'] = $this->config->showKilograms ? $checked : '';
+        $this->data['checkSP'] = $this->config->showPounds ? $checked : '';
+        $this->data['checkSS'] = $this->config->showStones ? $checked : '';
+
         $this->includeTemplate('form');
     }
 
