@@ -100,17 +100,17 @@ use Attogram\Body\Equation\BodyMassIndex;
     <div class="collapse hide" id="equations">
         <div class="row mx-5 px-2 bg-light">
             <div class="col nobr pt-3">
-                <label>BMI - Body Mass Index Equation:</label>
+                <label>Body Mass Index (BMI) equation:</label>
                 <br />
                 <?= $this->radioBunch(BodyMassIndex::getEquations(), 'equationBodyMassIndex', 'bmi') ?>
             </div>
             <div class="col nobr pt-3">
-                <label>BFP - Body Fat Percentage Equation:</label>
+                <label>Body Fat Percentage (BFP) equation:</label>
                 <br />
                 <?= $this->radioBunch(BodyFatPercentage::getEquations(), 'equationBodyFatPercentage', 'bfp') ?>
             </div>
             <div class="col nobr pt-3">
-                <label>BMR - Basal Metabolic Rate Equation:</label>
+                <label>Basal Metabolic Rate (BMR) equation:</label>
                 <br />
                 <?= $this->radioBunch(BasalMetabolicRate::getEquations(), 'equationBasalMetabolicRate', 'bmr') ?>
             </div>

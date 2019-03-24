@@ -28,16 +28,17 @@ class BasalMetabolicRate extends Equation
         ],
         self::KATCH_MCARDLE_HYBRID_20XX => [
             'name' => 'Katch-McArdle-Hybrid 20XX',
-            'metric' => '(370 * (1 - BFP)) + (21.6 * (Weight_kilograms * (1 - BFP)))'
+            'metric' => '(370 * (1 - Body_Fat_Percentage)) + (21.6 * (Weight_kilograms * (1 - Body_Fat_Percentage)))'
                 . ' + (6.17 * (Weight_kilograms * BFP))',
             'imperial' => '',
             'cite' => '<https://www.sailrabbit.com/bmr/>',
         ],
         self::HARRIS_BENEDICT_REVISED_1984 => [
             'name' => 'Harris-Benedict-Revised 1984',
-            'metric' => 'Male: (13.397 * Weight_kilograms) + (4.799 * Height_cm) - (5.677 * Age) + 88.362'
-                . "\n\t"
-                . 'Female: (9.247 * Weight_kilograms) + (3.098 * Height_cm) - (4.330 * Age) + 447.593',
+            'metric' => '([M=13.397,F=9.247] * Weight_kilograms)'
+                . ' + ([M=4.799,F=3.098] * Height_centimeters)'
+                . ' - ([M=5.677,F=4.330] * Age)'
+                . ' + [M=88.36,F=447.593]',
             'imperial' => '',
             'cite' => 'Roza AM, Shizgal HM (1984).'
                 . ' "The Harris Benedict equation reevaluated: resting energy requirements and the body cell mass".'
@@ -46,9 +47,7 @@ class BasalMetabolicRate extends Equation
         ],
         self::MIFFLIN_ST_JEOR_1990 => [
             'name' => 'Mifflin-St Jeor 1990',
-            'metric' => 'Male: (10 * Weight_kilograms) + (6.25 * Height_cm) - (5 * Age) + 5'
-                . "\n\t"
-                . 'Female: (10 * Weight_kilograms) + (6.25 * Height_cm) - (5 * Age) - 161',
+            'metric' => '(10 * Weight_kilograms) + (6.25 * Height_centimeters) - (5 * Age) + [M=5,F=0] - [M=0,F=161]',
             'imperial' => '',
             'cite' => 'Mifflin MD, St Jeor ST, Hill LA, Scott BJ, Daugherty SA, Koh YO (1990).'
                 . ' "A new predictive equation for resting energy expenditure in healthy individuals".'
@@ -57,7 +56,7 @@ class BasalMetabolicRate extends Equation
         ],
         self::CUNNINGHAM_1980 => [
             'name' => 'Cunningham 1980',
-            'metric' => '500 + (22 * (Weight_kilograms * (1 - BFP)))',
+            'metric' => '500 + (22 * (Weight_kilograms * (1 - Body_Fat_Percentage)))',
             'imperial' => '',
             'cite' => 'Cunningham JJ.'
                 . ' A reanalysis of the factors influencing basal metabolic rate in normal adults.'
@@ -66,9 +65,10 @@ class BasalMetabolicRate extends Equation
         ],
         self::HARRIS_BENEDICT_1919 => [
             'name' => 'Harris-Benedict 1919',
-            'metric' => 'Male: (13.7516 * Weight_kilograms) + (5.0033 * Height_cm) - (6.755 * Age) + 66.473'
-                . "\n\t"
-                . 'Female: (9.5634 * Weight_kilograms) + (1.8496 * Height_cm) - (4.6756 * Age) + 655.0955',
+            'metric' => '([M=13.7516,F=9.5634] * Weight_kilograms)'
+                . ' + ([M=5.0033,F=1.8496] * Height_centimeters)'
+                . ' - ([M=6.755,F=4.6756] * Age)'
+                . ' + [M=66.473,F=655.0955]',
             'imperial' => '',
             'cite' => 'Harris JA, Benedict FG (1918). "A Biometric Study of Human Basal Metabolism".'
                 . ' Proceedings of the National Academy of Sciences of the United States of America. 4 (12): 370–3.'
@@ -124,13 +124,13 @@ class BasalMetabolicRate extends Equation
                     return  0.0;
                 }
                 switch ($this->human->getSex()) {
-                    case 'm': // Male: (13.397 * Weight_kilograms) + (4.799 * Height_cm) - (5.677 * Age) + 88.362
+                    case 'm': // Male: (13.397 * Weight_kilograms) + (4.799 * height_centimeters) - (5.677 * Age) + 88.362
                         $bmr = (float) (13.397 * $this->human->getMassKilograms())
                             + (4.799 * $this->human->getHeightCentimeters())
                             + (5.677 * $this->human->getAge())
                             + 88.362;
                         break;
-                    case 'f': // Female: ( 9.247 * Weight_kilograms) + (3.098 * Height_cm) - (4.330 * Age) + 447.593
+                    case 'f': // Female: ( 9.247 * Weight_kilograms) + (3.098 * height_centimeters) - (4.330 * Age) + 447.593
                         $bmr = (float) (9.247 * $this->human->getMassKilograms())
                             + (3.098 * $this->human->getHeightCentimeters())
                             + (4.330 * $this->human->getAge())
@@ -145,8 +145,8 @@ class BasalMetabolicRate extends Equation
                 if (!$this->isValidHumanHeight() || !$this->isValidHumanAge() || !$this->isValidHumanSex()) {
                     return  0.0;
                 }
-                // Male: (10 * Weight_kilograms) + (6.25 * Height_cm) - (5 * Age) + 5
-                // Female: (10 * Weight_kilograms) + (6.25 * Height_cm) - (5 * Age) - 161
+                // Male: (10 * Weight_kilograms) + (6.25 * height_centimeters) - (5 * Age) + 5
+                // Female: (10 * Weight_kilograms) + (6.25 * height_centimeters) - (5 * Age) - 161
                 $bmr = (10 * $this->human->getMassKilograms())
                     + (6.25 * $this->human->getHeightCentimeters())
                     - (5 * $this->human->getAge());
@@ -175,13 +175,13 @@ class BasalMetabolicRate extends Equation
                     return  0.0;
                 }
                 switch ($this->human->getSex()) {
-                    case 'm': // Male: (13.7516 * Weight_kilograms) + (5.0033 * Height_cm) - (6.755  * Age) + 66.473
+                    case 'm': // Male: (13.7516 * Weight_kilograms) + (5.0033 * height_centimeters) - (6.755  * Age) + 66.473
                         $bmr = (13.7516 * $this->human->getMassKilograms())
                             + (5.0033 * $this->human->getHeightCentimeters())
                             - (6.755 * $this->human->getAge())
                             + 66.473;
                         break;
-                    case 'f': // Female: (9.5634 * Weight_kilograms) + (1.8496 * Height_cm) - (4.6756 * Age) + 655.0955
+                    case 'f': // Female: (9.5634 * Weight_kilograms) + (1.8496 * height_centimeters) - (4.6756 * Age) + 655.0955
                         // BMR = 655.1 + ( 9.563 × weight in kg ) + ( 1.850 × height in cm ) – ( 4.676 × age in years )
                         $bmr = (9.5634 * $this->human->getMassKilograms())
                             + (1.8496 * $this->human->getHeightCentimeters())

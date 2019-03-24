@@ -238,10 +238,10 @@ class Table
             . '<br />'
             . '<small>'
             . '<br /><em>Equations used:</em>'
-            . "<br />BMI - Body Mass Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <b>$bmiName</b>"
-                . " - BMI =  <small>$bmiEquation</small>"
-            . "<br />BFP - Body Fat Percentage&nbsp;: <b>$bfpName</b> - BFP =  <small>$bfpEquation</small>"
-            . "<br />BMR - Basal Metabolic Rate: <b>$bmrName</b> - BMR = <small>$bmrEquation</small>"
+            . "<br />BMI = <b>$bmiName</b>"
+                . " =  <small>$bmiEquation</small>"
+            . "<br />BFP = <b>$bfpName</b>  =  <small>$bfpEquation</small>"
+            . "<br />BMR = <b>$bmrName</b>  = <small>$bmrEquation</small>"
             . '</small>'
             . '<br />'
             . '<br />';
