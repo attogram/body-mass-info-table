@@ -64,10 +64,6 @@ class AverageHuman extends BasicHuman
     }
 
     /**
-     * Get Basal Metabolic Rate, based on mass and body fat percentage
-     *
-     *      Katch-McArdle Formula: BMR = 370 + (21.6 * (WeightInKilograms * (1 - BodyFatPercentage)))
-     *
      * @param int $equation
      * @return float
      */
@@ -77,12 +73,10 @@ class AverageHuman extends BasicHuman
     }
 
     /**
-     * Get Total Daily Energy Expenditure
-     *
      * @param float $physicalActivityLevel
      * @return float
      */
-    public function getTDEE(float $physicalActivityLevel)
+    public function getTotalDailyEnergyExpenditure(float $physicalActivityLevel)
     {
         if (!Util::isValidFloat($this->bmr) || !Util::isValidFloat($physicalActivityLevel)) {
             return 0.0;

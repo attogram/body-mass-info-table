@@ -1,7 +1,6 @@
 <?php
 /**
  * Form Template
- *
  * @var Form $this
  */
 declare(strict_types = 1);

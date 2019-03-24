@@ -39,9 +39,7 @@ class Conversion
 
         return $stones
             . '<span style="font-size:xx-small;">st </span>'
-            . '<span style="font-size:smaller;">'
-            . $remainingPounds
-            . '</span>'
+            . '<span style="font-size:smaller;">' . $remainingPounds . '</span>'
             . '<span style="font-size:xx-small;">lbs</span></span>';
     }
 

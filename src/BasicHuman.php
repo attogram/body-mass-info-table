@@ -43,6 +43,7 @@ class BasicHuman
     {
         return (float) $this->height * 100;
     }
+
     /**
      * @return float
      */
@@ -122,7 +123,7 @@ class BasicHuman
 
             return;
         }
-        $this->sex = 'u';
+        $this->sex = '';
     }
 
     /**

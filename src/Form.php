@@ -28,6 +28,11 @@ class Form
         $this->config = $config;
     }
 
+    /**
+     * @uses $this->config
+     * @uses $this->data
+     * @uses $this->human
+     */
     public function include()
     {
         $this->data['height'] = ($this->human->getHeightMeters() > 0) ? $this->human->getHeightMeters() : '';
@@ -52,7 +57,7 @@ class Form
     /**
      * @param array $equations
      * @param string $config
-     * @param string $name
+     * @param string $bunchName
      * @return string
      */
     public function radioBunch(array $equations = [], string $config = '', string $bunchName = '')

@@ -1,11 +1,11 @@
 <?php
+/**
+ * 404 Template
+ * @var BodyMassInfoTable $this
+ */
 declare(strict_types = 1);
 
 namespace Attogram\Body;
-
-/**
- * @var BodyMassInfoTable $this
- */
 
 header('HTTP/1.0 404 Not Found');
 $this->includeTemplate('header');

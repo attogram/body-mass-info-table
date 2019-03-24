@@ -1,4 +1,9 @@
 <?php
+/**
+ * Footer Template
+ * @var BodyMassInfoTable $this
+ */
+
 declare(strict_types = 1);
 
 namespace Attogram\Body;

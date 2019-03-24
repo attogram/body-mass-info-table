@@ -23,7 +23,7 @@ class Util
 
     /**
      * @param string $name
-     * @param float  $default
+     * @param float $default
      * @return float
      */
     public static function getFloatVarFromGet(string $name, float $default = 0.0)
@@ -49,7 +49,7 @@ class Util
 
     /**
      * @param string $name
-     * @param int  $default
+     * @param int $default
      * @return float
      */
     public static function getIntVarFromGet(string $name, int $default = 0)
@@ -78,8 +78,8 @@ class Util
     }
 
     /**
-     * @param mixed  $var
-     * @param array  $enumArray
+     * @param mixed $var
+     * @param array $enumArray
      * @param string $default
      * @return string
      */

@@ -26,7 +26,6 @@ class Table
     private $mass = [];
 
     /**
-     * Table constructor.
      * @param AverageHuman $human
      * @param Config $config
      */
@@ -100,16 +99,36 @@ class Table
                     '',
                     ''
                 );
-            $this->info["$mass"]['tdeeSedentary']
-                = number_format($this->human->getTDEE(PhysicalActivityLevel::SEDENTARY), 0, '', '');
-            $this->info["$mass"]['tdeeLight']
-                = number_format($this->human->getTDEE(PhysicalActivityLevel::LIGHT), 0, '', '');
-            $this->info["$mass"]['tdeeModerate']
-                = number_format($this->human->getTDEE(PhysicalActivityLevel::MODERATE), 0, '', '');
-            $this->info["$mass"]['tdeeHeavy']
-                = number_format($this->human->getTDEE(PhysicalActivityLevel::HEAVY), 0, '', '');
-            $this->info["$mass"]['tdeeExtreme']
-                = number_format($this->human->getTDEE(PhysicalActivityLevel::EXTREME), 0, '', '');
+            $this->info["$mass"]['tdeeSedentary'] = number_format(
+                $this->human->getTotalDailyEnergyExpenditure(PhysicalActivityLevel::SEDENTARY),
+                0,
+                '',
+                ''
+            );
+            $this->info["$mass"]['tdeeLight'] = number_format(
+                $this->human->getTotalDailyEnergyExpenditure(PhysicalActivityLevel::LIGHT),
+                0,
+                '',
+                ''
+            );
+            $this->info["$mass"]['tdeeModerate'] = number_format(
+                $this->human->getTotalDailyEnergyExpenditure(PhysicalActivityLevel::MODERATE),
+                0,
+                '',
+                ''
+            );
+            $this->info["$mass"]['tdeeHeavy'] = number_format(
+                $this->human->getTotalDailyEnergyExpenditure(PhysicalActivityLevel::HEAVY),
+                0,
+                '',
+                ''
+            );
+            $this->info["$mass"]['tdeeExtreme'] = number_format(
+                $this->human->getTotalDailyEnergyExpenditure(PhysicalActivityLevel::EXTREME),
+                0,
+                '',
+                ''
+            );
 
             if ($this->info["$mass"]['bmi'] == 0.00) {
                 $this->info["$mass"]['bmi'] = '-';
@@ -185,7 +204,7 @@ class Table
                     : ''
                 )
                 . '<td class="righty bold">' . $info['bmi'] . '</td>'
-                . '<td class="righty">' . $info['bmiPrime'] . '</td>'
+                . '<td class="righty"><em>' . $info['bmiPrime'] . '</em></td>'
                 . '<td class="righty">' . $info['bodyFat'] . '</td>'
                 . '<td class="righty">' . $info['leanMass'] . '</td>'
                 . '<td class="righty bold">' . $info['bmr'] . '</td>'
