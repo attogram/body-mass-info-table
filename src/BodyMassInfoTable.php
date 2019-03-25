@@ -14,7 +14,7 @@ class BodyMassInfoTable
     use TemplateTrait;
 
     /** @var string Version*/
-    const VERSION = '1.10.4';
+    const VERSION = '2.0.0';
 
     /** @var Router */
     private $router;
