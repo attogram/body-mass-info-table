@@ -10,52 +10,25 @@ namespace Attogram\Body;
 class Config
 {
     /** @var float */
-    const DEFAULT_AGE = 0.0;
+    public $startMass = 100.0;
     /** @var float */
-    const DEFAULT_HEIGHT = 0.0;
-    /** @var string */
-    const DEFAULT_SEX = '';
+    public $endMass = 50.0;
     /** @var float */
-    const DEFAULT_START_MASS = 100.0;
-    /** @var float */
-    const DEFAULT_END_MASS = 50.0;
-    /** @var float */
-    const DEFAULT_INCREMENT = 1.0;
+    public $increment = 1.0;
     /** @var int */
-    const DEFAULT_REPEAT_HEADER = 25;
-    /** @var int */
-    const DEFAULT_EQUATION_BMI = 1;
-    /** @var int */
-    const DEFAULT_EQUATION_BFP = 1;
-    /** @var int */
-    const DEFAULT_EQUATION_BMR = 1;
-    /** @var bool */
-    const DEFAULT_SHOW_KILOGRAMS = true;
-    /** @var bool */
-    const DEFAULT_SHOW_POUNDS = true;
-    /** @var bool */
-    const DEFAULT_SHOW_STONES = false;
-
-    /** @var float */
-    public $startMass;
-    /** @var float */
-    public $endMass;
-    /** @var float */
-    public $increment;
-    /** @var int */
-    public $repeatHeader;
+    public $repeatHeader = 25;
 
     /** @var bool */
-    public $showKilograms;
+    public $showKilograms = true;
     /** @var bool */
-    public $showPounds;
+    public $showPounds = true;
     /** @var bool */
-    public $showStones;
+    public $showStones = false;
 
     /** @var int*/
-    public $equationBodyMassIndex;
+    public $equationBodyMassIndex = 1; // QUETELET_1832
     /** @var int*/
-    public $equationBodyFatPercentage;
+    public $equationBodyFatPercentage = 1; // JACKSON_2002
     /** @var int*/
-    public $equationBasalMetabolicRate;
+    public $equationBasalMetabolicRate = 1; // KATCH_MCARDLE_2006
 }

@@ -21,7 +21,7 @@ body { background-color:white; color:black; font-family:monospace; font-size:110
 a { color:black; padding:1px; text-decoration:none; }
 a:hover { background-color:yellow; color:black; text-decoration:none; }
 .hdr { padding:4px; margin:0; }
-.bw { background-color: #c4e2d7; color:black; }
+.bw { background-color:#c4e2d7; color:black; }
 .bold { font-weight:bold; }
 .error { background-color:black; border:1px solid red; color:yellow; padding:0 4px 0 4px; }
 .nobr { white-space:nowrap; }
@@ -32,8 +32,8 @@ label { font-size:smaller; font-weight:bold; margin:0; padding:0; }
 table, tr, td { border:1px solid black; border-collapse:collapse; margin:auto; padding:2px 8px 2px 8px; }
 </style></head><body>
 <div class="container-fluid">
-<div class="hdr bw bold">
-    <a href="<?= $this->router->getUriBase(); ?>/">Body Mass Info Table</a>
-    &nbsp;&nbsp;
-    <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
-</div>
+    <div class="hdr bw bold">
+        <a href="<?= $this->router->getUriBase(); ?>/">Body Mass Info Table</a>
+        &nbsp;&nbsp;
+        <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
+    </div>

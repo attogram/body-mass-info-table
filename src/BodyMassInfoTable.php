@@ -68,18 +68,21 @@ class BodyMassInfoTable
     private function setConfig()
     {
         $this->config = new Config();
-        $this->config->startMass = Util::getFloatVarFromGet('s', Config::DEFAULT_START_MASS);
-        $this->config->endMass = Util::getFloatVarFromGet('e', Config::DEFAULT_END_MASS);
-        $this->config->increment = Util::getFloatVarFromGet('i', Config::DEFAULT_INCREMENT);
-        $this->config->repeatHeader = Util::getIntVarFromGet('r', Config::DEFAULT_REPEAT_HEADER);
+        $this->config->startMass = Util::getFloatVarFromGet('s', $this->config->startMass);
+        $this->config->endMass = Util::getFloatVarFromGet('e', $this->config->endMass);
+        $this->config->increment = Util::getFloatVarFromGet('i', $this->config->increment);
+        $this->config->repeatHeader = Util::getIntVarFromGet('r', $this->config->repeatHeader);
 
-        $this->config->showKilograms = Util::getBoolVarFromGetCheckbox('sk', Config::DEFAULT_SHOW_KILOGRAMS);
-        $this->config->showPounds = Util::getBoolVarFromGetCheckbox('sp', Config::DEFAULT_SHOW_POUNDS);
-        $this->config->showStones = Util::getBoolVarFromGetCheckbox('ss', Config::DEFAULT_SHOW_STONES);
+        $this->config->showKilograms = Util::getBoolVarFromGetCheckbox('sk', $this->config->showKilograms);
+        $this->config->showPounds = Util::getBoolVarFromGetCheckbox('sp', $this->config->showPounds);
+        $this->config->showStones = Util::getBoolVarFromGetCheckbox('ss', $this->config->showStones);
 
-        $this->config->equationBodyMassIndex = Util::getIntVarFromGet('bmi', Config::DEFAULT_EQUATION_BMI);
-        $this->config->equationBodyFatPercentage = Util::getIntVarFromGet('bfp', Config::DEFAULT_EQUATION_BFP);
-        $this->config->equationBasalMetabolicRate = Util::getIntVarFromGet('bmr', Config::DEFAULT_EQUATION_BMR);
+        $this->config->equationBodyMassIndex
+            = Util::getIntVarFromGet('bmi', $this->config->equationBodyMassIndex);
+        $this->config->equationBodyFatPercentage
+            = Util::getIntVarFromGet('bfp', $this->config->equationBodyFatPercentage);
+        $this->config->equationBasalMetabolicRate
+            = Util::getIntVarFromGet('bmr', $this->config->equationBasalMetabolicRate);
     }
 
     /**
@@ -88,8 +91,8 @@ class BodyMassInfoTable
     private function setHuman()
     {
         $this->human = new AverageHuman();
-        $this->human->setAge(Util::getFloatVarFromGet('a', Config::DEFAULT_AGE));
-        $this->human->setSex(Util::getEnumVarFromGet('x', ['m','f'], Config::DEFAULT_SEX));
+        $this->human->setAge(Util::getFloatVarFromGet('a', 0));
+        $this->human->setSex(Util::getEnumVarFromGet('x', ['m','f'], ''));
         $this->setHumanHeight();
     }
 
@@ -98,15 +101,15 @@ class BodyMassInfoTable
      */
     private function setHumanHeight()
     {
-        $heightMeters = Util::getFloatVarFromGet('hm', Config::DEFAULT_HEIGHT);
+        $heightMeters = Util::getFloatVarFromGet('hm', 0);
         if (Util::isValidFloat($heightMeters)) {
-            $this->human->setHeightMeters(Util::getFloatVarFromGet('hm', Config::DEFAULT_HEIGHT));
+            $this->human->setHeightMeters(Util::getFloatVarFromGet('hm', 0));
 
             return;
         }
 
-        $heightFeet = Util::getFloatVarFromGet('hf', Config::DEFAULT_HEIGHT);
-        $heightAndInches = Util::getFloatVarFromGet('hi', Config::DEFAULT_HEIGHT);
+        $heightFeet = Util::getFloatVarFromGet('hf', 0);
+        $heightAndInches = Util::getFloatVarFromGet('hi', 0);
         $this->human->setHeightInches(($heightFeet * 12) + $heightAndInches);
     }
 }

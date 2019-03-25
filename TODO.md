@@ -4,3 +4,5 @@
 * Black and White version
 * About page: content for What is TDEE?
 * Install instructions
+* Weight Range in Pounds
+* Show Setup/Equation current settings in sub-headers when form hidden
