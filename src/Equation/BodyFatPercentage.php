@@ -16,6 +16,7 @@ class BodyFatPercentage extends Equation
     const GALLAGHER_1996       = 3;
     const DEURENBERG_1991      = 4;
     const JACKSON_POLLOCK_1984 = 5;
+    const DEURENBERG_CHILD_15_1991 = 6;
 
     protected static $equations = [
         self::JACKSON_2002 => [
@@ -30,7 +31,7 @@ class BodyFatPercentage extends Equation
         ],
         self::DEURENBERG_1998 => [
             'name'     => 'Deurenberg 1998',
-            'metric'   => '(1.29 * BMI) + (0.20 * Age) - (11.40 * [M=1,F=0]) - 8.03',
+            'metric'   => '(1.29 * BMI) + (0.20 * Age) - (11.4 * [M=1,F=0]) - 8.03',
             'imperial' => '',
             'cite'     => 'Deurenberg, P., Yap, M. and van Staveren, W.A. (1998)'
                         . ' Body mass index and percent body fat. A meta analysis among different ethnic groups.'
@@ -48,16 +49,25 @@ class BodyFatPercentage extends Equation
         ],
         self::DEURENBERG_1991 => [
             'name'     => 'Deurenberg 1991',
-            'metric'   => '(1.20 * BMI) + (0.23 * Age) - (10.80 * [M=1,F=0]) - 5.42',
+            'metric'   => '(1.20 * BMI) + (0.23 * Age) - (10.8 * [M=1,F=0]) - 5.42',
             'imperial' => '',
             'cite'     => 'Deurenberg, P., Westrate, J.A. and Seidell, J.C. (1991)'
                 . ' Body mass index as a measure of body fatness: Age- and sex-specific prediction formulas.'
                 . ' British Journal of Nutrition, 65, 105-114.doi:10.1079/BJN19910073'
-                . ' <https://www.cambridge.org/core/journals/british-journal-of-nutrition/article/body-mass-index-as-a-measure-of-body-fatness-age-and-sexspecific-prediction-formulas/9C03B18E1A0E4CDB0441644EE64D9AA2>',
+                . ' <https://www.ncbi.nlm.nih.gov/pubmed/2043597>',
+        ],
+        self::DEURENBERG_CHILD_15_1991 => [
+            'name'     => 'Deurenberg [Child Under 15] 1991',
+            'metric'   => '(1.51 * BMI) - (0.7 * age) - (3.6 * [M=1,F=0]) +  1.4',
+            'imperial' => '',
+            'cite'     => 'Deurenberg, P., Westrate, J.A. and Seidell, J.C. (1991)'
+                . ' Body mass index as a measure of body fatness: Age- and sex-specific prediction formulas.'
+                . ' British Journal of Nutrition, 65, 105-114.doi:10.1079/BJN19910073'
+                . ' <https://www.ncbi.nlm.nih.gov/pubmed/2043597>'
         ],
         self::JACKSON_POLLOCK_1984 => [
             'name'     => 'Jackson-Pollock 1984',
-            'metric'   => '(1.61 * BMI) + (0.13 * Age) - (12.10 * [M=1,F=0]) - 13.95',
+            'metric'   => '(1.61 * BMI) + (0.13 * Age) - (12.1 * [M=1,F=0]) - 13.95',
             'imperial' => '',
             'cite'     => 'Jackson, A.S., Pollock, M.L. and Ward, A. (1980)'
                 . ' Generalized equations for predicting body density of women.'
@@ -84,17 +94,20 @@ class BodyFatPercentage extends Equation
             case self::JACKSON_2002: // (1.39 x BMI) + (0.16 x age) - (10.34 x [m=1,f=0]) - 9
                 $bodyFat = $this->bodyFatFromBmi($bmi, 1.39, 0.16, 10.34, 9);
                 break;
-            case self::DEURENBERG_1998: // (1.29 * BMI) + (0.20 * Age) - (11.40 * [M=1,F=0]) - 8.03
+            case self::DEURENBERG_1998: // (1.29 * BMI) + (0.2 * Age) - (11.4 * [M=1,F=0]) - 8.03
                 $bodyFat = $this->bodyFatFromBmi($bmi, 1.29, 0.2, 11.4, 8.03);
                 break;
             case self::GALLAGHER_1996: // (1.46 * BMI) + (0.14 * Age) - (11.6 * [M=1,F=0]) – 10
                 $bodyFat = $this->bodyFatFromBmi($bmi, 1.46, 0.14, 11.6, 10);
                 break;
-            case self::DEURENBERG_1991: // (1.20 * BMI) + (0.23 * Age) - (10.80 * [M=1,F=0]) - 5.42
+            case self::DEURENBERG_1991: // (1.20 * BMI) + (0.23 * Age) - (10.8 * [M=1,F=0]) - 5.42
                 $bodyFat = $this->bodyFatFromBmi($bmi, 1.20, 0.23, 10.8, 5.42);
                 break;
-            case self::JACKSON_POLLOCK_1984: // (1.61 * BMI) + (0.13 * Age) - (12.10 * [M=1,F=0]) - 13.95
-                $bodyFat = $this->bodyFatFromBmi($bmi, 1.61, 0.13, 12.10, 13.95);
+            case self::DEURENBERG_CHILD_15_1991: // (1.51 * BMI) - (0.7 * age) - (3.6 * [M=1,F=0]) +  1.4'
+                $bodyFat = $this->bodyFatFromBmi($bmi, 1.51, 0.7, 3.6, 1.4);
+                break;
+            case self::JACKSON_POLLOCK_1984: // (1.61 * BMI) + (0.13 * Age) - (12.1 * [M=1,F=0]) - 13.95
+                $bodyFat = $this->bodyFatFromBmi($bmi, 1.61, 0.13, 12.1, 13.95);
                 break;
             default:
                 return 0.0;
