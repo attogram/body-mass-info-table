@@ -43,14 +43,21 @@ class Conversion
             . '<span style="font-size:xx-small;">lbs</span></span>';
     }
 
-
+    /**
+     * @param float $inches
+     * @return float
+     */
+    public static function inchesToMeters(float $inches)
+    {
+        return (float) $inches / 39.37;
+    }
     /**
      * @param float $meters
      * @return float
      */
     public static function metersToInches(float $meters)
     {
-        return (float) $meters * 39.370;
+        return (float) $meters * 39.37;
     }
 
     /**

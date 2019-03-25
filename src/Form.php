@@ -35,7 +35,16 @@ class Form
      */
     public function include()
     {
-        $this->data['height'] = ($this->human->getHeightMeters() > 0) ? $this->human->getHeightMeters() : '';
+        $this->data['height_meters'] = ($this->human->getHeightMeters() > 0)
+            ? number_format($this->human->getHeightMeters(), 2)
+            : '';
+        $this->data['height_feet'] = ($this->human->getHeightFeet() > 0)
+            ? $this->human->getHeightFeet()
+            : '';
+        $this->data['height_and_inches'] = ($this->human->getHeightAndInches() > 0)
+            ? number_format($this->human->getHeightAndInches(), 1)
+            : '';
+
         $this->data['age'] = ($this->human->getAge() > 0) ? $this->human->getAge() : '';
 
         $checked = ' checked="checked"';

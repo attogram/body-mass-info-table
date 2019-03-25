@@ -45,6 +45,22 @@ class BasicHuman
     }
 
     /**
+     * @return int
+     */
+    public function getHeightFeet()
+    {
+        return (int) floor(Conversion::metersToFeet($this->height));
+    }
+
+    /**
+     * @return float
+     */
+    public function getHeightAndInches()
+    {
+        return (float) Conversion::metersToInches($this->height) - ($this->getHeightFeet() * 12);
+    }
+
+    /**
      * @return float
      */
     public function getMassKilograms()
@@ -88,9 +104,23 @@ class BasicHuman
     /**
      * @param mixed $height
      */
-    public function setHeight($height)
+    public function setHeightMeters($height)
     {
         $height = (float) $height;
+        if (Util::isValidFloat($height)) {
+            $this->height = $height;
+
+            return;
+        }
+        $this->height = 0.0;
+    }
+
+    /**
+     * @param mixed $inches
+     */
+    public function setHeightInches($inches)
+    {
+        $height = (float) Conversion::inchesToMeters($inches);
         if (Util::isValidFloat($height)) {
             $this->height = $height;
 

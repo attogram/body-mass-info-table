@@ -89,7 +89,24 @@ class BodyMassInfoTable
     {
         $this->human = new AverageHuman();
         $this->human->setAge(Util::getFloatVarFromGet('a', Config::DEFAULT_AGE));
-        $this->human->setHeight(Util::getFloatVarFromGet('h', Config::DEFAULT_HEIGHT));
         $this->human->setSex(Util::getEnumVarFromGet('x', ['m','f'], Config::DEFAULT_SEX));
+        $this->setHumanHeight();
+    }
+
+    /**
+     * @uses $this->human
+     */
+    private function setHumanHeight()
+    {
+        $heightMeters = Util::getFloatVarFromGet('hm', Config::DEFAULT_HEIGHT);
+        if (Util::isValidFloat($heightMeters)) {
+            $this->human->setHeightMeters(Util::getFloatVarFromGet('hm', Config::DEFAULT_HEIGHT));
+
+            return;
+        }
+
+        $heightFeet = Util::getFloatVarFromGet('hf', Config::DEFAULT_HEIGHT);
+        $heightAndInches = Util::getFloatVarFromGet('hi', Config::DEFAULT_HEIGHT);
+        $this->human->setHeightInches(($heightFeet * 12) + $heightAndInches);
     }
 }

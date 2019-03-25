@@ -21,8 +21,14 @@ use Attogram\Body\Equation\BodyMassIndex;
         <div class="col nobr pb-2">
             <label for="h">Height:</label>
             <br />
-            <input id="h" name="h" title="Height" type="text" size="4" maxlength="5" value="<?=
-                $this->getData('height') ?>" /> meters
+            <input id="hm" name="hm" title="Height_Meters" type="text" size="4" maxlength="4" value="<?=
+                $this->getData('height_meters') ?>" /> meters
+            <br /><span style="font-size:smaller;font-style:italic;">or</span><br />
+            <input id="hf" name="hf" title="Height_Feet" type="text" size="2" maxlength="2" value="<?=
+            $this->getData('height_feet') ?>" /> feet +
+            <input id="hi" name="hi" title="Height_And_Inches" type="text" size="3" maxlength="4" value="<?=
+            $this->getData('height_and_inches') ?>" /> inches
+
         </div>
         <div class="col nobr pb-2">
             <label for="a">Age:</label>
