@@ -20,7 +20,7 @@ class BodyFatPercentage extends Equation
     protected static $equations = [
         self::JACKSON_2002 => [
             'name'     => 'Jackson 2002',
-            'metric'   => '(1.39 * Body_Mass_Index) + (0.16 * Age) - (10.34 * [M=1,F=0]) - 9.0',
+            'metric'   => '(1.39 * BMI) + (0.16 * Age) - (10.34 * [M=1,F=0]) - 9.0',
             'imperial' => '',
             'cite'     => 'Jackson, A.S., Stanforth, P.R. and Gagnon, J. (2002)'
                         . ' The effect of sex, age and race on estimating percentage body fat from body mass index:'
@@ -30,7 +30,7 @@ class BodyFatPercentage extends Equation
         ],
         self::DEURENBERG_1998 => [
             'name'     => 'Deurenberg 1998',
-            'metric'   => '(1.29 * Body_Mass_Index) + (0.20 * Age) - (11.40 * [M=1,F=0]) - 8.03',
+            'metric'   => '(1.29 * BMI) + (0.20 * Age) - (11.40 * [M=1,F=0]) - 8.03',
             'imperial' => '',
             'cite'     => 'Deurenberg, P., Yap, M. and van Staveren, W.A. (1998)'
                         . ' Body mass index and percent body fat. A meta analysis among different ethnic groups.'
@@ -39,7 +39,7 @@ class BodyFatPercentage extends Equation
         ],
         self::GALLAGHER_1996 => [
             'name'     => 'Gallagher 1996',
-            'metric'   => '(1.46 * Body_Mass_Index) + (0.14 * Age) - (11.6 * [M=1,F=0]) – 10',
+            'metric'   => '(1.46 * BMI) + (0.14 * Age) - (11.6 * [M=1,F=0]) – 10',
             'imperial' => '',
             'cite'     => 'Gallagher, D., Visser, M., Sepulveda, D., et al. (1996)'
                         . ' How useful is body mass index for comparison of body fatness'
@@ -48,7 +48,7 @@ class BodyFatPercentage extends Equation
         ],
         self::DEURENBERG_1991 => [
             'name'     => 'Deurenberg 1991',
-            'metric'   => '(1.20 * Body_Mass_Index) + (0.23 * Age) - (10.80 * [M=1,F=0]) - 5.42',
+            'metric'   => '(1.20 * BMI) + (0.23 * Age) - (10.80 * [M=1,F=0]) - 5.42',
             'imperial' => '',
             'cite'     => 'Deurenberg, P., Westrate, J.A. and Seidell, J.C. (1991)'
                 . ' Body mass index as a measure of body fatness: Age- and sex-specific prediction formulas.'
@@ -57,7 +57,7 @@ class BodyFatPercentage extends Equation
         ],
         self::JACKSON_POLLOCK_1984 => [
             'name'     => 'Jackson-Pollock 1984',
-            'metric'   => '(1.61 * Body_Mass_Index) + (0.13 * Age) - (12.10 * [M=1,F=0]) - 13.95',
+            'metric'   => '(1.61 * BMI) + (0.13 * Age) - (12.10 * [M=1,F=0]) - 13.95',
             'imperial' => '',
             'cite'     => 'Jackson, A.S., Pollock, M.L. and Ward, A. (1980)'
                 . ' Generalized equations for predicting body density of women.'
@@ -71,8 +71,6 @@ class BodyFatPercentage extends Equation
     ];
 
     /**
-     * Get Body Fat Percentage
-     *
      * @param int $equationId
      * @param float $bmi
      * @return float
@@ -82,56 +80,45 @@ class BodyFatPercentage extends Equation
         if (!Util::isValidFloat($bmi) || !$this->isValidHumanAge() || !$this->isValidHumanSex()) {
             return 0.0;
         }
-
         switch ($equationId) {
             case self::JACKSON_2002: // (1.39 x BMI) + (0.16 x age) - (10.34 x [m=1,f=0]) - 9
-                $bodyFatSexFactor = 10.34 + 9; // male factor
-                if ($this->human->isFemale()) {
-                    $bodyFatSexFactor = 9; // female factor
-                }
-                $bodyFat = (float) (1.39 * $bmi) + (0.16 * $this->human->getAge()) - $bodyFatSexFactor;
+                $bodyFat = $this->bodyFatFromBmi($bmi, 1.39, 0.16, 10.34, 9);
                 break;
-
             case self::DEURENBERG_1998: // (1.29 * BMI) + (0.20 * Age) - (11.40 * [M=1,F=0]) - 8.03
-                $bodyFatSexFactor = 11.40 + 8.03; // male factor
-                if ($this->human->isFemale()) {
-                    $bodyFatSexFactor = 8.03; // female factor
-                }
-                $bodyFat = (float) (1.29 * $bmi) + (0.20 * $this->human->getAge()) - $bodyFatSexFactor;
+                $bodyFat = $this->bodyFatFromBmi($bmi, 1.29, 0.2, 11.4, 8.03);
                 break;
-
-            case self::GALLAGHER_1996: // (1.46 * Body_Mass_Index) + (0.14 * Age) - (11.6 * [M=1,F=0]) – 10
-                $bodyFatSexFactor = 11.6; // male factor
-                if ($this->human->isFemale()) {
-                    $bodyFatSexFactor = 0; // female factor
-                }
-                $bodyFat = (float) (1.46 * $bmi) + (0.14 * $this->human->getAge()) - $bodyFatSexFactor - 10;
+            case self::GALLAGHER_1996: // (1.46 * BMI) + (0.14 * Age) - (11.6 * [M=1,F=0]) – 10
+                $bodyFat = $this->bodyFatFromBmi($bmi, 1.46, 0.14, 11.6, 10);
                 break;
-
             case self::DEURENBERG_1991: // (1.20 * BMI) + (0.23 * Age) - (10.80 * [M=1,F=0]) - 5.42
-                $bodyFatSexFactor = 10.80 + 5.42; // male factor
-                if ($this->human->isFemale()) {
-                    $bodyFatSexFactor = 5.42; // female factor
-                }
-                $bodyFat = (float) (1.20 * $bmi) + (0.23 * $this->human->getAge()) - $bodyFatSexFactor;
+                $bodyFat = $this->bodyFatFromBmi($bmi, 1.20, 0.23, 10.8, 5.42);
                 break;
-
             case self::JACKSON_POLLOCK_1984: // (1.61 * BMI) + (0.13 * Age) - (12.10 * [M=1,F=0]) - 13.95
-                $bodyFatSexFactor = 12.10 + 13.95; // male factor
-                if ($this->human->isFemale()) {
-                    $bodyFatSexFactor = 13.95; // female factor
-                }
-                $bodyFat = (float) (1.61 * $bmi) + (0.13 * $this->human->getAge()) - $bodyFatSexFactor;
+                $bodyFat = $this->bodyFatFromBmi($bmi, 1.61, 0.13, 12.10, 13.95);
                 break;
-
             default:
                 return 0.0;
         }
-
         if ($bodyFat > 100 || $bodyFat < 0) {
             return 0.0;
         }
 
         return $bodyFat;
+    }
+
+    /**
+     * @param float $bmi
+     * @param float $bmiFactor
+     * @param float $ageFactor
+     * @param float $maleFactor
+     * @param float $endFactor
+     * @return float
+     */
+    private function bodyFatFromBmi(float $bmi, float $bmiFactor, float $ageFactor, float $maleFactor, float $endFactor)
+    {
+        return (float) ($bmiFactor * $bmi)
+            + ($ageFactor * $this->human->getAge())
+            - ($this->human->isMale() ? $maleFactor : 0)
+            - $endFactor;
     }
 }

@@ -15,7 +15,7 @@ class BodyMassIndex extends Equation
     protected static $equations = [
         self::QUETELET_1832 => [
             'name'     => 'Quetelet 1832',
-            'metric'   => 'Weight_kilograms / (Height_meters ^2)',
+            'metric'   => 'Weight_kg / (Height_meters ^2)',
             'imperial' => '(703 * Weight_pounds) / (Height_inches ^2)',
             'cite'     => 'Quetelet, Ad.. "Recherches sur le penchant au crime aux différens âges.." '
                 . "Nouveaux mémoires de l'Académie Royale des Sciences et Belles-Lettres de Bruxelles 7 (1832): "
@@ -23,7 +23,7 @@ class BodyMassIndex extends Equation
         ],
         self::TREFETHEN_2013 => [
             'name'     => 'Trefethen 2013',
-            'metric'   => '(1.3 * Weight_kilograms) / (Height_meters ^2.5)',
+            'metric'   => '(1.3 * Weight_kg) / (Height_meters ^2.5)',
             'imperial' => '(5734 * Weight_pounds) / (Height_inches ^2.5)',
             'cite'     => '<https://people.maths.ox.ac.uk/trefethen/bmi.html>',
         ],
