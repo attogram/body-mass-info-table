@@ -69,14 +69,21 @@ class BodyFatPercentage extends Equation
             'name'     => 'Jackson-Pollock 1984',
             'metric'   => '(1.61 * BMI) + (0.13 * Age) - (12.1 * [M=1,F=0]) - 13.95',
             'imperial' => '',
-            'cite'     => 'Jackson, A.S., Pollock, M.L. and Ward, A. (1980)'
+            'cite'     => 'Jackson, A.S. (1984)'
+                . ' Research design and analysis of data procedures for predicting body density.'
+                . ' Medicine &amp; Science in Sports &amp; Exercise, 16, 616-620.doi:10.1249/00005768-198412000-00018'
+                . ' <https://insights.ovid.com/crossref?an=00005768-198412000-00018>'
+                . "\n"
+                . 'Jackson, A.S., Pollock, M.L. and Ward, A. (1980)'
                 . ' Generalized equations for predicting body density of women.'
                 . ' Medicine &amp; Science in Sports &amp; Exercise, 12, 175-182.doi:10.1249/00005768-198023000-00009'
                 . ' <https://insights.ovid.com/crossref?an=00005768-198023000-00009>'
                 . "\n"
-                . 'Jackson, A.S. (1984) Research design and analysis of data procedures for predicting body density.'
-                . ' Medicine &amp; Science in Sports &amp; Exercise, 16, 616-620.doi:10.1249/00005768-198412000-00018'
-                . ' <https://insights.ovid.com/crossref?an=00005768-198412000-00018>',
+                . 'Jackson, A., &amp; Pollock, M. (1978).'
+                . ' Generalized equations for predicting body density of men.'
+                . ' British Journal of Nutrition, 40(3), 497-504. doi:10.1079/BJN19780152'
+                . ' <https://www.cambridge.org/core/journals/british-journal-of-nutrition/article/generalized-equations-for-predicting-body-density-of-men/EAB21B1CF3A8360E5F5D43FDB8D4DD17>'
+            ,
         ],
     ];
 
