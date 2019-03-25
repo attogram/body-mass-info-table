@@ -227,7 +227,7 @@ class Table
     {
         $error = '<span class="error">Unknown</span>';
         $height = $this->human->getHeightMeters()
-            ? '<b>' . number_format($this->human->getHeightMeters(), 2) . ' meters</b>'
+            ? '<b>' . number_format($this->human->getHeightMeters(), 3) . ' meters</b>'
                 . ' (' . number_format(Conversion::metersToInches($this->human->getHeightMeters()), 2) . ' inches)'
                 . ' (' . Conversion::metersToFeetAndInches($this->human->getHeightMeters()) . ')'
             : $error;

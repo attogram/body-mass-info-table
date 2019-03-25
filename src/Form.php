@@ -36,7 +36,7 @@ class Form
     public function include()
     {
         $this->data['height_meters'] = ($this->human->getHeightMeters() > 0)
-            ? number_format($this->human->getHeightMeters(), 2)
+            ? number_format($this->human->getHeightMeters(), 3)
             : '';
         $this->data['height_feet'] = ($this->human->getHeightFeet() > 0)
             ? $this->human->getHeightFeet()
