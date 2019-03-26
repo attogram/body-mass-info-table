@@ -13,8 +13,7 @@ use Attogram\Body\Equation\BodyMassIndex;
  */
 class Table
 {
-    /** @var AverageHuman */
-    private $human;
+    use HumanTrait;
 
     /** @var Config */
     private $config;
@@ -226,17 +225,17 @@ class Table
     private function getTableTopic()
     {
         $error = '<span class="error">Unknown</span>';
-        $height = $this->human->getHeightMeters()
+        $height = $this->isValidHumanHeight()
             ? '<b>' . number_format($this->human->getHeightMeters(), 3) . ' meters</b>'
                 . ' (' . number_format(Conversion::metersToInches($this->human->getHeightMeters()), 2) . ' inches)'
                 . ' (' . Conversion::metersToFeetAndInches($this->human->getHeightMeters()) . ')'
             : $error;
-        $age = $this->human->getAge()
+        $age = $this->isValidHumanAge()
             ? '<b>' . $this->human->getAge() . ' years</b>'
             : $error;
-        $sex = ($this->human->getSex() == 'm' ? '<b>Male</b>' : '')
-            . ($this->human->getSex() == 'f' ? '<b>Female</b>' : '')
-            . (!in_array($this->human->getSex(), ['m', 'f']) ? $error : '');
+        $sex = $this->isValidHumanSex()
+            ? '<b>' . ($this->human->getSex() == 'm' ? 'Male' : 'Female') . '</b>'
+            : $error;
 
         $bmiName = BodyMassIndex::getEquationName($this->config->equationBodyMassIndex);
         $bmiEquation = BodyMassIndex::getEquationMetric($this->config->equationBodyMassIndex);
@@ -246,7 +245,7 @@ class Table
 
         $bmrName = BasalMetabolicRate::getEquationName($this->config->equationBasalMetabolicRate);
         $bmrEquation = BasalMetabolicRate::getEquationMetric($this->config->equationBasalMetabolicRate);
-        $bmrEquation =  str_replace("\n\t", '<br /> &nbsp;&nbsp;&nbsp; ', $bmrEquation);
+        $bmrEquation = str_replace("\n\t", '<br /> &nbsp;&nbsp;&nbsp; ', $bmrEquation);
 
 
         return '<span class="bold">Body Mass Info Table</span>'

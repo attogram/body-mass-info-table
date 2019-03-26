@@ -10,9 +10,7 @@ namespace Attogram\Body;
 class Form
 {
     use TemplateTrait;
-
-    /** @var AverageHuman */
-    private $human;
+    use HumanTrait;
 
     /** @var Config */
     private $config;
@@ -35,31 +33,26 @@ class Form
      */
     public function include()
     {
-        $this->data['height_meters'] = ($this->human->getHeightMeters() > 0)
+        $this->data['height_meters'] = $this->isValidHumanHeight()
             ? number_format($this->human->getHeightMeters(), 3)
             : '';
-        $this->data['height_feet'] = ($this->human->getHeightFeet() > 0)
+        $this->data['height_feet'] = $this->isValidHumanHeight()
             ? $this->human->getHeightFeet()
             : '';
-        $this->data['height_and_inches'] = ($this->human->getHeightAndInches() > 0)
+        $this->data['height_and_inches'] = $this->isValidHumanHeight()
             ? number_format($this->human->getHeightAndInches(), 1)
             : '';
-
-        $this->data['age'] = ($this->human->getAge() > 0) ? $this->human->getAge() : '';
-
+        $this->data['age'] = $this->isValidHumanAge() ? $this->human->getAge() : '';
         $checked = ' checked="checked"';
         $this->data['checkM'] = $this->human->isMale() ? $checked : '';
         $this->data['checkF'] = $this->human->isFemale() ? $checked : '';
-
         $this->data['startMass'] = $this->config->startMass;
         $this->data['endMass'] = $this->config->endMass;
         $this->data['increment'] = $this->config->increment;
         $this->data['repeatHeader'] = $this->config->repeatHeader;
-
         $this->data['checkSK'] = $this->config->showKilograms ? $checked : '';
         $this->data['checkSP'] = $this->config->showPounds ? $checked : '';
         $this->data['checkSS'] = $this->config->showStones ? $checked : '';
-
         $this->includeTemplate('form');
     }
 

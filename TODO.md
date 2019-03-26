@@ -1,5 +1,6 @@
 # Body Mass Info Table TODO
 
+* new v2 thumbnail in README.md
 * Print to PDF
 * Black and White version
 * About page: content for What is TDEE?
