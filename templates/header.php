@@ -33,7 +33,7 @@ table, tr, td { border:1px solid black; border-collapse:collapse; margin:auto; p
 </style></head><body>
 <div class="container-fluid">
     <div class="hdr bw bold">
-        <a href="<?= $this->router->getUriBase(); ?>/">Body Mass Info Table</a>
+        <a href="<?= $this->router->getHome() ?>">Body Mass Info Table</a>
         &nbsp;&nbsp;
-        <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
+        <a href="<?= $this->router->getHome() ?>about/">About</a>
     </div>

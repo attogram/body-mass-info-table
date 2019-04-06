@@ -12,9 +12,9 @@ namespace Attogram\Body;
 <footer>
     <br />
     <div class="hdr bw bold">
-    <a href="<?= $this->router->getUriBase(); ?>/">Body Mass Info Table v<?= BodyMassInfoTable::VERSION; ?></a>
+    <a href="<?= $this->router->getHome() ?>">Body Mass Info Table v<?= BodyMassInfoTable::VERSION; ?></a>
         &nbsp;&nbsp;
-    <a href="<?= $this->router->getUriBase(); ?>/about/">About</a>
+    <a href="<?= $this->router->getHome() ?>about/">About</a>
         &nbsp;&nbsp;
     <a href="https://github.com/attogram/body-mass-info-table" target="github">Github</a>
     </div>

@@ -10,7 +10,7 @@
         }
     },
     "require": {
-        "attogram/router": "^1.0",
+        "attogram/router": "^4.0",
         "php": "^7.0"
     }
 }
